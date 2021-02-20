@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Book
+from .models import Category, Book, Author
 
 
 # Register your models here.
@@ -15,3 +15,12 @@ class BookAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 admin.site.register(Book, BookAdmin)
+
+
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'age', 'about']
+    list_editable = ['about']
+    list_per_page = 20
+
+
+admin.site.register(Author, AuthorAdmin)
