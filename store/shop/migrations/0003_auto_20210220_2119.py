@@ -10,4 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        #migrations.RenameModel('Books', 'Book')
+        
     ]

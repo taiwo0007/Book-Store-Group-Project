@@ -12,7 +12,7 @@ class Category(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
     popularity = models.PositiveSmallIntegerField()
-    books = models.ManyToManyField('Books')
+    books = models.ManyToManyField('Book')
 
     class Meta:
         ordering = ('name', )
@@ -22,7 +22,7 @@ class Category(models.Model):
     def get_aboslute_url(self):
         return reverse('shop:books_by_category', args=[self.id])
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Author(models.Model):
@@ -35,7 +35,7 @@ class Author(models.Model):
     age = models.PositiveSmallIntegerField()
     about = models.TextField(blank=True)
 
-class Books(models.Model):
+class Book(models.Model):
         id = models.UUIDField(
             primary_key=True,
             default=uuid.uuid4,
@@ -52,7 +52,7 @@ class Books(models.Model):
         updated = models.DateTimeField(auto_now=True, blank=True, null=True)
         pub_date = models.DateField(blank=True, null=True)
         num_pages = models.IntegerField()
-        publisher = models.CharField(max_length=250)
+        publisher = models.CharField(max_length=240)
         author = models.ForeignKey(Author, related_name='authors', on_delete=models.CASCADE)
 
         class Meta:
