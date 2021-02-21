@@ -35,6 +35,11 @@ class Author(models.Model):
     age = models.PositiveSmallIntegerField()
     about = models.TextField(blank=True)
 
+    
+
+    def __str__(self):
+        return self.first_name
+
 class Book(models.Model):
         id = models.UUIDField(
             primary_key=True,
