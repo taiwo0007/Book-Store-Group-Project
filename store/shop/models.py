@@ -12,14 +12,14 @@ class Category(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
     popularity = models.PositiveSmallIntegerField()
-    books = models.ManyToManyField('Book')
+    '''books = models.ManyToManyField('Book')'''
 
     class Meta:
         ordering = ('name', )
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
-    def get_aboslute_url(self):
+    def get_absolute_url(self):
         return reverse('shop:books_by_category', args=[self.id])
 
     def __str__(self):
@@ -59,14 +59,15 @@ class Book(models.Model):
         num_pages = models.IntegerField()
         publisher = models.CharField(max_length=240)
         author = models.ForeignKey(Author, related_name='authors', on_delete=models.CASCADE)
-
+        category = models.ForeignKey(Category, on_delete=models.CASCADE,null=False)
         class Meta:
             ordering = ('title', )
             verbose_name = 'book'
             verbose_name_plural = 'books'
-
+        
         def get_absolute_url(self):
-            return reverse('shop:book_detail', args=[self.category.id, self.id])
+            return reverse('shop:book_detail',args=[self.category_id, self.id])
         
         def __str__(self):
             return self.title
+

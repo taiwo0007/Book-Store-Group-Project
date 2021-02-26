@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+	{{ book.description|truncatewords:155 }}
+{% endblock %}
+{% block title %}
+	{{ book.title }} - Perfect Cushion Store
+{% endblock %}
+{% block content %}
+	<div>
+		<div>
+			<p><a href="{% url 'shop:allBookCat' %}">Home</a> | <a href="{{ book.category.get_url }}">{{book.category}}</a> | {{book.title}}</p>
+		</div>
+		<div>
+			<br>
+			<div>
+				<div>
+					<div>
+						<img src="{{book.image.url}}" alt="{{book.title}}">
+					</div>
+				</div>
+				<div>
+					<div>
+						<h1>{{book.title}}</h1>
+						<p>£{{book.price}}</p>
+						<p>book Description</p>
+						<p>{{book.description}}</p>
+						{% if book.stock == 0%}
+							<p><b>Out of Stock</b></p>
+						{% else %}
+							<a href="">Add to Cart</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
