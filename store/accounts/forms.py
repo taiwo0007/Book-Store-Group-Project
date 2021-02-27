@@ -5,11 +5,12 @@ from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
     model = CustomUser
-    fields = UserCreationForm.Meta.fields + ('',)
+    fields = UserCreationForm.Meta.fields + ('groups', 'is_customer', 'is_manager',)
 
 class ManagerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
+        fields = UserCreationForm.Meta.fields + ('groups',)
 
     def save(self, commit=True):
         user = super().save(commit=False)

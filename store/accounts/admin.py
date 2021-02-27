@@ -8,6 +8,13 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username', 'is_staff', 'is_customer', 'is_manager']
+    list_display = ['email', 'username', 'is_staff', 'custom_group',]
+
+    def custom_group(self, obj):
+        """
+        get group, separate by comma, and display empty string if user has no group
+        """
+        return ','.join([g.name for g in obj.groups.all()]) if obj.groups.count() else ''
+
 
 admin.site.register(CustomUser, CustomUserAdmin)
