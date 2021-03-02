@@ -10,7 +10,7 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['iban', 'title', 'synopsis', 'price', 'star_rating', 'stock', 'availible', 'created', 'updated', 'pub_date', 'num_pages', 'publisher', 'author']
+    list_display = ['iban', 'title', 'price', 'star_rating', 'stock', 'availible', 'num_pages', 'publisher', 'author']
     list_editable = ['price', 'stock', 'availible']
     list_per_page = 20
 

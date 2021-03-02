@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Book
+from django.core.paginator import Paginator,EmptyPage,InvalidPage
 
 # Create your views here.
 
@@ -21,6 +22,16 @@ def allBookCat(request, category_id=None):
         
     else:
         books = Book.objects.all().filter(availible=True)
+    
+    paginator = Paginator(books,1)
+    try:
+        page = int(request.GET.get('page','1'))
+    except:
+        page = 1
+    try:
+        books = paginator.page(page)
+    except (EmptyPage,InvalidPage):
+        books = paginator.page(paginator.num_pages)
    
     return render(request, 'shop/category.html', {'category':c_page,'books':books})
 
