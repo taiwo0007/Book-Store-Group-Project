@@ -1,16 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from datetime import datetime
-<<<<<<< HEAD
-from django.urls import reverse, resolve
+from django.urls import reverse, resolve, reverse_lazy
 from shop.models import Category, Author, Book
-from shop.views import allBookCat, book_detail
-=======
-from django.urls import reverse,reverse_lazy
-from shop.models import Category, Author, Book
-from shop.views import book_detail,allBookCat
->>>>>>> e75cde4... views testing
+from shop.views import book_detail, allBookCat
 import uuid
-from django.test import SimpleTestCase
+
 
 class TestModels(TestCase):
 
