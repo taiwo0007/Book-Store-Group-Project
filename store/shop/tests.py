@@ -1,8 +1,14 @@
 from django.test import TestCase
 from datetime import datetime
+<<<<<<< HEAD
 from django.urls import reverse, resolve
 from shop.models import Category, Author, Book
 from shop.views import allBookCat, book_detail
+=======
+from django.urls import reverse,reverse_lazy
+from shop.models import Category, Author, Book
+from shop.views import book_detail,allBookCat
+>>>>>>> e75cde4... views testing
 import uuid
 from django.test import SimpleTestCase
 
@@ -67,6 +73,18 @@ class TestModels(TestCase):
         self.assertEqual(f'{self.Book1.publisher}', 'Publisher')
         self.assertEqual(self.Book1.author, self.Author1)
         self.assertEqual(self.Book1.category, self.Category1)
+
+    # def test_book_detail(self):
+
+    #     response = self.client.get(reverse_lazy('shop:book_detail'))
+    #     self.assertEqual(response.status_code,200)
+    #     self.assertTemplateUsed(response,'shop/book.html')
+
+    # def test_allBookCat(self):
+
+    #     response = self.client.get(reverse_lazy('shop:allBookCat'))
+    #     self.assertEqual(response.status_code,200)
+    #     self.assertTemplateUsed(response,'shop/category.html')
 
         
 class TestUrls(SimpleTestCase):

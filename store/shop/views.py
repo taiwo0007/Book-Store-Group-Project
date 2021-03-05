@@ -32,6 +32,8 @@ def allBookCat(request, category_id=None):
         books = paginator.page(page)
     except (EmptyPage,InvalidPage):
         books = paginator.page(paginator.num_pages)
+
+    
    
     return render(request, 'shop/category.html', {'category':c_page,'books':books})
 

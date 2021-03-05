@@ -24,21 +24,22 @@
         </div>
     {% endif %}
 	<div class="mx-auto">
-	{% if category %}
+	{% if category.image %}
 		<img class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
 	</div>
+	
 	<br>
 	<div>
 		<h1 class="text-center my_title" >{{category.name}}</h1>
 		<p class="text-justify">{{category.description}}</p>
     </div>
-    {% else %}
+    <!-- {% else %}
 		<img class="my_image my_image_padding mx-auto w-auto" src="{% static 'images/bannerResized.jpg' %}" alt="Our Book Collection">
 	</div>
 	<br>
 	<div>
 		<h1 class="text-center my_title" >Our Book Collection</h1>
-		<p class="text-justify">Add some text about our book collection here</p>
+		<p class="text-justify">Add some text about our book collection here</p> -->
 	</div>
     {% endif %}
     <div class="container">
