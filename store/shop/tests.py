@@ -1,8 +1,10 @@
 from django.test import TestCase
 from datetime import datetime
-from django.urls import reverse
+from django.urls import reverse, resolve
 from shop.models import Category, Author, Book
+from shop.views import allBookCat, book_detail
 import uuid
+from django.test import SimpleTestCase
 
 class TestModels(TestCase):
 
@@ -67,4 +69,19 @@ class TestModels(TestCase):
         self.assertEqual(self.Book1.category, self.Category1)
 
         
-    
+class TestUrls(SimpleTestCase):
+
+    def test_allBookCat_url_resolved(self):
+        url = reverse('shop:allBookCat')
+        #print(resolve(url).func)
+        self.assertEquals(resolve(url).func, allBookCat)
+
+    def test_books_by_category_kwags_added_resolved(self):
+        url = reverse('shop:books_by_category', args=['5cd2e4fa-5fc8-4701-8d76-f72809e00ecd'])
+       # print(resolve(url).func)
+        self.assertEquals(resolve(url).func, allBookCat)
+
+    def test_book_detail_kwargs_added_resolved(self):
+        url = reverse('shop:book_detail', args=['5cd2e4fa-5fc8-4701-8d76-f72809e00ecd','5cd2e4fa-5fc8-4701-8d76-f72809e00ecd'])
+        #print(resolve(url).func)
+        self.assertEquals(resolve(url).func, book_detail)
