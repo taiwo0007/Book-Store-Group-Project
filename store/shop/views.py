@@ -4,6 +4,7 @@ from django.core.paginator import Paginator,EmptyPage,InvalidPage
 from .forms import BookForm
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User, Group
 
 
 # Create your views here.
@@ -18,6 +19,14 @@ def book_detail(request, category_id, book_id):
     return render(request, 'shop/book.html', {'book':book})
 
 def allBookCat(request, category_id=None):
+
+    managerCheck = False
+
+    if request.user.groups.filter(name="Manager").exists() == True:
+        managerCheck = True
+
+    
+        
     c_page = None
     books = None
     if category_id != None:
@@ -39,7 +48,7 @@ def allBookCat(request, category_id=None):
 
     
    
-    return render(request, 'shop/category.html', {'category':c_page,'books':books})
+    return render(request, 'shop/category.html', {'category':c_page,'books':books, 'managerCheck':managerCheck})
 
 
 
