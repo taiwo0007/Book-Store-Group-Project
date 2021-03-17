@@ -9,6 +9,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Shop
           </a>
+          <li class="nav-item"><a class="nav-link" href="{% url 'shop:book_new' %}">Manager Link</a></li>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'shop:allBookCat'%}">All Books</a>
             {% for cat in links %}
@@ -19,6 +20,7 @@
         {% if item_count > 0 %}
           <li class="nav-item">
           <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>({{item_count}})</a>
+          
         </li>
         {% endif%}
       </ul>
@@ -27,5 +29,6 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
+      
     </div>
 </nav>

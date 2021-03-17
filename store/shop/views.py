@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Book
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
+from .forms import BookForm
+from django.views.generic.edit import CreateView
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 
@@ -39,3 +43,17 @@ def allBookCat(request, category_id=None):
 
 
 
+def managerCreateView(request):
+    
+    books = Book.objects.all().filter(availible=True)
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('')
+
+    else:
+        form = BookForm()
+
+    return render(request, 'shop/book_new.html', {'form':form})
