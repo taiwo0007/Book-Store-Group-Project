@@ -1,13 +1,13 @@
 {% extends 'base.html'%}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-<h1>Manager View Test</h1>
+<h1 class="text-center">Add Book</h1>
 
 <form action="" method="post">
     {% csrf_token %}
-    {{form.as_p}}
+    {{ form|crispy}}
     <button type="submit">Save</button>
 </form>
 

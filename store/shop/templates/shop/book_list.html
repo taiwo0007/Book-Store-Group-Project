@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block content %}
+<h1 class="text-center">Manager Books</h1>
+
+<div  class="container ">
+{% for book in object_list %}
+    <div  class="bookcardcard border" style="width: 18rem; display: inline-block; height: 100%;">
+    <img  src="{{book.image.url}}" class="card-img-top" alt="book image">
+    <div id="carder" class="card-body">
+    <h5 class="card-title">{{book.title}}</h5>
+    <p class="card-text">{{book.synopsis}}</p>
+
+    <a class="btn btn-success" href="{% url 'shop:book_edit' book.category.pk book.pk %}">Edit</a><a class="btn btn-danger" href="{% url 'shop:book_delete' book.category.pk book.pk %}">Delete</a>
+    </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock content%}

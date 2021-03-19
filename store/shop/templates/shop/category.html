@@ -15,6 +15,10 @@
 	{% endif %}
 {% endblock %}
 {% block content %}
+{% if managerCheck %}
+
+	<h1 style="text-align: center;" >Manager Only View</h1>
+{% endif %}
 	<!--Breadcrumb navigation-->
 	{% if category %}
 		<div class="row my_row_class">

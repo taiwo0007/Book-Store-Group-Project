@@ -67,6 +67,9 @@ class Book(models.Model):
         
         def get_absolute_url(self):
             return reverse('shop:book_detail',args=[self.category_id, self.id])
+
+        def temp_url(self):
+            return self.category_id, self.id
         
         def __str__(self):
             return self.title
