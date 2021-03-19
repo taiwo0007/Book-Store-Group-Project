@@ -7,4 +7,4 @@ class Contact(models.Model):
     email=models.EmailField()
     subject=models.TextField()
     def __str__(self):
-        return self.firstname
+        return self.lastname, self.firstname, self.email
