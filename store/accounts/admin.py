@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ['email', 'username', 'is_staff', 'custom_group',]
+    list_display = ['email', 'username', 'is_staff', 'custom_group', 'is_superuser',]
 
     def custom_group(self, obj):
         """
