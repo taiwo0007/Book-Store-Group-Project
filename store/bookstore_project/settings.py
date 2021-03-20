@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cart',
     'crispy_forms',
     'contact',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,6 @@ STATICFILES_FINDERS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
+STRIPE_SECRET_KEY = 'sk_test_51HqLtRIcVPfBeesUUTmm5heIo7Kaxw8WzM1GdPCfIeVjFIryvlOHhsAyAk3encPxpdS4IwTdnb0Xi8lh92GdlZhy00Qz8CqgHF'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51HqLtRIcVPfBeesUa9iMcs1TGM2AX2lFFsU0TrFgJo0CD6QRzlSm0Kw0mXcgHub4atmQODnpQmMO8jloLDTXiN6t00nW8Rl12V'
