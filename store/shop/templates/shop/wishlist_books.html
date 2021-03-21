@@ -7,7 +7,8 @@
     <h1 class="text-center">Wish List</h1>
         {% for book in books %}
             <div  class="border" style="width: 18rem; display: inline-block; height: 100%;">
-            <img  src="{{book.wished_item.image.url}}" class="card-img-top" alt="book image">
+           
+            <a href="{{book.wished_item.get_absolute_url}}"> <img  src="{{book.wished_item.image.url}}" class="card-img-top" alt="book image"></a>
             <div class="card-body">
             <h5 class="card-title">{{book.wished_item.title}}</h5>
             <p class="card-text">{{book.wished_item.synopsis}}</p>
