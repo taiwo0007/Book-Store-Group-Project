@@ -7,13 +7,11 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 
-
 def group_check(user):
-    if request.user.groups.filter(name="Manager").exists() == True:
+    if user.groups.filter(name="Manager").exists() == True:
         return True
     else:
         return False
@@ -51,14 +49,12 @@ def viewWishList(request):
     books = WishList.objects.filter(user = request.user)
     return render(request, 'shop/wishlist_books.html', {'books':books})
 
-
-
 def allBookCat(request, category_id=None):
     managerCheck = False
 
     if request.user.groups.filter(name="Manager").exists() == True:
         managerCheck = True
-        
+
     c_page = None
     books = None
     if category_id != None:
@@ -66,8 +62,6 @@ def allBookCat(request, category_id=None):
         books = Book.objects.filter(category=c_page, availible=True) 
     else:
         books = Book.objects.all().filter(availible=True)
-    
-   
     
     paginator = Paginator(books,6)
     try:
@@ -79,14 +73,10 @@ def allBookCat(request, category_id=None):
     except (EmptyPage,InvalidPage):
         books = paginator.page(paginator.num_pages)
 
-
-
     return render(request, 'shop/category.html', {'category':c_page,'books':books, 'managerCheck':managerCheck})
-
 
 @user_passes_test(group_check)
 def managerCreateView(request):
-    
     books = Book.objects.all().filter(availible=True)
 
     if request.method == 'POST':
@@ -100,30 +90,15 @@ def managerCreateView(request):
 
     return render(request, 'shop/book_new.html', {'form':form})
 
+@user_passes_test(group_check)
+def bookListView(request):
+    books = Book.objects.all()
+    return render(request, 'shop/book_list.html',{'books':books})
 
-
-class ManagerCreateView(CreateView):
-    model = Book
-    fields = '__all__'
-    template_name = "shop/book_new.html"
-
-
-class BookListView(ListView):
-    model = Book
-    template_name = 'shop/book_list.html'
-
-class BookUpdateView(UpdateView):
-    model = Book
-    fields='__all__'
-    template_name = 'shop/book_edit.html'
-
-
-
-@login_required()
+@user_passes_test(group_check)
 def bookUpdateView(request, category_id, book_id):
     book = Book.objects.get(category_id=category_id, id=book_id)
 
-    
     form = BookForm(request.POST or None, request.FILES or None , instance = book)
     if form.is_valid():
         form.save()
@@ -131,24 +106,12 @@ def bookUpdateView(request, category_id, book_id):
 
     return render(request, 'shop/book_edit.html', {'form':form})
 
-
-@login_required()
+@user_passes_test(group_check)
 def bookDeleteView(request, category_id, book_id):
     book = Book.objects.get(category_id=category_id, id=book_id)
-
     
     if request.method =="POST":
         book.delete()
         return HttpResponseRedirect('/')
 
     return render(request, 'shop/book_delete.html', {'book':book})
-
-
-
-    
-
-class BookDeleteView(DeleteView):
-    model = Book
-    fields='__all__'
-    template_name = 'shop/book_delete.html'
-    success_url = reverse_lazy('book_list')
