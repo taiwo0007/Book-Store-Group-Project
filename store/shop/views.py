@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-
+from django.urls import reverse
 def group_check(user):
     if user.groups.filter(name="Manager").exists() == True:
         return True
@@ -43,6 +43,15 @@ def add_to_wishList(request, book_id, category_id):
         obj.save()
    
     return HttpResponseRedirect(book.get_absolute_url())
+
+@login_required()
+def delete_from_wishList(request, book_id):
+    
+    book = WishList.objects.get(wished_item_id=book_id, user = request.user)
+    book.delete()
+
+    return HttpResponseRedirect(reverse('shop:allBookCat'))
+
 
 @login_required() 
 def viewWishList(request):

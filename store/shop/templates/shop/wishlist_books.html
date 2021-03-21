@@ -12,7 +12,7 @@
             <div class="card-body">
             <h5 class="card-title">{{book.wished_item.title}}</h5>
             <p class="card-text">{{book.wished_item.synopsis}}</p>
-
+            <a class="btn btn-danger" href="{% url 'shop:wishList_delete' book.wished_item.pk %}">Delete</a>
             </div>
             </div>
         {% endfor %}
