@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+{% block content %}
+
+
+<div  class="container ">
+    {% if books %}
+    <h1 class="text-center">Wish List</h1>
+        {% for book in books %}
+            <div  class="border" style="width: 18rem; display: inline-block; height: 100%;">
+            <img  src="{{book.wished_item.image.url}}" class="card-img-top" alt="book image">
+            <div class="card-body">
+            <h5 class="card-title">{{book.wished_item.title}}</h5>
+            <p class="card-text">{{book.wished_item.synopsis}}</p>
+
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+    <p class="card-text text-center mt-3">No books in wishlist</p>
+    {% endif %}
+
+ 
+{% endblock content%}

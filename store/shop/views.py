@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Book
+from .models import Category, Book, WishList
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
 from .forms import BookForm
@@ -7,12 +7,20 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib import messages
 
+
+def group_check(user):
+    if request.user.groups.filter(name="Manager").exists() == True:
+        return True
+    else:
+        return False
 
 # Create your views here.
 
 def book_detail(request, category_id, book_id):
-    
     try:
         book = Book.objects.get(category_id=category_id, id=book_id)
     except Exception as e:
@@ -20,11 +28,32 @@ def book_detail(request, category_id, book_id):
 
     return render(request, 'shop/book.html', {'book':book})
 
+@login_required()
+def add_to_wishList(request, book_id, category_id):
+    print(book_id)
+    book = get_object_or_404(Book, id=book_id)
+    print(book)
+
+    try :
+        obj = WishList.objects.get(user=request.user, wished_item=book)
+        
+    except WishList.DoesNotExist:
+        obj = WishList.objects.create(
+            user = request.user, 
+            wished_item=book,
+        )
+        obj.save()
+   
+    return HttpResponseRedirect(book.get_absolute_url())
+
+@login_required() 
+def viewWishList(request):
+    books = WishList.objects.filter(user = request.user)
+    return render(request, 'shop/wishlist_books.html', {'books':books})
+
 
 
 def allBookCat(request, category_id=None):
-
-
     managerCheck = False
 
     if request.user.groups.filter(name="Manager").exists() == True:
@@ -38,8 +67,7 @@ def allBookCat(request, category_id=None):
     else:
         books = Book.objects.all().filter(availible=True)
     
-    print(books[0].category_id)
-    print(books[0].category.pk)
+   
     
     paginator = Paginator(books,6)
     try:
@@ -56,7 +84,7 @@ def allBookCat(request, category_id=None):
     return render(request, 'shop/category.html', {'category':c_page,'books':books, 'managerCheck':managerCheck})
 
 
-
+@user_passes_test(group_check)
 def managerCreateView(request):
     
     books = Book.objects.all().filter(availible=True)
@@ -72,6 +100,8 @@ def managerCreateView(request):
 
     return render(request, 'shop/book_new.html', {'form':form})
 
+
+
 class ManagerCreateView(CreateView):
     model = Book
     fields = '__all__'
@@ -82,12 +112,14 @@ class BookListView(ListView):
     model = Book
     template_name = 'shop/book_list.html'
 
-
 class BookUpdateView(UpdateView):
     model = Book
     fields='__all__'
     template_name = 'shop/book_edit.html'
 
+
+
+@login_required()
 def bookUpdateView(request, category_id, book_id):
     book = Book.objects.get(category_id=category_id, id=book_id)
 
@@ -100,7 +132,7 @@ def bookUpdateView(request, category_id, book_id):
     return render(request, 'shop/book_edit.html', {'form':form})
 
 
-
+@login_required()
 def bookDeleteView(request, category_id, book_id):
     book = Book.objects.get(category_id=category_id, id=book_id)
 

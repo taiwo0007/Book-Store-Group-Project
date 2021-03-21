@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Book, Author
+from .models import Category, Book, Author, WishList
 
 
 # Register your models here.
@@ -7,6 +7,12 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 admin.site.register(Category, CategoryAdmin)
+
+
+class WishListAdmin(admin.ModelAdmin):
+    list_display = ['user', 'wished_item']
+
+admin.site.register(WishList, WishListAdmin)
 
 
 class BookAdmin(admin.ModelAdmin):

@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.urls import reverse
+from django.conf import settings
 
 class Category(models.Model):
     id = models.UUIDField(
@@ -74,5 +75,16 @@ class Book(models.Model):
         def __str__(self):
             return self.title
 
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    wished_item = models.ForeignKey(Book, on_delete=models.CASCADE)
+    added_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.wished_item.title
+
+    
 
             

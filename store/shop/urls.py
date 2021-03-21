@@ -13,6 +13,8 @@ urlpatterns = [
     path('booksManagerList/', views.BookListView.as_view(), name='book_list'),
     path('<uuid:category_id>/<uuid:book_id>/edit/', views.bookUpdateView, name='book_edit'),
     path('<uuid:category_id>/<uuid:book_id>/delete/',views.bookDeleteView, name='book_delete'),
+    path('<uuid:category_id>/<uuid:book_id>/add', views.add_to_wishList, name='add_wishlist'),
+    path('wishlists/',views.viewWishList, name='wishList_books')
 
     
 

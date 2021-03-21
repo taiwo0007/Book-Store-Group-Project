@@ -29,6 +29,7 @@
 							<p class="text-justify my_prod_text"><b>Out of Stock</b></p>
 						{% else %}
 							<a class="btn btn-secondary" href="{% url 'cart:add_cart' book.id %}">Add to Cart</a>
+							<a  class="btn btn-warning" href="{% url 'shop:add_wishlist' book.category.pk book.pk %}">Add Wish list</a>
 						{% endif %}
 					</div>
 				</div>
