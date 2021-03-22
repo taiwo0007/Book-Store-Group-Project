@@ -7,12 +7,14 @@
     {{ book.title }} - Online Book Store
 {% endblock %}
 {% block content %}
-    <div class = "row my_prod_row_class">
+
+    <div  class = "row my_prod_row_class">
 
         
-        <div class ="container">
-            <div class = "text-center mx-auto">
-                <p><a href="{% url 'shop:allBookCat' %}">Home</a> | <a href="{{ book.category.get_url }}">{{book.category}}</a> | {{book.title}}</p>
+        <div  class ="container ">
+            <div  class = "text-center mx-auto py-3">
+           
+                <u><p ><a href="{% url 'shop:allBookCat' %}">Home</a></u> | <u><a href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p></u>
             </div>
             <br>
             <div class ="row">
@@ -32,7 +34,7 @@
                             <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
                         {% else %} 
                             <a class="btn btn-secondary" href="{% url 'cart:add_cart' book.id %}">Add to Cart</a>
-                            <a  class="btn btn-warning" href="{% url 'shop:add_wishlist' book.category.pk book.pk %}">Add Wish list</a>
+                            <a style="background-color: #f3db15;" class="btn btn-alert" href="{% url 'shop:add_wishlist' book.category.pk book.pk %}">Add Wish list</a>
                         {% endif %}
                         <br>
                         <br>
@@ -40,7 +42,7 @@
                         <p  style="width:400px;" class="text-justify my_prod_text my_title border p-3">{{book.synopsis}}
                             <br>
                             <br>
-                        <span class="text-danger">Publisher: {{book.publisher}}</span> <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span class="text-info"> Pages: {{book.num_pages}}</span>
+                        <span class="text-secondary">Publisher: {{book.publisher}}</span> <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span class="text-secondary"> Pages: {{book.num_pages}}</span>
                     </p>
                     </div>
                 </div>
