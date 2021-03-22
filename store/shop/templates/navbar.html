@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class=" border-top navbar navbar-expand-lg navbar-light ">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,33 +7,20 @@
       <ul class="navbar-nav mr-auto">
         
        
-        {% if managerCheck %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'shop:book_new' %}">+add Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'shop:book_list' %}">+list Book</a></li>
-		      {% endif %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'shop:wishList_books' %}">View WishList</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Shop
-          </a>
+        
+    
+        <li class="nav-item">
           
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'shop:allBookCat'%}">All Books</a>
+          
+            <a style="display: inline-block;"class="nav-link" href="{% url 'shop:allBookCat'%}">All Books</a>
             {% for cat in links %}
-              <a class="dropdown-item" href="{{cat.get_absolute_url}}">{{cat.name}}</a>
+              <a style="display: inline-block;" class="nav-link" href="{{cat.get_absolute_url}}">{{cat.name}}</a>
             {% endfor %}
             </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/contact" id="contactlink" role="button" aria-haspopup="true" aria-expanded="false">
-            CONTACT
-          </a>
-        {% if item_count > 0 %}
-          <li class="nav-item">
-          <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>({{item_count}})</a>
+       
           
-        </li>
-        {% endif%}
+        
       </ul>
       <form class="form-inline my-2 my-lg-0" action="{% url 'search_app:searchResult'%}" method="get">
         {% csrf_token %}
@@ -41,5 +28,14 @@
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
       
+      <ul class="navbar-nav mr-auto">
+        {% if item_count > 0 %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>({{item_count}})</a>
+          
+        </li>
+        {% endif%}
+     
+        </ul>
     </div>
 </nav>
