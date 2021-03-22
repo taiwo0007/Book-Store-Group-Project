@@ -19,6 +19,30 @@ def group_check(user):
 
 # Create your views here.
 
+def popularBooks(request):
+
+    booksPopulateF = Book.objects.filter(category='b6e303f8-d681-4aa2-ab8a-ad3b27a62015')
+    booksPopularFiction = booksPopulateF.order_by('-star_rating')[:6]
+
+    booksPopC= Book.objects.filter(category='1a8c0bf6-85cf-4170-ab6b-45604dd43cf2')
+    booksPopularChildren = booksPopC.order_by('-star_rating')[:6]
+
+    booksPopN= Book.objects.filter(category='f1b46f0d-7ee6-4ecb-a649-aaeb6407f836')
+    booksPopularNon = booksPopN.order_by('-star_rating')[:6]
+
+    for i in booksPopularChildren:
+        print(i.star_rating)
+
+    for l in booksPopularFiction:
+        print(l.star_rating)
+    
+    for j in booksPopularNon:
+        print(j.star_rating)
+
+
+
+    return render(request, 'shop/book_popular.html', {'booksPopularChildren':booksPopularChildren, 'booksPopularFiction':booksPopularFiction,'booksPopularNon':booksPopularNon })
+
 def book_detail(request, category_id, book_id):
 
     try:
@@ -78,7 +102,7 @@ def allBookCat(request, category_id=None):
     else:
         books = Book.objects.all().filter(availible=True)
     
-    paginator = Paginator(books,18)
+    paginator = Paginator(books,24)
     try:
         page = int(request.GET.get('page','1'))
     except:
@@ -88,7 +112,11 @@ def allBookCat(request, category_id=None):
     except (EmptyPage,InvalidPage):
         books = paginator.page(paginator.num_pages)
 
-    return render(request, 'shop/category.html', {'category':c_page,'books':books,'managerCheck':managerCheck})
+
+   
+    
+
+    return render(request, 'shop/category.html', {'category':c_page,'books':books,'managerCheck':managerCheck })
 
 @user_passes_test(group_check)
 def managerCreateView(request):

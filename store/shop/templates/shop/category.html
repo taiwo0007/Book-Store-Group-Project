@@ -48,6 +48,7 @@
 		<p class="text-justify">{{category.description}}</p>
     </div>
    {% else %}
+
    <a href="{% url 'shop:allBookCat' %}">
 		<img style="width:100vw;" class="my_image my_image_padding " src="{% static 'images/banner2.jpeg' %}" alt="Our Book Collection">
 	</a>
@@ -59,8 +60,8 @@
 	
 	</div>
     {% endif %}
-    <div class="container">
-		<div class="row mx-auto"> 
+   <div class="container">
+		<div style="margin-top: 130px; margin-bottom: 100px;" class="row mx-auto"> 
 			{% for book in books %}
 		
 				<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
@@ -75,7 +76,7 @@
 				</div>
 			{% endfor %}
 		</div>
-		<div class="mx-auto">
+		<div class="mx-auto" style="margin-top: 30px; margin-bottom: 130px;">
 			{% if books.paginator.num_pages > 1 %}
 				<hr>
 				<div class="text-center">
@@ -87,10 +88,10 @@
 				</div>
 			{% endif %}
 		</div>
-		<br>
 		
-
-		
-
 	</div>
+
+		
+
+
 {% endblock %}
