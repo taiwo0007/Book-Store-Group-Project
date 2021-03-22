@@ -20,6 +20,7 @@ def group_check(user):
 # Create your views here.
 
 def book_detail(request, category_id, book_id):
+
     try:
         book = Book.objects.get(category_id=category_id, id=book_id)
     except Exception as e:
@@ -59,6 +60,7 @@ def delete_from_wishList(request, book_id):
 
 @login_required() 
 def viewWishList(request):
+    managerCheck = False
     books = WishList.objects.filter(user = request.user)
     return render(request, 'shop/wishlist_books.html', {'books':books})
 
@@ -86,12 +88,13 @@ def allBookCat(request, category_id=None):
     except (EmptyPage,InvalidPage):
         books = paginator.page(paginator.num_pages)
 
-    return render(request, 'shop/category.html', {'category':c_page,'books':books, 'managerCheck':managerCheck})
+    return render(request, 'shop/category.html', {'category':c_page,'books':books,'managerCheck':managerCheck})
 
 @user_passes_test(group_check)
 def managerCreateView(request):
+    
     books = Book.objects.all().filter(availible=True)
-
+    managerCheck = True
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
@@ -101,15 +104,17 @@ def managerCreateView(request):
     else:
         form = BookForm()
 
-    return render(request, 'shop/book_new.html', {'form':form})
+    return render(request, 'shop/book_new.html', {'form':form,'managerCheck':managerCheck})
 
 @user_passes_test(group_check)
 def bookListView(request):
+    managerCheck = True
     books = Book.objects.all()
-    return render(request, 'shop/book_list.html',{'books':books})
+    return render(request, 'shop/book_list.html',{'books':books,'managerCheck':managerCheck})
 
 @user_passes_test(group_check)
 def bookUpdateView(request, category_id, book_id):
+    managerCheck = True
     book = Book.objects.get(category_id=category_id, id=book_id)
 
     form = BookForm(request.POST or None, request.FILES or None , instance = book)
@@ -117,14 +122,15 @@ def bookUpdateView(request, category_id, book_id):
         form.save()
         return HttpResponseRedirect('/')
 
-    return render(request, 'shop/book_edit.html', {'form':form})
+    return render(request, 'shop/book_edit.html', {'form':form,'managerCheck':managerCheck})
 
 @user_passes_test(group_check)
 def bookDeleteView(request, category_id, book_id):
+    managerCheck = True
     book = Book.objects.get(category_id=category_id, id=book_id)
     
     if request.method =="POST":
         book.delete()
         return HttpResponseRedirect('/')
 
-    return render(request, 'shop/book_delete.html', {'book':book})
+    return render(request, 'shop/book_delete.html', {'book':book,'managerCheck':managerCheck})
