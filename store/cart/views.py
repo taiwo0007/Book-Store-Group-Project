@@ -104,7 +104,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                     products.save()
                     order_item.delete
                     print('The order has been created')
-                return redirect('shop:allBookCat')
+                return redirect('order:thanks',order_details.id)
             except ObjectDoesNotExist:
                 pass       
         except stripe.error.CardError as e:
