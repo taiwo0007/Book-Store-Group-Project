@@ -39,7 +39,7 @@ class Author(models.Model):
     
 
     def __str__(self):
-        return self.first_name
+        return "{} {}".format(self.first_name, self.last_name)
 
 class Book(models.Model):
         id = models.UUIDField(

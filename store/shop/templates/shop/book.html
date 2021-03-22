@@ -21,12 +21,15 @@
                 <div class = "col-12 col-sm-12 col-lg-6 text-center">
                     <div>
                         <img src="{{book.image.url}}" alt="{{book.title}}">
+                        <br><br>
+
+                        <span style="color: rgb(114, 91, 69);">{{book.author}}</span><span style="font-size: small; font-weight: lighter;"> (author)</span>
                     </div>
                 </div>
                 <div class = "col-12 col-sm-12 col-md-12 col-lg-6">
                     <div>
                         <h1 class="my_prod_title">{{book.title}}</h1>
-                        <p>€{{book.price}}</p>
+                        <p style="font-weight: 900;">€{{book.price}}</p>
                         
                         <p class="text-justify my_prod_text">{{book.description}}</p>
                         <p class="text-justify my_prod_text"><i class="fas fa-check"></i> {{book.stock}} in stock</p>
@@ -37,12 +40,12 @@
                             <a style="background-color: #f3db15;" class="btn btn-alert" href="{% url 'shop:add_wishlist' book.category.pk book.pk %}">Add Wish list</a>
                         {% endif %}
                         <br>
-                        <br>
-                        <h3>Synopsis: </h3>
-                        <p  style="width:400px;" class="text-justify my_prod_text my_title border p-3">{{book.synopsis}}
+                        
+                        <h3 class="my_prod_title">Synopsis: </h3>
+                        <p  style="width:400px; font-weight: 200;" class="text-justify my_prod_text my_title border p-3">{{book.synopsis}}
                             <br>
                             <br>
-                        <span class="text-secondary">Publisher: {{book.publisher}}</span> <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span class="text-secondary"> Pages: {{book.num_pages}}</span>
+                        <span style="font-weight: bold;" class="text-secondary">Publisher: {{book.publisher}}</span> <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span style="font-weight: bold;" class="text-secondary"> Pages: {{book.num_pages}}</span>
                     </p>
                     </div>
                 </div>

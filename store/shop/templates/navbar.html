@@ -16,7 +16,7 @@
         <li class="nav-item">
           
           
-            <a style="display: inline-block; margin-left: 300px;" class="nav-link text-dark" href="{% url 'shop:allBookCat'%}">All Books |</a>
+            <a style="display: inline-block; margin-left: 100px;" class="nav-link text-dark" href="{% url 'shop:allBookCat'%}">All Books |</a>
             {% for cat in links %}
               <a style="display: inline-block; margin-left: -10px" class="nav-link text-dark" href="{{cat.get_absolute_url}}">{{cat.name}} |</a>
             {% endfor %}
@@ -35,7 +35,7 @@
       
       <ul  class="navbar-nav mr-auto">
         
-          <li style="margin-right: 300px;" class="nav-item">
+          <li style="margin-right: 100px;" class="nav-item">
           <a class=" text-dark nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i><span class="text-danger">({{item_count}})</span></a>
           
         </li>
@@ -43,7 +43,7 @@
       </ul>
     
         {%else %}
-        <form style="margin-right: 350px;" class="form-inline my-2 my-lg-0" action="{% url 'search_app:searchResult'%}" method="get">
+        <form style="margin-right: 150px;" class="form-inline my-2 my-lg-0" action="{% url 'search_app:searchResult'%}" method="get">
           {% csrf_token %}
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
