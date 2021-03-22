@@ -72,7 +72,7 @@ def allBookCat(request, category_id=None):
     else:
         books = Book.objects.all().filter(availible=True)
     
-    paginator = Paginator(books,6)
+    paginator = Paginator(books,18)
     try:
         page = int(request.GET.get('page','1'))
     except:
