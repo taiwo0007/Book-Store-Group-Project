@@ -4,6 +4,7 @@ from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 import stripe
+from order.models import Order,OrderItem
 
 # Create your views here.
 def _cart_id(request):
@@ -53,7 +54,16 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
         try:
             token = request.POST['stripeToken']
             email = request.POST['stripeEmail']
-
+            billingName = request.POST['stripeBillingName']
+            billingAddress1 = request.POST['stripeBillingAddressLine1']
+            billingcity = request.POST['stripeBillingAddressCity']
+            billingPostcode = request.POST['stripeBillingAddressZip']
+            billingCountry = request.POST['stripeBillingAddressCountryCode']
+            shippingName = request.POST['stripeShippingName']
+            shippingAddress1 = request.POST['stripeShippingAddressLine1']
+            shippingcity = request.POST['stripeShippingAddressCity']
+            shippingPostcode = request.POST['stripeShippingAddressZip']
+            shippingCountry = request.POST['stripeShippingAddressCountryCode']
             customer = stripe.Customer.create(
                 email=email,
                 source=token
@@ -64,6 +74,39 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                 description=description,
                 customer=customer.id
             )
+
+            try:
+                order_details = Order.objects.create(
+                    token = token,
+                    total = total,
+                    emailAddress = email,
+                    billingName = billingName,
+                    billingAddress1 = billingAddress1,
+                    billingCity = billingcity,
+                    billingPostcode = billingPostcode,
+                    billingCountry = billingCountry,
+                    shippingName = shippingName,
+                    shippingAddress1 = shippingAddress1,
+                    shippingCity = shippingcity,
+                    shippingPostcode = shippingPostcode,
+                    shippingCountry = shippingCountry
+                    )
+                order_details.save
+                for order_item in cart_items:
+                    oi = OrderItem.objects.create(
+                        product = order_item.book.title,
+                        quantity = order_item.quantity,
+                        price = order_item.book.price,
+                        order = order_details)
+                    oi.save()
+                    products = Book.objects.get(id=order_item.book.id)
+                    products.stock = int(order_item.book.stock - order_item.quantity)
+                    products.save()
+                    order_item.delete
+                    print('The order has been created')
+                return redirect('shop:allBookCat')
+            except ObjectDoesNotExist:
+                pass       
         except stripe.error.CardError as e:
             return false, e
 
