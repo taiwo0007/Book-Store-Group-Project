@@ -102,7 +102,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                     products = Book.objects.get(id=order_item.book.id)
                     products.stock = int(order_item.book.stock - order_item.quantity)
                     products.save()
-                    order_item.delete
+                    order_item.delete()
                     print('The order has been created')
                 return redirect('order:thanks',order_details.id)
             except ObjectDoesNotExist:

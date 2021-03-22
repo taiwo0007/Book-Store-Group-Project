@@ -33,7 +33,7 @@
 			</div>
         </div>
     {% endif %}
-	<div style=" overflow-x: hidden;" class="mx-auto">
+	<div style=" overflow-x: hidden; margin-top: -10px;;" class="mx-auto">
 	{% if category.image %}
 	<a href="{% url 'shop:allBookCat' %}">
 		<img style="width:100vw" class="my_image" src="{{category.image.url}}" alt="{{category.name}}">

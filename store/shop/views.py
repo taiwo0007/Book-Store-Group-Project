@@ -10,6 +10,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib import messages
 def group_check(user):
     if user.groups.filter(name="Manager").exists() == True:
         return True
@@ -30,10 +31,11 @@ def book_detail(request, category_id, book_id):
 def add_to_wishList(request, book_id, category_id):
     print(book_id)
     book = get_object_or_404(Book, id=book_id)
-    print(book)
+    
 
     try :
         obj = WishList.objects.get(user=request.user, wished_item=book)
+        messages.warning(request, 'Item already added in wishlist -')
         
     except WishList.DoesNotExist:
         obj = WishList.objects.create(
@@ -41,6 +43,7 @@ def add_to_wishList(request, book_id, category_id):
             wished_item=book,
         )
         obj.save()
+        messages.success(request,'"' +str(obj.wished_item) +'" added to Wish List -')
    
     return HttpResponseRedirect(book.get_absolute_url())
 
@@ -49,8 +52,9 @@ def delete_from_wishList(request, book_id):
     
     book = WishList.objects.get(wished_item_id=book_id, user = request.user)
     book.delete()
+    messages.success(request, 'Successfully deleted from Wish List')
 
-    return HttpResponseRedirect(reverse('shop:allBookCat'))
+    return HttpResponseRedirect('/wishlists/')
 
 
 @login_required() 

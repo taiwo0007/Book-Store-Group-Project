@@ -12,6 +12,16 @@
 
         
         <div  class ="container ">
+            {% if messages %}
+            {% for message in messages%}
+                        <div class="alert alert-{{message.tags}} text-center" role="{{message.tags}}">
+                            {{message}} <a class="text-secondary" href="{% url 'shop:wishList_books' %}"> Your Wish List</a>
+                        </div>
+                 
+            {% endfor %}
+            {% endif %}
+            
+            
             <div  class = "text-center mx-auto py-3">
            
                 <u><p ><a href="{% url 'shop:allBookCat' %}">Home</a></u> | <u><a href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p></u>

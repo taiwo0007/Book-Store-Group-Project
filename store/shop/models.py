@@ -85,6 +85,9 @@ class WishList(models.Model):
     def __str__(self):
         return self.wished_item.title
 
+    def get_absolute_url(self):
+            return reverse('shop:wishList_books')
+
     
 
             
