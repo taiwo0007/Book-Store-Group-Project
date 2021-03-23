@@ -5,6 +5,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 import stripe
 from order.models import Order,OrderItem
+import random
+import string
+
+def create_ref_code():
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 # Create your views here.
 def _cart_id(request):
@@ -78,6 +83,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
             try:
                 order_details = Order.objects.create(
                     token = token,
+                    ref_code = create_ref_code(),
                     total = total,
                     emailAddress = email,
                     billingName = billingName,

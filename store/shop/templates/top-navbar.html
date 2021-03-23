@@ -26,6 +26,7 @@
                 <i class="fas fa-user-circle"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"> 
 					<a  href="{% url 'order:order_history' %}" class="dropdown-item">Order History</a>
+					<a  href="{% url 'order:request-refund' %}" class="dropdown-item">Request Refund</a>
 		
 			{% if managerCheck %}
 			<a class="dropdown-item" href="{% url 'shop:book_new' %}">+add Book</a>

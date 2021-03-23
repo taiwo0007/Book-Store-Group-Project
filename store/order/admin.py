@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Order,OrderItem
+from .models import Order,OrderItem,Refund
+
+def make_refund_accepted(modeladmin, request, queryset):
+    queryset.update(refund_requested=False, refund_granted=True)
+make_refund_accepted.short_description = 'Update orders to refund granted'
 
 # Register your models here.
 class OrderItemAdmin(admin.TabularInline):
@@ -15,9 +19,10 @@ class OrderItemAdmin(admin.TabularInline):
     template = 'admin/order/tabular.html'
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id','billingName','emailAddress','created']
-    list_display_links = ('id','billingName')
-    search_fields = ['id','billingName','emailAddress']
+    list_display = ['id','billingName','emailAddress', 'being_delivered', 'refund_requested', 'refund_granted', 'total']
+    list_filter = ['being_delivered', 'refund_requested', 'refund_granted']
+    list_display_links = ('id','billingName', 'total')
+    search_fields = ['id','billingName','emailAddress', 'ref_code']
     readonly_fields= ['token','total','emailAddress','created','billingName',
                 'billingAddress1','billingCity','billingPostcode','billingCountry',
                 'shippingName','shippingAddress1','shippingCity','shippingPostcode',
@@ -28,10 +33,10 @@ class OrderAdmin(admin.ModelAdmin):
                                      'billingPostcode','billingCountry','emailAddress']}),
     ('SHIPPING INFORMATION',{'fields': ['shippingName','shippingAddress1','shippingCity','shippingPostcode','shippingCountry']}),
     ]
-    
     inlines = [
         OrderItemAdmin,
     ]
+    actions = [make_refund_accepted]
     
 
     def has_delete_permission(self,request,obj=None):
