@@ -85,7 +85,7 @@ def add_to_wishList(request, book_id, category_id):
 
     try :
         obj = WishList.objects.get(user=request.user, wished_item=book)
-        messages.warning(request, 'Item already added in wishlist -')
+        messages.warning(request, 'Item already added in wishlist ')
         
     except WishList.DoesNotExist:
         obj = WishList.objects.create(
@@ -93,7 +93,7 @@ def add_to_wishList(request, book_id, category_id):
             wished_item=book,
         )
         obj.save()
-        messages.success(request,'"' +str(obj.wished_item) +'" added to Wish List -')
+        messages.success(request,'"' +str(obj.wished_item) +'" added to Wish List')
    
     return HttpResponseRedirect(book.get_absolute_url())
 
