@@ -116,43 +116,44 @@
 						</form>
 						<br>
 						
-						 <!-- Set up a container element for the button -->
-						 <div id="paypal-button-container"></div>
+					
 
-						 <!-- Include the PayPal JavaScript SDK -->
-						 <script src="https://www.paypal.com/sdk/js?client-id=AR6cTJMtz5K2C0o6lZOD2uXxkpAtg7rrwNrWJbwzEfutJO-KfUGVa_S1tIMus1qZun20IBC1aGxreEKp&currency=EUR"></script>
-					 
-						 <script>
-							 // Render the PayPal button into #paypal-button-container
-							 paypal.Buttons({
-					 
-								 // Set up the transaction
-								 createOrder: function(data, actions) {
-									 return actions.order.create({
-										 purchase_units: [{
-											 amount: {
-												 value: '{{total}}'
-											 }
-										 }]
-									 });
-								 },
-					 
-								 // Finalize the transaction
-								 onApprove: function(data, actions) {
-									 return actions.order.capture().then(function(details) {
-										 // Show a success message to the buyer
-										
-										 location.href="{% url 'order:thanks' 6%}"
-										 
-									 });
+						 
+							<script
+							  src="https://www.paypal.com/sdk/js?client-id=AR6cTJMtz5K2C0o6lZOD2uXxkpAtg7rrwNrWJbwzEfutJO-KfUGVa_S1tIMus1qZun20IBC1aGxreEKp&currency=EUR"> // Required. Replace YOUR_CLIENT_ID with your sandbox client ID.
+							</script>
+						  
+							<div id="paypal-button-container"></div>
+						  
+							
+					
 
+					<script>
+						paypal.Buttons({
+						  createOrder: function(data, actions) {
+							// This function sets up the details of the transaction, including the amount and line item details.
+							return actions.order.create({
+							  purchase_units: [{
+								amount: {
+								  value: "{{total}}"
+								}
+							  }]
+							});
+						  },
+						  onApprove: function(data, actions) {
+							// This function captures the funds from the transaction.
+							return actions.order.capture().then(function(details) {
+							  // This function shows a transaction success message to your buyer.
+							  alert('Transaction completed by ' + '{{request.user}}');
+							  location.href="{% url 'order:thanks' 6%}'"
+							
 
-								 }
-					 
-					 
-							 }).render('#paypal-button-container');
-
-						 </script>
+							  
+							});
+						  }
+						}).render('#paypal-button-container');
+						//This function displays Smart Payment Buttons on your web page.
+					  </script>
 
 
 
