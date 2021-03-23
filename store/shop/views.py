@@ -44,29 +44,29 @@ def cheapBooks(request):
     return render(request, 'shop/book_cheap.html', {'booksCheapChildren':booksCheapChildren, 'booksCheapFiction':booksCheapFiction,'booksCheapNon':booksCheapNon })
 
 
-def popularBooks(request):
+def topRatedBooks(request):
 
     booksPopulateF = Book.objects.filter(category='b6e303f8-d681-4aa2-ab8a-ad3b27a62015')
-    booksPopularFiction = booksPopulateF.order_by('-star_rating')[:6]
+    booksRatedFiction = booksPopulateF.order_by('-star_rating')[:6]
 
     booksPopC= Book.objects.filter(category='1a8c0bf6-85cf-4170-ab6b-45604dd43cf2')
-    booksPopularChildren = booksPopC.order_by('-star_rating')[:6]
+    booksRatedChildren = booksPopC.order_by('-star_rating')[:6]
 
     booksPopN= Book.objects.filter(category='f1b46f0d-7ee6-4ecb-a649-aaeb6407f836')
-    booksPopularNon = booksPopN.order_by('-star_rating')[:6]
+    booksRatedNon = booksPopN.order_by('-star_rating')[:6]
 
-    for i in booksPopularChildren:
+    for i in booksRatedChildren:
         print(i.star_rating)
 
-    for l in booksPopularFiction:
+    for l in booksRatedFiction:
         print(l.star_rating)
     
-    for j in booksPopularNon:
+    for j in booksRatedNon:
         print(j.star_rating)
 
 
 
-    return render(request, 'shop/book_popular.html', {'booksPopularChildren':booksPopularChildren, 'booksPopularFiction':booksPopularFiction,'booksPopularNon':booksPopularNon })
+    return render(request, 'shop/book_rating.html', {'booksRatedChildren':booksRatedChildren, 'booksRatedFiction':booksRatedFiction,'booksRatedNon':booksRatedNon })
 
 def book_detail(request, category_id, book_id):
 
