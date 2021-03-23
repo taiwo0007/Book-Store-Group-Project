@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class Order(models.Model):
 	token = models.CharField(max_length=250, blank=True)
+	ref_code = models.CharField(max_length=20)
 	total = models.DecimalField(max_digits=10,decimal_places=2,verbose_name='Euro Order Total')
 	emailAddress = models.EmailField(max_length=250,blank=True,verbose_name='Email Address')
 	created = models.DateTimeField(auto_now_add=True)
@@ -16,6 +17,9 @@ class Order(models.Model):
 	shippingCity = models.CharField(max_length=250, blank=True)
 	shippingPostcode = models.CharField(max_length=10, blank=True)
 	shippingCountry = models.CharField(max_length=250, blank=True)
+	being_delivered = models.BooleanField(default=False)
+	refund_requested = models.BooleanField(default=False)
+	refund_granted = models.BooleanField(default=False)
 
 	class Meta:
 		db_table = 'Order'
@@ -38,3 +42,11 @@ class OrderItem(models.Model):
 
 	def __str__(self):
 		return self.product
+
+class Refund(models.Model):
+	order = models.ForeignKey(Order, on_delete=models.CASCADE)
+	reason = models.TextField()
+	accepted = models.BooleanField(default=False)
+	email = models.EmailField()
+	def __str__(self):
+		return f"{self.pk}"

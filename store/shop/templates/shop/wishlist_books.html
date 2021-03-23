@@ -2,15 +2,6 @@
 {% block content %}
 
     <div  class="container pt-1">
-        {% if messages %}
-        {% for message in messages%}
-
-        <div class="alert alert-{{message.tags}} text-center">
-            {{message}}
-        </div>
-       
-        {% endfor%}
-        {% endif%}
         <h1 style="font-weight: lighter;" class="mt-4  my-3 text-center">{{request.user}}'s Wish List</h1>
       
         {% if books %}
