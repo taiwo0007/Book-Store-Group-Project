@@ -17,6 +17,7 @@ urlpatterns = [
     path('wishlists/',views.viewWishList, name='wishList_books'),
     path('<uuid:book_id>/delete', views.delete_from_wishList, name='wishList_delete'),
     path('popular/', views.popularBooks, name='popularBooks'),
+    path('cheapest/', views.cheapBooks, name='cheapBooks'),
 
     
 

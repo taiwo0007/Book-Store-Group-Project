@@ -1,5 +1,5 @@
 <div class="container" >
-	<div style="position: sticky; top:0; z-index: 1;" class="my_custom_menu">
+	<div  class="my_custom_menu">
 		
 		<ul style="background-color: white; "class="text-right">
 
@@ -8,14 +8,11 @@
 				<a href="{% url 'shop:allBookCat' %}">Home |</a>
 			</li>
 
-			<li  class="mt-2" style="float: left; margin-right: -10px;">
-				<a href="">Null |</a></li>
-
 				<li  class="mt-2" style="float: left;">
 					<a href="/contact">Contact Us |</a></li>
 			
-					<li  class="mt-2" style="float: left; margin-right: -10px; margin-left: -9px;">
-				<a href="">Null |</a></li>
+					<li  class="mt-2" style="float: left; margin-right: -10px; margin-left: -9px;"><i class="fas fa-euro-sign"></i>
+				<a href="{%url 'shop:cheapBooks' %}">Cheapest |</a></li>
 
 				<li  class="mt-2" style="float: left;"><i class="fas fa-star"></i>
 					<a href="{% url 'shop:popularBooks'%}">Popular </a></li>
@@ -23,16 +20,16 @@
 
 
 			{% if user.is_authenticated %}
-			<li>
-                Welcome, <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+			<li style="">
+                Welcome, <a style="height: 0px;" href="#" class="dropdown-toggle" data-toggle="dropdown" 
                 aria-haspopup="true" aria-expanded="false">{{ user.username }} 
                 <i class="fas fa-user-circle"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"> 
-					<a href="{% url 'order:order_history' %}" class="dropdown-item">Order History</a>
+					<a  href="{% url 'order:order_history' %}" class="dropdown-item">Order History</a>
 		
 			{% if managerCheck %}
 			<a class="dropdown-item" href="{% url 'shop:book_new' %}">+add Book</a>
-			<a class="dropdown-item" href="{% url 'shop:book_list' %}">+list Book</a>
+			<a  class="dropdown-item" href="{% url 'shop:book_list' %}">+list Book</a>
 				{% endif %}
 
 			</li>
@@ -72,4 +69,3 @@
 	</div>
 </div>
 
-</div>
