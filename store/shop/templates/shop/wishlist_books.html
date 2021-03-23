@@ -25,6 +25,8 @@
                             <p class="card-text">€{{book.wished_item.price}}</p>
                             <p style="color: rgb(114, 91, 69);" class="card-text">{{book.wished_item.author}}</p>
                             <a style="font-size: 10px;"class="btn btn-danger" href="{% url 'shop:wishList_delete' book.wished_item.pk %}">Delete</a>
+                            <br>
+                            <a  style="font-size: 10px;"class="btn btn-secondary mt-2" href="{% url 'cart:add_cart' book.wished_item.pk %}">Add to Cart</a>
 
                         </div>
                     </div>
