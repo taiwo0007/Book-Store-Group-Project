@@ -16,8 +16,8 @@ urlpatterns = [
     path('<uuid:category_id>/<uuid:book_id>/add', views.add_to_wishList, name='add_wishlist'),
     path('wishlists/',views.viewWishList, name='wishList_books'),
     path('<uuid:book_id>/delete', views.delete_from_wishList, name='wishList_delete'),
-    path('popular/', views.popularBooks, name='popularBooks'),
-    path('cheapest/', views.cheapBooks, name='cheapBooks'),
+    path('highest_rated/', views.highRatedBooks, name='highRatedBooks'),
+    path('best_value/', views.cheapBooks, name='cheapBooks'),
 
     
 
