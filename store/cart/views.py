@@ -91,7 +91,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                     shippingPostcode = shippingPostcode,
                     shippingCountry = shippingCountry
                     )
-                order_details.save
+                order_details.save()
                 for order_item in cart_items:
                     oi = OrderItem.objects.create(
                         product = order_item.book.title,
