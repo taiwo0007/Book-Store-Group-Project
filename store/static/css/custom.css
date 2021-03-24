@@ -245,6 +245,7 @@ input[type=text], select, textarea {
   input[type=submit]:hover {
 	background-color: #45a049;
   }
+  /*
   .card-body{
 	background-color: lightcyan;
 	border: 1px solid #1C6EA4;
@@ -253,3 +254,4 @@ input[type=text], select, textarea {
 	-webkit-box-shadow: 1px 1px 15px 1px #000000; 
 	box-shadow: 1px 1px 15px 1px #000000
 }
+*/

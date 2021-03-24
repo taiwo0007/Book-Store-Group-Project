@@ -1,58 +1,134 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block metadescription %}
-    {{ book.description|truncatewords:155 }}
+{{ book.description|truncatewords:155 }}
 {% endblock %}
 {% block title %}
-    {{ book.title }} - Bookspace.
+{{ book.title }} - Bookspace.
 {% endblock %}
 {% block content %}
 
-    <div  class = "row my_prod_row_class">
 
-        
-        <div  class ="container ">
-        
-            
-            <div  class = "text-center mx-auto py-3">
-           
-                <u><p ><a href="{% url 'shop:allBookCat' %}">Home</a></u> | <u><a href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p></u>
-            </div>
-            <br>
-            <div class ="row">
-                <div class = "col-12 col-sm-12 col-lg-6 text-center">
-                    <div>
-                        <img src="{{book.image.url}}" alt="{{book.title}}">
-                        <br><br>
+<div class="row my_prod_row_class">
 
-                        <span style="color: rgb(114, 91, 69);">{{book.author}}</span><span style="font-size: small; font-weight: lighter;"> (author)</span>
-                    </div>
+
+    <div class="container ">
+
+
+        <div class="text-center mx-auto py-3">
+
+            <u>
+                <p><a href="{% url 'shop:allBookCat' %}">Home</a>
+            </u> | <u><a href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p>
+                </u>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-6 text-center">
+                <div>
+                    <img src="{{book.image.url}}" alt="{{book.title}}">
+                    <br><br>
+
+                    <span style="color: rgb(114, 91, 69);">{{book.author}}</span><span
+                        style="font-size: small; font-weight: lighter;"> (author)</span>
                 </div>
-                <div class = "col-12 col-sm-12 col-md-12 col-lg-6">
-                    <div>
-                        <h1 class="my_prod_title">{{book.title}}</h1>
-                        <p style="font-weight: 900;">€{{book.price}}</p>
-                        
-                        <p class="text-justify my_prod_text">{{book.description}}</p>
-                        <p class="text-justify my_prod_text"><i class="fas fa-check"></i> {{book.stock}} in stock</p>
-                        {% if book.stock == 0%}
-                            <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
-                        {% else %} 
-                            <a class="btn btn-secondary" href="{% url 'cart:add_cart' book.id %}">Add to Cart</a>
-                            <a style="background-color: #f3db15;" class="btn btn-alert" href="{% url 'shop:add_wishlist' book.category.pk book.pk %}">Add Wish list</a>
-                        {% endif %}
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div>
+                    <h1 class="my_prod_title">{{book.title}}</h1>
+                    <p style="font-weight: 900;">€{{book.price}}</p>
+
+                    <p class="text-justify my_prod_text">{{book.description}}</p>
+                    <p class="text-justify my_prod_text"><i class="fas fa-check"></i> {{book.stock}} in stock</p>
+                    {% if book.stock == 0%}
+                    <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
+                    {% else %}
+                    <a class="btn btn-secondary" href="{% url 'cart:add_cart' book.id %}">Add to Cart</a>
+                    <a style="background-color: #f3db15;" class="btn btn-alert"
+                        href="{% url 'shop:add_wishlist' book.category.pk book.pk %}">Add Wish list</a>
+                    {% endif %}
+                    <br>
+
+                    <h3 class="my_prod_title">Synopsis: </h3>
+                    <p style="width:400px; font-weight: 200;" class="text-justify my_prod_text my_title border p-3">
+                        {{book.synopsis}}
                         <br>
-                        
-                        <h3 class="my_prod_title">Synopsis: </h3>
-                        <p  style="width:400px; font-weight: 200;" class="text-justify my_prod_text my_title border p-3">{{book.synopsis}}
-                            <br>
-                            <br>
-                        <span style="font-weight: bold;" class="text-secondary">Publisher: {{book.publisher}}</span> <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span style="font-weight: bold;" class="text-secondary"> Pages: {{book.num_pages}}</span>
+                        <br>
+                        <span style="font-weight: bold;" class="text-secondary">Publisher: {{book.publisher}}</span>
+                        <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span style="font-weight: bold;"
+                            class="text-secondary"> Pages: {{book.num_pages}}</span>
                     </p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
 
+</div>
+<div class="container">
+    <div class="row border-bottom mb-5">
+    <p  id="b"  class="btn" style="text-decoration: underline; float: right; margin-right: 50px;">write a review</p>
+</div>
+    <div class="j row">
+        <div class="col-12">
+            <form style="display: none;" id="r" action="add_review/" method="post">
+                {% csrf_token %}
+                {{ form|crispy}}
+                {% if user.is_authenticated %}
+                <button class="btn btn-secondary" type="submit">Save</button>
+                {% else %}
+                <p>Sign in to review</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Reviews</h1>
+        </div>
+        {% if reviews %}
+        
+        {% for review in reviews%}
+        <div class="col-4">
+
+
+            <div  class="card">
+                <div class="card-header">
+                    {{review.subject}}
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{review.comment}}</p>
+                        <footer class=""><p>-{{review.name}}</p></footer>
+                        <blockquote>
+                </div>
+
+            </div>
+     
+        
+            </div>
+    {%endfor%}
+
+</div>
+    {% else %}
+    <div class="row">
+    <p class="text-center">No reviews</p>
+</div>
+    {%endif%}
+</div>
+
+<script>
+    
+    texter = document.querySelector("#b");
+    para = document.querySelector("#r");
+    
+    function gofunc(){
+        para.style.display = "block"
+        
+    }
+    
+    texter.addEventListener('click', gofunc)
+  
+</script>
+
+{% endblock %}

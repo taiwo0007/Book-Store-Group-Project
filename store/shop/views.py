@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Book, WishList
+from .models import Category, Book, WishList, Review
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
-from .forms import BookForm
+from .forms import BookForm, ReviewForm
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
@@ -69,13 +69,16 @@ def topRatedBooks(request):
     return render(request, 'shop/book_rating.html', {'booksRatedChildren':booksRatedChildren, 'booksRatedFiction':booksRatedFiction,'booksRatedNon':booksRatedNon })
 
 def book_detail(request, category_id, book_id):
-
+    form = ReviewForm()
+   
+    reviews = Review.objects.filter(review_item=book_id)
+    print(reviews)
     try:
         book = Book.objects.get(category_id=category_id, id=book_id)
     except Exception as e:
         raise e
 
-    return render(request, 'shop/book.html', {'book':book})
+    return render(request, 'shop/book.html', {'book':book, 'form':form, 'reviews':reviews})
 
 @login_required()
 def add_to_wishList(request, book_id, category_id):
@@ -137,10 +140,6 @@ def allBookCat(request, category_id=None):
     except (EmptyPage,InvalidPage):
         books = paginator.page(paginator.num_pages)
 
-
-   
-    
-
     return render(request, 'shop/category.html', {'category':c_page,'books':books,'managerCheck':managerCheck })
 
 @user_passes_test(group_check)
@@ -187,3 +186,66 @@ def bookDeleteView(request, category_id, book_id):
         return HttpResponseRedirect('/')
 
     return render(request, 'shop/book_delete.html', {'book':book,'managerCheck':managerCheck})
+
+
+@login_required()
+def addReview(request, category_id, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    
+    if request.method == "POST":
+        obj = Review.objects.create(
+            subject = request.POST['subject'],
+            comment = request.POST['comment'],
+            user = request.user, 
+            review_item=book,
+            name = str(request.user),
+
+            
+            )
+        obj.save()
+    print(obj.user)
+        
+   
+    return HttpResponseRedirect(book.get_absolute_url())
+
+
+   
+
+"""
+@login_required()
+def add_to_wishList(request, book_id, category_id):
+    print(book_id)
+    book = get_object_or_404(Book, id=book_id)
+    
+
+    try :
+        obj = WishList.objects.get(user=request.user, wished_item=book)
+        messages.warning(request, 'Item already added in wishlist ')
+        
+    except WishList.DoesNotExist:
+        obj = WishList.objects.create(
+            user = request.user, 
+            wished_item=book,
+        )
+        obj.save()
+        messages.success(request,'"' +str(obj.wished_item) +'" added to Wish List')
+   
+    return HttpResponseRedirect(book.get_absolute_url())
+   
+
+@user_passes_test(group_check)
+def managerCreateView(request):
+    
+    books = Book.objects.all().filter(availible=True)
+    managerCheck = True
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('')
+
+    else:
+        form = ReviewForm()
+
+    return render(request, 'shop/book_new.html', {'form':form,'managerCheck':managerCheck})
+    """

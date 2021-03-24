@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Book, Category
+from .models import Book, Category,Review
 
 
 class BookForm(ModelForm):
@@ -12,3 +12,8 @@ class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = '__all__'
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['subject', 'comment']
