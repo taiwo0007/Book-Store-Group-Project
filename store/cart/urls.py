@@ -5,8 +5,8 @@ app_name = 'cart'
 
 
 urlpatterns = [
-    path('add/<uuid:book_id>/', views.add_cart, name='add_cart'),
+    path('add/<slug:book_slug>/', views.add_cart, name='add_cart'),
     path('', views.cart_detail, name='cart_detail'),
-    path('remove/<uuid:book_id>/', views.cart_remove, name='cart_remove'),
-    path('full_remove/<uuid:book_id>/', views.full_remove, name='full_remove'),
+    path('remove/<slug:book_slug>/', views.cart_remove, name='cart_remove'),
+    path('full_remove/<slug:book_slug>/', views.full_remove, name='full_remove'),
 ]

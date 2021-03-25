@@ -11,16 +11,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib import messages
+
+
 def group_check(user):
     if user.groups.filter(name="Manager").exists() == True:
         return True
     else:
         return False
 
-# Create your views here.
 
 def cheapBooks(request):
-
     booksCheapF = Book.objects.filter(category='b6e303f8-d681-4aa2-ab8a-ad3b27a62015')
     booksCheapFiction = booksCheapF.order_by('price')[:6]
 
@@ -68,24 +68,24 @@ def topRatedBooks(request):
 
     return render(request, 'shop/book_rating.html', {'booksRatedChildren':booksRatedChildren, 'booksRatedFiction':booksRatedFiction,'booksRatedNon':booksRatedNon })
 
-def book_detail(request, category_id, book_id):
+def book_detail(request, category_slug, book_slug):
     form = ReviewForm()
    
-    reviewss = Review.objects.filter(review_item=book_id)
+    reviewss = Review.objects.filter(review_item__slug=book_slug)
     reviews = reviewss.order_by('-created_date')
 
     print(reviews)
     try:
-        book = Book.objects.get(category_id=category_id, id=book_id)
+        book = Book.objects.get(category__slug=category_slug, slug=book_slug)
     except Exception as e:
         raise e
 
     return render(request, 'shop/book.html', {'book':book, 'form':form, 'reviews':reviews})
 
 @login_required()
-def add_to_wishList(request, book_id, category_id):
-    print(book_id)
-    book = get_object_or_404(Book, id=book_id)
+def add_to_wishList(request, book_slug, category_slug):
+    print(book_slug)
+    book = get_object_or_404(Book, slug=book_slug)
     
 
     try :
@@ -103,9 +103,9 @@ def add_to_wishList(request, book_id, category_id):
     return HttpResponseRedirect(book.get_absolute_url())
 
 @login_required()
-def delete_from_wishList(request, book_id):
+def delete_from_wishList(request, book_slug):
     
-    book = WishList.objects.get(wished_item_id=book_id, user = request.user)
+    book = WishList.objects.get(wished_item__slug=book_slug, user = request.user)
     book.delete()
     messages.success(request, 'Successfully deleted from Wish List')
 
@@ -118,7 +118,7 @@ def viewWishList(request):
     books = WishList.objects.filter(user = request.user)
     return render(request, 'shop/wishlist_books.html', {'books':books})
 
-def allBookCat(request, category_id=None):
+def allBookCat(request, category_slug=None):
    
     
     managerCheck = False
@@ -128,8 +128,8 @@ def allBookCat(request, category_id=None):
 
     c_page = None
     books = None
-    if category_id != None:
-        c_page = get_object_or_404(Category, id=category_id)
+    if category_slug != None:
+        c_page = get_object_or_404(Category, slug=category_slug)
         books = Book.objects.filter(category=c_page, availible=True) 
     else:
         books = Book.objects.all().filter(availible=True)
@@ -169,9 +169,9 @@ def bookListView(request):
     return render(request, 'shop/book_list.html',{'books':books,'managerCheck':managerCheck})
 
 @user_passes_test(group_check)
-def bookUpdateView(request, category_id, book_id):
+def bookUpdateView(request, category_slug, book_slug):
     managerCheck = True
-    book = Book.objects.get(category_id=category_id, id=book_id)
+    book = Book.objects.get(category__slug=category_slug, slug=book_slug)
 
     form = BookForm(request.POST or None, request.FILES or None , instance = book)
     if form.is_valid():
@@ -181,9 +181,9 @@ def bookUpdateView(request, category_id, book_id):
     return render(request, 'shop/book_edit.html', {'form':form,'managerCheck':managerCheck})
 
 @user_passes_test(group_check)
-def bookDeleteView(request, category_id, book_id):
+def bookDeleteView(request, category_slug, book_slug):
     managerCheck = True
-    book = Book.objects.get(category_id=category_id, id=book_id)
+    book = Book.objects.get(category__slug=category_slug, slug=book_slug)
     
     if request.method =="POST":
         book.delete()
@@ -193,8 +193,8 @@ def bookDeleteView(request, category_id, book_id):
 
 
 @login_required()
-def addReview(request, category_id, book_id):
-    book = get_object_or_404(Book, id=book_id)
+def addReview(request, category_slug, book_slug):
+    book = get_object_or_404(Book, slug=book_slug)
     
     if request.method == "POST":
         obj = Review.objects.create(
@@ -218,9 +218,9 @@ def addReview(request, category_id, book_id):
 
 """
 @login_required()
-def add_to_wishList(request, book_id, category_id):
-    print(book_id)
-    book = get_object_or_404(Book, id=book_id)
+def add_to_wishList(request, book_slug, category_slug):
+    print(book_slug)
+    book = get_object_or_404(Book, id=book_slug)
     
 
     try :

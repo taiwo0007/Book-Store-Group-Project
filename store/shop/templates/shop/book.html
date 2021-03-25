@@ -44,9 +44,9 @@
                     {% if book.stock == 0%}
                     <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
                     {% else %}
-                    <a class="btn btn-secondary" href="{% url 'cart:add_cart' book.id %}">Add to Cart</a>
+                    <a class="btn btn-secondary" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
                     <a style="background-color: #f3db15;" class="btn btn-alert" data-toggle="tooltip" title="Wishlist"
-                        href="{% url 'shop:add_wishlist' book.category.pk book.pk %}"><i style="background-color: #f3db15;" class="fas fa-heart "></i></a>
+                        href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i style="background-color: #f3db15;" class="fas fa-heart "></i></a>
                         <a  id="share" class="btn btn-primary"><i style="" class="fas fa-share-alt text-light"></i></a>
                     {% endif %}
                     <br>
