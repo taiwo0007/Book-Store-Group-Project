@@ -21,11 +21,11 @@
 			</li>
 
 			<li  class="mt-2" style="float: left; margin-right: -12px;">
-				<a href="{% url 'order:request-refund'%}">Request Refund |</a>
+				<a href="{% url 'order:request-refund'%}">Refunds</a>
 			</li>
 			{% if user.is_authenticated %}
 			<li  class="mt-2" style="float: left; margin-right: -12px;">
-				<a href="{% url 'order:order_history'%}">Your Orders |</a>
+				<a href="{% url 'order:order_history'%}">| Orders |</a>
 			</li>
 			{% endif %}
 
