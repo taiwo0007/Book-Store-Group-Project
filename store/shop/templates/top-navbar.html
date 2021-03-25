@@ -8,16 +8,26 @@
 				<a href="{% url 'shop:allBookCat' %}">Home |</a>
 			</li>
 
-				<li  class="mt-2" style="float: left;">
-					<a href="/contact">Contact Us |</a></li>
+			<li  class="mt-2" style="float: left;">
+				<a href="/contact">Contact Us |</a>
+			</li>
 			
-					<li  class="mt-2" style="float: left; margin-right: -10px; margin-left: -9px;"><i class="fas fa-euro-sign"></i>
-				<a href="{%url 'shop:cheapBooks' %}">Best Value |</a></li>
+			<li  class="mt-2" style="float: left; margin-right: -12px; margin-left: -9px;"><i class="fas fa-euro-sign"></i>
+				<a href="{%url 'shop:cheapBooks' %}">Best Value |</a>
+			</li>
 
-				<li  class="mt-2" style="float: left;"><i class="fas fa-star"></i>
-					<a href="{% url 'shop:topRatedBooks'%}">Top Rated </a></li>
+			<li  class="mt-2" style="float: left; margin-right: -12px;"><i class="fas fa-star"></i>
+				<a href="{% url 'shop:topRatedBooks'%}">Top Rated |</a>
+			</li>
 
-
+			<li  class="mt-2" style="float: left; margin-right: -12px;">
+				<a href="{% url 'order:request-refund'%}">Request Refund |</a>
+			</li>
+			{% if user.is_authenticated %}
+			<li  class="mt-2" style="float: left; margin-right: -12px;">
+				<a href="{% url 'order:order_history'%}">Your Orders |</a>
+			</li>
+			{% endif %}
 
 			{% if user.is_authenticated %}
 			<li >
