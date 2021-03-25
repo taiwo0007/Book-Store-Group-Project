@@ -84,7 +84,8 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <h4 class="text-center pb-4 border-bottom">Reviews</h5>
+            <h4 class="text-center pb-4 border-bottom">Reviews </h5>
+                <span style="float: right;">/{{reviews.count}}</span><span style="float: right;" id="num">0</span>
         </div>
         {% if reviews %}
 
@@ -134,11 +135,29 @@
 </div>
 
 <script>
+
+    var num = document.getElementById("num");
+    console.log(num)
     var texter = document.querySelector("#b");
     var para = document.querySelector("#r");
     var moreSelect = document.getElementById("more");
-    var seeLesser = document.getElementById("less")
+    var seeLesser = document.getElementById("less");
+    var reviewsList = document.getElementsByClassName("reviewCard");
+    if(reviewsList.length == 1){
+    num.innerHTML = 1;
+    }
+    if(reviewsList.length == 2){
+    num.innerHTML = 2;
+    }
+    if(reviewsList.length == 3){
+    num.innerHTML = 3;
+    }
+    if(reviewsList.length > 3){
+    num.innerHTML = 3;
+    }
 
+
+    
 
 
     function gofunc() {
@@ -149,7 +168,7 @@
     texter.addEventListener('click', gofunc)
 
 
-    var reviewsList = document.getElementsByClassName("reviewCard");
+    
     for (var i = 0; i < reviewsList.length; i++) {
 
         if (i > 2) {
@@ -168,6 +187,7 @@
         }
         moreSelect.style.display = "none";
         seeLesser.style.display = "block";
+        num.innerHTML = reviewsList.length
 
     }
 
@@ -180,7 +200,8 @@
             }
         }
         moreSelect.style.display = "block";
-        seeLesser.style.display = "none"
+        seeLesser.style.display = "none";
+        num.innerHTML = 3
 
     }
     seeLesser.addEventListener('click', seeLess)
