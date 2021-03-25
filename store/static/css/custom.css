@@ -56,14 +56,16 @@ body {
 }
 
 .footer-dark {
-	padding:50px 0;
+	padding:20px;
 	color:#f0f9ff;
 	background-color:#282d32;
+	position: absolute;
+  	bottom: 0;
+  	width: 100%;
   }
   
 .footer-dark h3 {
-	margin-top:0;
-	margin-bottom:12px;
+	margin-top:1px;
 	font-weight:bold;
 	font-size:18px;
 	letter-spacing: 1px;
@@ -72,7 +74,7 @@ body {
 @media (max-width:767px) {
 .footer-dark .item:not(.social) {
 		text-align:center;
-		padding-bottom:20px;
+		padding-bottom:5px;
 	}
 }
   
@@ -83,7 +85,7 @@ body {
 @media (max-width:991px) {
 	.footer-dark .item.social {
 		text-align:center;
-		margin-top:20px;
+		margin-top:0px;
 	}
 }
   
@@ -107,7 +109,7 @@ body {
   
 .footer-dark .copyright {
 	text-align:center;
-	padding-top:24px;
+	padding-top:4px;
 	opacity:0.5;
 	font-size:14px;
 	margin-bottom:0;
