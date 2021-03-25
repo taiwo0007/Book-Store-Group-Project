@@ -119,6 +119,8 @@ def viewWishList(request):
     return render(request, 'shop/wishlist_books.html', {'books':books})
 
 def allBookCat(request, category_id=None):
+   
+    
     managerCheck = False
 
     if request.user.groups.filter(name="Manager").exists() == True:

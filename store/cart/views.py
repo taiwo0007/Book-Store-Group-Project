@@ -58,7 +58,10 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
     if request.method == 'POST':
         try:
             token = request.POST['stripeToken']
-            email = request.POST['stripeEmail']
+            if request.user.is_authenticated:
+                email = request.user.email
+            else:
+                email = request.POST['stripeEmail']
             billingName = request.POST['stripeBillingName']
             billingAddress1 = request.POST['stripeBillingAddressLine1']
             billingcity = request.POST['stripeBillingAddressCity']
