@@ -203,6 +203,7 @@ def addReview(request, category_id, book_id):
             
             )
         obj.save()
+        messages.success(request, "Review has been submitted")
     print(obj.user)
         
    
