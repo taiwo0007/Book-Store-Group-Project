@@ -119,9 +119,10 @@ def viewWishList(request):
     return render(request, 'shop/wishlist_books.html', {'books':books})
 
 def allBookCat(request, category_slug=None):
-   
-    
     managerCheck = False
+
+    print(category_slug)
+    print(category_slug)
 
     if request.user.groups.filter(name="Manager").exists() == True:
         managerCheck = True
@@ -208,7 +209,7 @@ def addReview(request, category_slug, book_slug):
             )
         obj.save()
         messages.success(request, "Review has been submitted")
-    print(obj.user)
+    
         
    
     return HttpResponseRedirect(book.get_absolute_url())

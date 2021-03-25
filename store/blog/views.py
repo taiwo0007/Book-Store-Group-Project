@@ -22,7 +22,7 @@ def blogDetail(request, id):
     books = Book.objects.get(id=author.book_blog.id)
     
     
-    reviews = Review.objects.filter(name=author.author)
+    reviews = Review.objects.filter(name=author.author)[:5]
     
     
    
