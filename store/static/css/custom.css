@@ -256,3 +256,11 @@ input[type=text], select, textarea {
 }
 */
 
+#img-blog{
+background-color: red;
+	width: 10px;
+}
+
+#go{
+	background-color: red;
+}

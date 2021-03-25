@@ -22,6 +22,7 @@ def group_check(user):
 def cheapBooks(request):
 
     booksCheapF = Book.objects.filter(category='b6e303f8-d681-4aa2-ab8a-ad3b27a62015')
+    print(booksCheapF)
     booksCheapFiction = booksCheapF.order_by('price')[:6]
 
     booksCheapC= Book.objects.filter(category='1a8c0bf6-85cf-4170-ab6b-45604dd43cf2')

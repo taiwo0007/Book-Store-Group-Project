@@ -8,4 +8,5 @@ app_name='blog'
 
 urlpatterns = [
     path('', views.blogView, name='blog_list'),
+    path('<int:id>/detail/', views.blogDetail, name='blog_detail'),
 ]
