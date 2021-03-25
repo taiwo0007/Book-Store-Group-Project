@@ -71,7 +71,9 @@ def topRatedBooks(request):
 def book_detail(request, category_id, book_id):
     form = ReviewForm()
    
-    reviews = Review.objects.filter(review_item=book_id)
+    reviewss = Review.objects.filter(review_item=book_id)
+    reviews = reviewss.order_by('-created_date')
+
     print(reviews)
     try:
         book = Book.objects.get(category_id=category_id, id=book_id)
