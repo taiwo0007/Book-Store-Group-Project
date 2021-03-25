@@ -2,6 +2,8 @@ from django.db import models
 import uuid
 from django.urls import reverse
 from django.conf import settings
+from autoslug import AutoSlugField
+
 
 class Category(models.Model):
     id = models.UUIDField(
@@ -13,6 +15,7 @@ class Category(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
     popularity = models.PositiveSmallIntegerField()
+    slug = AutoSlugField(null=True, default=None, unique=True, populate_from='name')
     '''books = models.ManyToManyField('Book')'''
 
     class Meta:
@@ -21,7 +24,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
     def get_absolute_url(self):
-        return reverse('shop:books_by_category', args=[self.id])
+        return reverse('shop:books_by_category', args=[self.slug])
 
     def __str__(self):
         return self.name
@@ -61,16 +64,18 @@ class Book(models.Model):
         publisher = models.CharField(max_length=240)
         author = models.ForeignKey(Author, related_name='authors', on_delete=models.CASCADE)
         category = models.ForeignKey(Category, on_delete=models.CASCADE,null=False)
+        slug = AutoSlugField(null=True, default=None, unique=True, populate_from='title')
+
         class Meta:
             ordering = ('title', )
             verbose_name = 'book'
             verbose_name_plural = 'books'
         
         def get_absolute_url(self):
-            return reverse('shop:book_detail',args=[self.category_id, self.id])
+            return reverse('shop:book_detail',args=[self.category.slug, self.slug])
 
         def temp_url(self):
-            return self.category_id, self.id
+            return self.category.slug, self.slug
         
         def __str__(self):
             return self.title

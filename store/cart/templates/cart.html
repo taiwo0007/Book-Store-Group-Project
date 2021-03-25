@@ -59,14 +59,14 @@
 								</td>
 								{% if cart_item.quantity < cart_item.book.stock %}
 									<td>
-										<a href="{% url 'cart:add_cart' cart_item.book.id %}" class="custom_a"><i class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
-										<a href="{% url 'cart:cart_remove' cart_item.book.id%}" class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
-										<a href="{%url 'cart:full_remove' cart_item.book.id%}" class="custom_icon"><i class="fas fa-trash-alt custom_icon"></i></a>
+										<a href="{% url 'cart:add_cart' cart_item.book.slug %}" class="custom_a"><i class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
+										<a href="{% url 'cart:cart_remove' cart_item.book.slug%}" class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
+										<a href="{%url 'cart:full_remove' cart_item.book.slug%}" class="custom_icon"><i class="fas fa-trash-alt custom_icon"></i></a>
 									</td>
 								{% else %}
 									<td>
-										&nbsp;<a href="{%url 'cart:cart_remove' cart_item.book.id%}" class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
-										<a href="{%url 'cart:full_remove' cart_item.book.id%}" class="custom_icon"><i class="fas fa-trash-alt custom_icon"></i></a>
+										&nbsp;<a href="{%url 'cart:cart_remove' cart_item.book.slug%}" class="custom_a"><i class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
+										<a href="{%url 'cart:full_remove' cart_item.book.slug%}" class="custom_icon"><i class="fas fa-trash-alt custom_icon"></i></a>
 									</td>
 									<td></td>
 								{% endif %}

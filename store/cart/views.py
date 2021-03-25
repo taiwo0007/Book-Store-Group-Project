@@ -18,8 +18,8 @@ def _cart_id(request):
         cart = request.session.create()
     return cart
 
-def add_cart(request, book_id):
-    book = Book.objects.get(id=book_id)
+def add_cart(request, book_slug):
+    book = Book.objects.get(slug=book_slug)
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
     except Cart.DoesNotExist:
@@ -108,7 +108,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                         price = order_item.book.price,
                         order = order_details)
                     oi.save()
-                    products = Book.objects.get(id=order_item.book.id)
+                    products = Book.objects.get(slug=order_item.book.slug)
                     products.stock = int(order_item.book.stock - order_item.quantity)
                     products.save()
                     order_item.delete()
@@ -125,9 +125,9 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
     'data_key':data_key, 'stripe_total':stripe_total,
     'description':description})
 
-def cart_remove(request, book_id):
+def cart_remove(request, book_slug):
     cart = Cart.objects.get(cart_id=_cart_id(request))
-    book = get_object_or_404(Book, id=book_id)
+    book = get_object_or_404(Book, slug=book_slug)
     cart_item = CartItem.objects.get(book=book, cart=cart)
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
@@ -136,9 +136,9 @@ def cart_remove(request, book_id):
         cart_item.delete()
     return redirect('cart:cart_detail')
 
-def full_remove(request, book_id):
+def full_remove(request, book_slug):
     cart = Cart.objects.get(cart_id=_cart_id(request))
-    book = get_object_or_404(Book, id=book_id)
+    book = get_object_or_404(Book, slug=book_slug)
     cart_item = CartItem.objects.get(book=book, cart=cart)
     cart_item.delete()
     return redirect('cart:cart_detail')

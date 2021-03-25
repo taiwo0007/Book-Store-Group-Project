@@ -6,5 +6,6 @@ class Contact(models.Model):
     lastname=models.CharField(max_length=200)
     email=models.EmailField()
     subject=models.TextField()
+
     def __str__(self):
-        return self.lastname, self.firstname, self.email
+        return f'{self.lastname}, {self.firstname}, {self.email}'
