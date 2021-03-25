@@ -107,6 +107,10 @@ class Review(models.Model):
         return self.subject
 
 
+    def get_absolute_url(self):
+            return reverse('shop:book_detail',args=[self.review_item.category.slug, self.review_item.slug])
+
+
 
     
 
