@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+	{% if category %}
+		{{ category.description|truncatewords:155 }}
+	{% else %}
+		Welcome to the Online Book Store where you can buy awesome books.
+	{% endif %}
+{% endblock %}
+{% block title %}
+	{% if category %}
+		{{ category.name }} - Bookspace.
+	{% else %}
+		Best Value - Bookspace.
+	{% endif %}
+{% endblock %}
+{% block content %}
+
+
+
+
+{% for blog in blogs %}
+{{blog.title}}
+<img id="img-blog" src="{{blog.image.url}}"/>
+
+{% endfor%}
+
+
+
+{%endblock content%}
