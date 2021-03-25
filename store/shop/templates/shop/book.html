@@ -112,11 +112,15 @@
         </div>
 
         {%endfor%}
+        
     </div>
     <div class="row">
-        
+        {% if reviews.count > 3%}
         <p id="more" class="btn text-center" style="text-decoration: underline; float: right; margin-right: 50px; display: block;">
             view more</p>
+        {% endif %}
+        
+       
         <p id="less" class="btn text-center" style="text-decoration: underline; float: right; margin-right: 50px; display: none;">
             See less</p>
 
