@@ -27,11 +27,13 @@
 			<li  class="mt-2" style="float: left; margin-right: -12px;">
 				<a href="{% url 'order:order_history'%}">| Orders |</a>
 			</li>
+			<li  class="mt-2" style="float: left; margin-left: -2px; margin-right: -25px;;"><i class="fas fa-blog"></i>
+				<a href="{% url 'blog:blog_list'%}"> Blog |</a></li>
 			{% endif %}
 
 			{% if user.is_authenticated %}
-			<li >
-                Welcome, <a style="height: 0px;" href="#" class="dropdown-toggle" data-toggle="dropdown" 
+			<li class="dropdown">
+                <!--Welcome,--> <a style="height: 0px;" href="#" class="dropdown-toggle" data-toggle="dropdown" 
                 aria-haspopup="true" aria-expanded="false">{{ user.username }} 
                 <i class="fas fa-user-circle"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"> 
@@ -42,7 +44,7 @@
 			<a class="dropdown-item" href="{% url 'shop:book_new' %}">+add Book</a>
 			<a  class="dropdown-item" href="{% url 'shop:book_list' %}">+list Book</a>
 				{% endif %}
-
+				</div>
 			</li>
 			<span style="margin-left: -14px; margin-right: 5px;">|</span>
 		
