@@ -78,7 +78,7 @@
                 {% if user.is_authenticated %}
                 <button class="btn btn-secondary" type="submit">Save</button>
                 {% else %}
-                <p>Sign in to review</p>
+                <a href="{% url 'signin' %}"> Sign in to review </a>
                 {% endif %}
             </form>
         </div>
