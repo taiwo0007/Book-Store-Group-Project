@@ -21,14 +21,15 @@
 			</li>
 
 			<li  class="mt-2" style="float: left; margin-right: -12px;">
-				<a href="{% url 'order:request-refund'%}">Refunds</a>
+				<a href="{% url 'order:request-refund'%}">Refunds |</a>
 			</li>
+			<li  class="mt-2" style="float: left; margin-left: -2px; margin-right: -25px;;"><i class="fas fa-blog"></i>
+				<a href="{% url 'blog:blog_list'%}"> Blog |</a></li>
 			{% if user.is_authenticated %}
 			<li  class="mt-2" style="float: left; margin-right: -12px;">
 				<a href="{% url 'order:order_history'%}">| Orders |</a>
 			</li>
-			<li  class="mt-2" style="float: left; margin-left: -2px; margin-right: -25px;;"><i class="fas fa-blog"></i>
-				<a href="{% url 'blog:blog_list'%}"> Blog |</a></li>
+			
 			{% endif %}
 
 			{% if user.is_authenticated %}
