@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from .models import CustomUser
 from django.contrib.auth.models import Group
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
+from django.contrib import messages
 
 def signupView(request):
     if request.method == 'POST':
@@ -37,3 +38,19 @@ def signinView(request):
 def signoutView(request):
     logout(request)
     return redirect('signin')
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('signin')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })

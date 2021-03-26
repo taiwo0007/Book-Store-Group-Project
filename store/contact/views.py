@@ -15,5 +15,4 @@ def contactView(request):
         contact.email=email
         contact.subject=subject
         contact.save()
-        return HttpResponse("<h2>Thank you for contacting us!</h2>")
-    return render(request, 'contact.html')
+    return render(request, 'thanks_contact.html')
