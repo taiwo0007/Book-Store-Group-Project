@@ -1,9 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-
-# Create your tests here.
-
-from .models import CustomUser, Customer
+from .models import CustomUser
 
 class TestModels(TestCase):
 

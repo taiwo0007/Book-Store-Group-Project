@@ -35,7 +35,7 @@ class TestModels(TestCase):
             publisher = 'Publisher',
             author = self.Author1,
             category = self.Category1  
-        )
+        ) 
         
 
     def test_category_create_success(self):
@@ -67,6 +67,12 @@ class TestModels(TestCase):
         self.assertEqual(f'{self.Book1.publisher}', 'Publisher')
         self.assertEqual(self.Book1.author, self.Author1)
         self.assertEqual(self.Book1.category, self.Category1)
+    
+    def test_book_is_assigned_slug_on_creation(self):
+        self.assertEquals(self.Book1.slug, 'title')
+
+    def test_category_is_assigned_slug_on_creation(self):
+        self.assertEquals(self.Category1.slug, 'test-category-name')
 
     # def test_book_detail(self):
 
@@ -115,6 +121,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func, book_detail)
 
 
-    
+    """
     def test_wishLists_url_resolved(self):
         url = reverse()
+    """
