@@ -1,6 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from . models import Order, OrderItem
 from datetime import datetime
+from order.views import *
+from django.urls import reverse, resolve, reverse_lazy
+
 
 class TestModels(TestCase):
 
@@ -51,8 +54,35 @@ class TestModels(TestCase):
         self.assertFalse(self.Order1.refund_requested)
         self.assertFalse(self.Order1.refund_granted)
 
+
+
+
     def test_order_item_create_success(self):
         self.assertEqual(f'{self.OrderItem1.product}', 'book')
         self.assertEqual(self.OrderItem1.quantity, 2)
         self.assertEqual(self.OrderItem1.price, 10.00)
         self.assertEqual(self.OrderItem1.order, self.Order1)
+
+
+
+class TestUrls(SimpleTestCase):
+
+    def test_thanks_url_resolved(self):
+        url = reverse('order:thanks', args=['10'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, thanks)
+
+    def test_order_history_url_resolved(self):
+        url = reverse('order:order_history')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, orderHistory)
+    
+    def test_order_detail_url_resolved(self):
+        url = reverse('order:order_detail', args=['10'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, viewOrder)
+
+    def test_request_refund_url_resolved(self):
+        url = reverse('order:request-refund')
+        print(resolve(url).func)
+        #self.assertEquals(resolve(url).func, RequestRefundView.as_view())

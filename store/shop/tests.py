@@ -2,7 +2,7 @@ from django.test import TestCase, SimpleTestCase
 from datetime import datetime
 from django.urls import reverse, resolve, reverse_lazy
 from shop.models import Category, Author, Book
-from shop.views import book_detail, allBookCat
+from shop.views import *
 import uuid
 
 
@@ -86,22 +86,6 @@ class TestModels(TestCase):
     #     self.assertEqual(response.status_code,200)
     #     self.assertTemplateUsed(response,'shop/category.html')
 
-"""
-  path('', views.allBookCat, name='allBookCat'),
-    path('books/<slug:category_slug>/', views.allBookCat, name='books_by_category'),
-    path('books/<slug:category_slug>/<slug:book_slug>/', views.book_detail, name='book_detail'),
-    path('new/', views.managerCreateView, name='book_new'),
-    path('booksManagerList/', views.bookListView, name='book_list'),
-    path('books/<slug:category_slug>/<slug:book_slug>/edit/', views.bookUpdateView, name='book_edit'),
-    path('books/<slug:category_slug>/<slug:book_slug>/delete/',views.bookDeleteView, name='book_delete'),
-    path('books/<slug:category_slug>/<slug:book_slug>/add', views.add_to_wishList, name='add_wishlist'),
-    path('wishlists/',views.viewWishList, name='wishList_books'),
-    path('books/<slug:book_slug>/delete', views.delete_from_wishList, name='wishList_delete'),
-    path('top_rated/', views.topRatedBooks, name='topRatedBooks'),
-    path('best_value/', views.cheapBooks, name='cheapBooks'),
-    path('books/<slug:category_slug>/<slug:book_slug>/add_review/', views.addReview, name="add_review")
-"""
-
         
 class TestUrls(SimpleTestCase):
 
@@ -125,3 +109,67 @@ class TestUrls(SimpleTestCase):
     def test_wishLists_url_resolved(self):
         url = reverse()
     """
+    
+
+
+    #Slugiffied
+    def test_books_by_category_url_slugified_resolved(self):
+        url = reverse('shop:books_by_category', args=['childrens'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, allBookCat)
+
+    def test_book_detail_url_slugified_resolved(self):
+        url = reverse('shop:book_detail', args=['childrens', 'diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, book_detail)
+
+    def test_book_new_url_resolved(self):
+        url = reverse('shop:book_new')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, managerCreateView)
+
+    def test_book_list_url_resolved(self):
+        url = reverse('shop:book_list')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, bookListView)
+
+    def test_book_edit_url_slugified_resolved(self):
+        url = reverse('shop:book_edit', args=['childrens', 'diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, bookUpdateView)
+
+    def test_book_delete_url_slugified_resolved(self):
+        url = reverse('shop:book_delete', args=['childrens', 'diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, bookDeleteView)
+
+    def test_add_wishList_url_slugified_resolved(self):
+        url = reverse('shop:add_wishlist', args=['childrens', 'diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, add_to_wishList)
+
+    def test_wishList_books_url_resolved(self):
+        url = reverse('shop:wishList_books')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, viewWishList)
+
+    def test__wishList_delete_url_slugified_resolved(self):
+        url = reverse('shop:wishList_delete', args=['diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, delete_from_wishList)
+
+    def test__topRatedBooks_url_resolved(self):
+        url = reverse('shop:topRatedBooks')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, topRatedBooks)
+
+    def test__cheapBooks_url_resolved(self):
+        url = reverse('shop:cheapBooks')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, cheapBooks)
+    
+
+    def test_add_review_url_slugified_resolved(self):
+        url = reverse('shop:add_review', args=['childrens', 'diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, addReview)

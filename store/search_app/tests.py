@@ -11,9 +11,14 @@ class TestUrls(SimpleTestCase):
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, searchResult)
 
+
+
 class searchResultsTest(TestCase):
 
     def test_searchResult(self):
         response = self.client.get(reverse_lazy('search_app:searchResult'))
         self.assertEqual(response.status_code,200)
         self.assertTemplateUsed(response,'search.html')
+
+
+    

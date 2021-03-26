@@ -1,7 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from datetime import datetime
 from shop.models import Category, Author, Book
-from .models import Cart, CartItem
+from .models import *
+from cart.views import *
+from django.urls import reverse, resolve, reverse_lazy
 
 
 class TestModels(TestCase):
@@ -53,3 +55,27 @@ class TestModels(TestCase):
         self.assertEqual(self.CartItem1.cart, self.Cart1)
         self.assertEqual(self.CartItem1.quantity, 2)
         self.assertTrue(self.CartItem1.active)
+
+
+class TestUrls(SimpleTestCase):
+
+    def test_add_cart_url_resolved(self):
+        url = reverse('cart:add_cart', args=['diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, add_cart)
+    
+
+    def test_cart_detail_url_resolved(self):
+        url = reverse('cart:cart_detail')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, cart_detail)
+
+    def test_cart_remove_url_resolved(self):
+        url = reverse('cart:cart_remove',args=['diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, cart_remove)
+
+    def test_full_remove_url_resolved(self):
+        url = reverse('cart:full_remove', args=['diary-of-a-wimpy-kid'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, full_remove)
