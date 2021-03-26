@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Contact
 from django.http import HttpResponse
 
@@ -15,4 +15,5 @@ def contactView(request):
         contact.email=email
         contact.subject=subject
         contact.save()
-    return render(request, 'thanks_contact.html')
+        return render(request, 'thanks_contact.html')
+    return render(request, 'contact.html')

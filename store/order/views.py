@@ -45,7 +45,7 @@ class RequestRefundView(View):
             email = form.cleaned_data.get('email')
             
             try:
-                order = Order.objects.get(ref_code=ref_code)
+                order = Order.objects.get(ref_code=ref_code) 
                 order.refund_requested = True
                 order.save()  
                 refund = Refund()
