@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from django.contrib.auth import get_user_model
 from shop.models import Book, Category, Author
 from datetime import datetime
@@ -6,6 +6,9 @@ from django.db import models
 from django.conf import settings
 from .models import Blog
 from accounts.models import CustomUser
+from blog.views import *
+from django.urls import reverse, resolve, reverse_lazy
+from shop.models import *
 
 class TestModels(TestCase):
 
@@ -56,3 +59,18 @@ class TestModels(TestCase):
         self.assertEqual(self.Blog1.author, self.CustomUser1)
         self.assertEqual(f'{self.Blog1.body}', 'Text field')
         self.assertEqual(self.Blog1.book_blog, self.Book1)
+
+
+
+class TestUrls(SimpleTestCase):
+
+    def test__blog_list_url_resolved(self):
+        url = reverse('blog:blog_list')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, blogView)
+    
+
+    def test_blog_detail_url_resolved(self):
+        url = reverse('blog:blog_detail', args=['1'])
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, blogDetail)

@@ -1,4 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
+from . models import Contact
+from contact.views import *
+from django.urls import reverse, resolve, reverse_lazy
 from . models import Contact
 
 class TestModels(TestCase):
@@ -16,3 +19,10 @@ class TestModels(TestCase):
         self.assertEqual(f'{self.Contact1.lastname}', 'lastname')
         self.assertEqual(f'{self.Contact1.email}', 'thisemail@email.com')
         self.assertEqual(f'{self.Contact1.subject}', 'this is the subject')
+
+
+class TestUrls(SimpleTestCase):
+    def test_contact_url_resolved(self):
+        url = reverse('contact')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, contactView)

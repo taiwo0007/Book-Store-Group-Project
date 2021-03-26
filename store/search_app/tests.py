@@ -4,6 +4,7 @@ from search_app.views import searchResult
 
 
 
+
 class TestUrls(SimpleTestCase):
 
     def test_searchResult_url_resolved(self):
