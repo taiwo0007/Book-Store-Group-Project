@@ -113,12 +113,12 @@ class TestUrls(SimpleTestCase):
 
 
     #Slugiffied
-    def test_books_by_category_url_slugified_resolved(self):
+    def test_books_by_category_url_resolved(self):
         url = reverse('shop:books_by_category', args=['childrens'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, allBookCat)
 
-    def test_book_detail_url_slugified_resolved(self):
+    def test_book_detail_url_resolved(self):
         url = reverse('shop:book_detail', args=['childrens', 'diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, book_detail)
@@ -133,17 +133,17 @@ class TestUrls(SimpleTestCase):
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, bookListView)
 
-    def test_book_edit_url_slugified_resolved(self):
+    def test_book_edit_url_resolved(self):
         url = reverse('shop:book_edit', args=['childrens', 'diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, bookUpdateView)
 
-    def test_book_delete_url_slugified_resolved(self):
+    def test_book_delete_url_resolved(self):
         url = reverse('shop:book_delete', args=['childrens', 'diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, bookDeleteView)
 
-    def test_add_wishList_url_slugified_resolved(self):
+    def test_add_wishList_url_resolved(self):
         url = reverse('shop:add_wishlist', args=['childrens', 'diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, add_to_wishList)
@@ -153,7 +153,7 @@ class TestUrls(SimpleTestCase):
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, viewWishList)
 
-    def test__wishList_delete_url_slugified_resolved(self):
+    def test__wishList_delete_url_resolved(self):
         url = reverse('shop:wishList_delete', args=['diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, delete_from_wishList)
@@ -163,13 +163,13 @@ class TestUrls(SimpleTestCase):
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, topRatedBooks)
 
-    def test__cheapBooks_url_resolved(self):
+    def test_cheapBooks_url_resolved(self):
         url = reverse('shop:cheapBooks')
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, cheapBooks)
     
 
-    def test_add_review_url_slugified_resolved(self):
+    def test_add_review_url_resolved(self):
         url = reverse('shop:add_review', args=['childrens', 'diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, addReview)
