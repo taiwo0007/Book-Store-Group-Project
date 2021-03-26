@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'stripe',
     'order',
     'blog',
+    'vouchers',
 ]
 
 MIDDLEWARE = [
