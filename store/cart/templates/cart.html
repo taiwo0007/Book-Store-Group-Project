@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block metadescription %}
 	This is the shopping cart page. Proceed to review your items and place the order.
 {% endblock %}
@@ -93,7 +94,7 @@
 						</tr>
 						{% if voucher %}
 							<tr class="subtotal">
-							<td>Total</td>
+							<td class="text-left">Total</td>
 							<td colspan="4"></td>
 							<td class="num">€{{ total|floatformat:"2" }}</td>
 							</tr>
@@ -128,7 +129,7 @@
 				<p>Apply a voucher:</p>
 				<form action="{% url 'vouchers:apply' %}" method="post">
 					{{ voucher_apply_form }}
-					<input type="submit" value="Apply">
+					<button type='submit' class="btn btn-primary my-3">Apply</button> 
 					{% csrf_token %}
 				</form>
 
