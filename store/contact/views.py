@@ -25,5 +25,4 @@ class ContactView(View):
             contact.subject = subject
             contact.save()
             messages.info(self.request, "Your message has been received.")
-            context = {'form':form}
-            return render(request,'thanks_contact.html',)
+            return render(request,'thanks_contact.html')
