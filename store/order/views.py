@@ -38,7 +38,7 @@ class RequestRefundView(View):
         return render(self.request, "request_refund.html", context)
         
     def post(self, *args, **kwargs):
-        form = RefundForm(self.request.POST)
+        form = RefundForm(self.request.POST) 
         if form.is_valid():
             ref_code = form.cleaned_data.get('ref_code')
             message = form .cleaned_data.get('message')

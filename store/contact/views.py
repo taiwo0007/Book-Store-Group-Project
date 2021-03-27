@@ -1,19 +1,29 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Contact
-from django.http import HttpResponse
+from django.views.generic import View
+from .forms import ContactForm
+from django.contrib import messages
 
-# Create your views here.
-def contactView(request):
-    if request.method=="POST":
-        contact=Contact()
-        firstname=request.POST.get('firstname')
-        lastname=request.POST.get('lastname')
-        email=request.POST.get('email')
-        subject=request.POST.get('subject')
-        contact.firstname=firstname
-        contact.lastname=lastname
-        contact.email=email
-        contact.subject=subject
-        contact.save()
-        return render(request, 'thanks_contact.html')
-    return render(request, 'contact.html')
+
+class ContactView(View):
+    def get(self, request, *args, **kwargs):
+        form = ContactForm()
+        context = {'form': form}
+        return render(request, "contact.html", context)
+
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(self.request.POST)
+        if form.is_valid():
+            firstname = form.cleaned_data.get('firstname')
+            lastname = form.cleaned_data.get('lastname')
+            email = form.cleaned_data.get('email')
+            subject = form.cleaned_data.get('subject')
+            contact = Contact()
+            contact.firstname = firstname
+            contact.lastname = lastname
+            contact.email = email
+            contact.subject = subject
+            contact.save()
+            messages.info(self.request, "Your message has been received.")
+            context = {'form':form}
+            return render(request,'thanks_contact.html',)
