@@ -1,39 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
-{% block metadescription %}
-	Contact Us
-{% endblock %}
+{% load crispy_forms_tags %}
 {% block title %}
 	Contact - Bookspace.
 {% endblock %}
 {% block content %}
-	<div>
-		<div class="text-center">
-			<br>
-				<h1 class="text-center my_title">
-					CONTACT US
-				</h1>
-			<br>
-		</div>
-	</div>
-    <div class="container">
-        <form class="" method="post" action="#">
-        {% csrf_token %}
-            <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Your email..">
-
-                <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-                <button type='submit' class="btn btn-primary my-3">Submit</button> 
-            </div>
-        </form>
+	<div class = "container">
+    <h2>Contact Us</h2>
+    <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type='submit' class="btn btn-primary my-3">Submit</button> 
+    </form>
     </div>
-{% endblock %}
+		
+{% endblock content%}
