@@ -56,6 +56,8 @@ def signupView(request):
 
     else:
         form = CustomUserCreationForm()
+
+
     return render(request, 'signup.html', {'form':form})         
 
 def signinView(request):
@@ -79,17 +81,19 @@ def signinView(request):
                     email_address = user.email
                     )
                     obj.save()
-
+                    
+                print("----------------------------------------------hello worled")
                 return redirect('shop:allBookCat')
             else:
+                print("=============================================hello worled")
                 return redirect('signup')
 
             
     else:
         form = AuthenticationForm()
 
-        print("hello")
-        return render(request, 'signin.html', {'form':form})   
+       
+    return render(request, 'signin.html', {'form':form})   
 
 def signoutView(request):
     logout(request)
