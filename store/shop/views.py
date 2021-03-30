@@ -19,6 +19,12 @@ def group_check(user):
     else:
         return False
 
+@login_required()
+def reviewList(request):
+    reviews = Review.objects.filter(user = request.user)
+   
+    return render(request, 'shop/reviews.html', {'reviews':reviews})
+    
 
 def cheapBooks(request):
     booksCheapF = Book.objects.filter(category='b6e303f8-d681-4aa2-ab8a-ad3b27a62015')

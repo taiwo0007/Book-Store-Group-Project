@@ -2,13 +2,28 @@
 {% block content %}
 
     <div  class="container pt-1">
-        <h1 style="font-weight: lighter;" class="mt-4  my-3 text-center">{{request.user}}'s Wish List</h1>
-      
+
+        <div class="row">
+            <div class="col-4 mt-5 pt-5">
+
+                <nav style="text-transform: uppercase; " class="nav flex-column ">
+                <a style=" background-color:rgb(36, 114, 78); width: 350px; font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0"><i class="fas fa-chevron-left"></i> Account dashboard</a>
+                <a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify text-light btn  rounded-0">Profile </a>
+                <a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'shop:wishList_books'%}" class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
+                <a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'order:order_history'%}" class="text-justify text-light btn rounded-0">Orders</a>
+                <a href="{% url 'shop:reviewList'%}" style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify  text-light btn rounded-0" aria-disabled="true">Reviews</a>
+                
+                </nav>
+                
+                    </div>
+        
+        <div class="col-8">
+            <h1 style="font-weight: lighter;" class="text-center mb-5">{{request.user}}'s Wish List</h1>
         {% if books %}
-        <div class="row mx-auto "> 
+        <div class="row "> 
             {% for book in books %}
         
-                <div class="my_bottom_margin col-9 col-lg-2 col-sm-4 col-md-3 my-3 py-5">
+                <div class="my_bottom_margin col-3">
                     <div style="font-size: 10px; " class="card text-center h-50 border-0" style="min-width: 18rem;">
                         <a href="{{book.wished_item.get_absolute_url}}"><img class="card-img-top my_image" src="{{book.wished_item.image.url}}" alt="{{book.title}}"></a>
                         <div class="card-body">
@@ -24,6 +39,8 @@
                 </div>
             {% endfor %}
         </div>
+    </div>
+</div>
         {% else %}
         <p class="card-text text-center mt-3">No books in wishlist</p>
         {% endif %}

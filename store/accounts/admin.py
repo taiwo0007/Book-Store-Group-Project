@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, UserProfile
 from contact.models import Contact
 
 class CustomUserAdmin(UserAdmin):
@@ -18,4 +18,14 @@ class CustomUserAdmin(UserAdmin):
         return ','.join([g.name for g in obj.groups.all()]) if obj.groups.count() else ''
 
 
+
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
+
+
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user','email_address']
+
+admin.site.register(UserProfile, UserProfileAdmin)

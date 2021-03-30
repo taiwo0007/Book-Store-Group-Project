@@ -18,7 +18,8 @@ urlpatterns = [
     path('books/<slug:book_slug>/delete', views.delete_from_wishList, name='wishList_delete'),
     path('top_rated/', views.topRatedBooks, name='topRatedBooks'),
     path('best_value/', views.cheapBooks, name='cheapBooks'),
-    path('books/<slug:category_slug>/<slug:book_slug>/add_review/', views.addReview, name="add_review")
+    path('books/<slug:category_slug>/<slug:book_slug>/add_review/', views.addReview, name="add_review"),
+    path('reviews/',views.reviewList, name="reviewList"),
 
     
 
