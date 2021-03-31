@@ -29,7 +29,7 @@ class Order(models.Model):
     voucher = models.ForeignKey(
         Voucher, related_name='orders', null=True, blank=True, on_delete=models.SET_NULL)
     discount = models.IntegerField(
-        default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]) 
 
     class Meta:
         db_table = 'Order'

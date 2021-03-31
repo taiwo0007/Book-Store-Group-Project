@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+	Order List - Bookspace.
+{% endblock %}
+{% block content %}
+<h1>This is all of our orders</h1>
+{% for order in orders %}
+<div class="orders"> 
+{{ order.ref_code }} {{ order.emailAddress }} {{ order.billingName }}
+</div>
+{% endfor %}
+{% endblock %}

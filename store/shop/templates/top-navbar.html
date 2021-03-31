@@ -25,6 +25,11 @@
 				<a href="{% url 'password_change'%}">Change Password |</a>
 			</li>
 			{% endif %}
+			{% if managerCheck%}
+			<li  class="mt-2" style="float: left; margin-right: -12px;">
+				<a href="{% url 'dashboard:manager_dashboard' %}">MGR DASH |</a>
+			</li>
+			{% endif %}
 
 			{% if user.is_authenticated %}
 			<li class="dropdown">

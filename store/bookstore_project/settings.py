@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop',
     'search_app',
     'cart',
+    'dashboard',
     'crispy_forms',
     'contact',
     'stripe',
@@ -67,7 +68,8 @@ TEMPLATES = [
         'DIRS': [str(BASE_DIR.joinpath('shop','templates')),
                  str(BASE_DIR.joinpath('search_app','templates')),
                  str(BASE_DIR.joinpath('blog','templates')),
-                 str(BASE_DIR.joinpath('cart', 'templates'))],
+                 str(BASE_DIR.joinpath('cart', 'templates')),
+                 str(BASE_DIR.joinpath('dashboard', 'templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

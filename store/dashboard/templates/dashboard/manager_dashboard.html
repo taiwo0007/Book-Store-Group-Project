@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+	This is page displays all orders. 
+{% endblock %}
+{% block title %}
+	All Orders - Bookspace.
+{% endblock %}
+{% block content %}
+
+
+<div class="container">
+<h1>Manager Dashboard</h1>
+<p style="font-weight: lighter;">Hi {{request.user}}</p>
+    <div class="row mt-5">
+        <div class="col-4">
+            <a href="{% url 'shop:book_new' %}" style="width: 19vw; " class="btn btn-secondary px-5 rounded-0 py-2">
+            <i style="font-size: 40px;" class="fas fa-book-medical d-block "></i>Add book</a> 
+        </div>
+        <div class="col-4">
+            <a href="#" style="width: 19vw;" class="btn btn-secondary px-5 rounded-0 py-2">
+            <i style="font-size: 40px;" class="fas fa-chart-line d-block"></i>Reports</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'dashboard:all_orders' %}" style="width: 19vw;" class="btn btn-secondary px-5 rounded-0 py-2">
+            <i style="font-size: 40px;" class="fas fa-shopping-cart d-block"></i>All Orders</a> 
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-4">
+            <a href="{% url 'shop:book_list' %}" style="width: 19vw; " class="btn btn-secondary px-5 rounded-0 py-2">
+            <i style="font-size: 40px;" class="fas fa-book d-block "></i>Book List</a> 
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content%}
