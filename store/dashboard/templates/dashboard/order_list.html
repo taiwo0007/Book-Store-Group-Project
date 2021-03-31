@@ -16,7 +16,7 @@
   </thead>
   <tbody>
 {% for order in orders %}
-<tr><th scope="row">1</th><td>{{ order.ref_code }} </td><td>{{ order.emailAddress }} </td><td>{{ order.billingName }}</td></tr>
+<tr><th scope="row">{{ order.id }}</th><td>{{ order.ref_code }} </td><td>{{ order.emailAddress }} </td><td>{{ order.billingName }}</td></tr>
 {% endfor %}
 </tbody>
 </table>
