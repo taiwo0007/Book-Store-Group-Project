@@ -26,6 +26,6 @@ admin.site.register(CustomUser, CustomUserAdmin)
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['user','email_address']
+    list_display = ['user','email_address', 'profile_image', 'colour']
 
 admin.site.register(UserProfile, UserProfileAdmin)

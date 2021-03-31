@@ -23,18 +23,34 @@ Best Value - Bookspace.
     <div class="row mt-5">
         <div class="col-4">
             
-           <a href="{% url 'shop:wishList_books' %}" style="width: 19vw; " class="btn btn-secondary px-5 rounded-0 py-2">
+           <a href="{% url 'shop:wishList_books' %}" style="width: 25vw; " class="btn btn-success px-5 rounded-0 py-2">
             <i style="font-size: 40px;" class="fas fa-male d-block "></i>Wish List</a> 
 
 
         </div>
         <div class="col-4">
-            <a href="{% url 'shop:reviewList'%}" style="width: 19vw;" class="btn btn-secondary px-5 rounded-0 py-2">
+            <a href="{% url 'shop:reviewList'%}" style="width: 25vw;" class="btn btn-success px-5 rounded-0 py-2">
                 <i style="font-size: 40px;" class="fas fa-star d-block"></i>Reviews</a> 
         </div>
         <div class="col-4">
-            <a href="{% url 'order:order_history' %}" style="width: 19vw;" class="btn btn-secondary px-5 rounded-0 py-2">
+            <a href="{% url 'order:order_history' %}" style="width: 25vw;" class="btn btn-success  px-5 rounded-0 py-2">
                 <i style="font-size: 40px;" class="fas fa-truck d-block"></i>Orders</a> 
+        </div>
+
+    </div>
+    <div class="row mt-3">
+
+        <div class="col-4">
+            <a href="{% url 'order:request-refund'%}" style="width: 25vw;" class="btn btn-success px-5 rounded-0 py-2">
+                <i style="font-size: 40px;" class="fas fa-money-check-alt d-block"></i>Refunds</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'password_change'%}" style="width: 25vw;" class="btn btn-success px-5 rounded-0 py-2">
+                <i style="font-size: 40px;" class="fas fa-key d-block"></i>Change Password</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'profile_view'%}" style="width: 25vw;" class="btn btn-success px-5 rounded-0 py-2">
+                <i style="font-size: 40px;" class="fas fa-key d-block"></i>View Profile</a> 
         </div>
 
     </div>

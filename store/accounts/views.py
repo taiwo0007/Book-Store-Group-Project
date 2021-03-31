@@ -8,6 +8,28 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
 
+
+
+def profileView(request):
+
+   
+    profile = UserProfile.objects.filter(user=request.user)
+    wishlist = WishList.objects.filter(user=request.user)
+    orders = Order.objects.filter(emailAddress = request.user.email)
+    reviews = Review.objects.filter(user=request.user)
+    
+
+    context = {
+        'profile':profile,
+        'wishlist' :wishlist,
+        'reviews':reviews,
+        'orders':orders
+
+    }
+    print(profile)
+
+    return render(request, 'profile.html', context)
+
 def dashboardView(request):
 
     try:
