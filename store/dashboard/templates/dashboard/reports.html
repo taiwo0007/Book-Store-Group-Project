@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block metadescription %} 
+This page displays manager content. 
+{% endblock %} 
+{% block title %} 
+Reports - Bookspace. 
+{% endblock %} 
+{% block content %}
+<div class="container">
+  <h1>Reports</h1>
+  <p style="font-weight: lighter">Hi {{request.user}}</p>
+  <div class="row mt-5">
+    <div class="col-4">
+      <a
+        href="{% url 'dashboard:sales_report' %}"
+        style="width: 19vw"
+        class="btn btn-secondary px-5 rounded-0 py-2"
+      >
+        <i style="font-size: 40px" class="fas fa-chart-line d-block"></i>Sales</a
+      >
+    </div>
+    <div class="col-4">
+      <a
+        href="#"
+        style="width: 19vw"
+        class="btn btn-secondary px-5 rounded-0 py-2"
+      >
+        <i style="font-size: 40px" class="fas fa-male d-block"></i
+        >Customers</a
+      >
+    </div>
+    <div class="col-4">
+      <a
+        href="#"
+        style="width: 19vw"
+        class="btn btn-secondary px-5 rounded-0 py-2"
+      >
+        <i style="font-size: 40px" class="fas fa-shopping-cart d-block"></i>
+        Orders</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock content%}
