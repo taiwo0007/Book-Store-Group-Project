@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+	Users - Bookspace.
+		
+{% endblock %}
+{% block content %}
+<h1>Users</h1>
+<table class="table">
+<thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Staff</th>
+    </tr>
+  </thead>
+    <tbody>
+{% for user in users %}
+<tr>
+<th scope="row">{{ user.username }}</th><td>{{ user.email }}</td><td>{{ user.is_staff }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

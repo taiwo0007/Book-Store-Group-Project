@@ -26,8 +26,7 @@ def orderHistory(request):
 @login_required()
 def viewOrder(request, order_id):
     if request.user.is_authenticated:
-        email = str(request.user.email)
-        order = Order.objects.get(id=order_id, emailAddress=email)
+        order = Order.objects.get(id=order_id)
         order_items =OrderItem.objects.filter(order=order)
     return render(request,'order/order_detail.html',{'order':order,'order_items':order_items})
 

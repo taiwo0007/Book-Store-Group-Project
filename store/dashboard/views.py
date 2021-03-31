@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from order.models import Order
+from accounts.models import CustomUser
 from django.db.models import Sum, DecimalField
 from django.db.models.functions import Cast
 
@@ -19,3 +20,8 @@ def sales_report(request):
     total_sales = Order.objects.aggregate(my_sum=Cast(Sum('total'), DecimalField(max_digits=30, decimal_places=2)))
     context = {'total_sales':total_sales}
     return render(request, 'dashboard/sales.html', context)
+
+def userListView(request):
+    users = CustomUser.objects.all()
+    context = {'users':users}
+    return render(request, 'dashboard/user_list.html', context)

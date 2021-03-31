@@ -20,7 +20,7 @@
   </thead>
     <tbody>
 {% for order in orders %}
-<tr><th scope="row">{{ order.id }}</th><td>{{ order.ref_code }}</td><td>{{ order.billingName }}</td><td>{{ order.emailAddress }}</td>
+<tr><th scope="row"><a href="{% url 'order:order_detail' order.id %}">{{ order.id }}</th><td>{{ order.ref_code }}</td><td>{{ order.billingName }}</td><td>{{ order.emailAddress }}</td></a>
 <td>{{ order.refund_requested }}</td><td>{{ order.refund_granted }}</td><td>{{ order.being_delivered }}</td>
 
 </tr>
