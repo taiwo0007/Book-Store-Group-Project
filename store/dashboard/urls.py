@@ -11,5 +11,4 @@ urlpatterns = [
     path('reports/', reportsView, name='reportsView'),
     path('sales/', sales_report, name='sales_report'),
     path('users/', userListView, name='user_list'),
-    path('<int:pk>/update/', userUpdate, name='userUpdate'),
 ]
