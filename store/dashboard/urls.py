@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import manager_dashboard, orders_list, reportsView, sales_report, userListView
+from .views import manager_dashboard, orders_list, reportsView, sales_report, userListView, userUpdate
 from shop.views import managerCreateView
 
 app_name = 'dashboard'
@@ -11,4 +11,5 @@ urlpatterns = [
     path('reports/', reportsView, name='reportsView'),
     path('sales/', sales_report, name='sales_report'),
     path('users/', userListView, name='user_list'),
+    path('<int:pk>/update/', userUpdate, name='userUpdate'),
 ]

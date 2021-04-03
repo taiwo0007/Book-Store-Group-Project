@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from order.models import Order
 from accounts.models import CustomUser
+from accounts.forms import UserChangeForm
 from django.db.models import Sum, DecimalField
 from django.db.models.functions import Cast
 
@@ -25,3 +26,11 @@ def userListView(request):
     users = CustomUser.objects.all()
     context = {'users':users}
     return render(request, 'dashboard/user_list.html', context)
+
+def userUpdate(request, pk):
+    form = UserChangeForm(self.request.POST)
+    user = CustomUser.objects.get(id=pk)
+    context = {
+        "user":user
+    }
+    return render(request, "dashboard/user_update.html", context)

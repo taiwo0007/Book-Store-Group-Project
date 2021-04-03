@@ -9,6 +9,7 @@ body {
 	font-style: normal;
 	font-variant: normal;
 	text-transform: none;
+	background-color: #000;
 		
 }
 
@@ -255,4 +256,11 @@ input[type=text], select, textarea {
 	background-color: #f6f6f6;
 	width: 100%;
 }
+
+.my-card:hover{
+	transform: scale(1.1);
+	transition: 0.2s ease-in-out;
+}
+
+
 
