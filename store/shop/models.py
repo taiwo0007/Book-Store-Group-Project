@@ -28,7 +28,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+ 
 class Author(models.Model):
     id = models.UUIDField(
         primary_key=True,

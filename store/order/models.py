@@ -20,7 +20,7 @@ class Order(models.Model):
     billingCountry = models.CharField(max_length=200, blank=True)
     shippingName = models.CharField(max_length=250, blank=True)
     shippingAddress1 = models.CharField(max_length=250, blank=True)
-    shippingCity = models.CharField(max_length=250, blank=True)
+    shippingCity = models.CharField(max_length=250, blank=True) 
     shippingPostcode = models.CharField(max_length=10, blank=True)
     shippingCountry = models.CharField(max_length=250, blank=True)
     being_delivered = models.BooleanField(default=False)
@@ -43,7 +43,7 @@ class OrderItem(models.Model):
     product = models.CharField(max_length=250)
     quantity = models.IntegerField()
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name='Euro Price')
+        max_digits=10, decimal_places=2, verbose_name='Euro Price') 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     class Meta:
