@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import manager_dashboard, orders_list, reportsView, sales_report, userListView, userUpdate
+from .views import manager_dashboard, orders_list, reportsView, sales_report, userListView
 from shop.views import managerCreateView
 
 app_name = 'dashboard'
