@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib import messages
+from order.models import Order
+from accounts.models import CustomUser
 
 
 def group_check(user):
@@ -149,7 +151,7 @@ def allBookCat(request, category_slug=None):
     try:
         books = paginator.page(page)
     except (EmptyPage,InvalidPage):
-        books = paginator.page(paginator.num_pages)
+        books = paginator.page(paginator.num_pages) 
 
     return render(request, 'shop/category.html', {'category':c_page,'books':books,'managerCheck':managerCheck })
 
@@ -173,7 +175,17 @@ def managerCreateView(request):
 def bookListView(request):
     managerCheck = True
     books = Book.objects.all()
-    return render(request, 'shop/book_list.html',{'books':books,'managerCheck':managerCheck})
+    books_count = Book.objects.count()
+    orders_count = Order.objects.count()
+    users_count = CustomUser.objects.count() 
+    context = {
+        'books_count' : books_count,
+        'orders_count' : orders_count,
+        'users_count' : users_count,
+        'books':books,
+        'managerCheck':managerCheck
+        }
+    return render(request, 'shop/book_list.html', context)
 
 @user_passes_test(group_check)
 def bookUpdateView(request, category_slug, book_slug):

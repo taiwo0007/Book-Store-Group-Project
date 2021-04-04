@@ -4,85 +4,45 @@
 	Order List - Bookspace.
 {% endblock %}
 {% block content %}
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card shadow">
-        <div class="card-header bg-info text-white">
-          Information
-        </div>
-        <div class="card-body">
-          <marquee behavior="" direction="">
-            <h3 class="my-4">This is the information!</h3>
-          </marquee>
-        </div>
-      </div>    
-    </div>
-    <div class="col-md-8">
-      <div class="card shadow">
-        <div class="card-header bg-info text-white">
-          Statistics
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <a class="text-decoration-none text-dark" href="{% url 'dashboard:user_list' %}">
-                <div class="card my-card shadow text-center p-3">
-                  <h4>Users <i class="fas fa-users"></i></h4>
-                  <h3>4</h3>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <a class="text-decoration-none text-dark" href="{% url 'shop:book_list' %}">
-                <div class="card my-card shadow text-center p-3">
-                  <h4>Products <i class="fas fa-box"></i></h4>
-                  <h3>4</h3>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-4">
-              <a class="text-decoration-none text-dark" href="{% url 'dashboard:all_orders' %}">
-                <div class="card my-card shadow text-center p-3">
-                  <h4>Orders <i class="fas fa-shipping-fast"></i></h4>
-                  <h3>4</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>    
-    </div>
-  </div>
-</div>
+{% include "dashboard/manager_navigation.html" %}
+
+
 <h1 class="py-5">Orders</h1>
 <div class="container">
-<table class="table">
-<thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Ref code:</th>
-      <th scope="col">Billing Name</th>
-      <th scope="col">Email</th>
-	  <th scope="col">Refund req.</th>
-	  <th scope="col">Refund granted</th>
-	  <th scope="col">Shipped</th>
-    <th scope="col">Activity</th>
-    </tr>
-  </thead>
-    <tbody>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Ref code:</th>
+				<th scope="col">Billing Name</th>
+				<th scope="col">Email</th>
+				<th scope="col">Refund req.</th>
+				<th scope="col">Refund granted</th>
+				<th scope="col">Shipped</th>
+				<th scope="col">Total</th>
+				<th scope="col">Activity</th>
+			</tr>
+		</thead>
+		<tbody>
 {% for order in orders %}
-<tr>
-<th scope="row">{{ order.id }}</th>
-<td>{{ order.ref_code }}</td>
-<td>{{ order.billingName }}</td>
-<td>{{ order.emailAddress }}</td></a>
-<td>{{ order.refund_requested }}</td>
-<td>{{ order.refund_granted }}</td>
-<td>{{ order.being_delivered }}</td>
-<td><a style="font-size: 12px;" class="btn btn-sm btn-info" href="{% url 'order:order_detail' order.id %}">View</a></td>
-</tr>
+
+			<tr>
+				<th scope="row">{{ order.id }}</th>
+				<td>{{ order.ref_code }}</td>
+				<td>{{ order.billingName }}</td>
+				<td>{{ order.emailAddress }}</td>
+				<td>{{ order.refund_requested }}</td>
+				<td>{{ order.refund_granted }}</td>
+				<td>{{ order.being_delivered }}</td>
+				<td>€{{ order.total }}</td>
+				<td>
+					<a style="font-size: 12px;" class="btn btn-sm btn-info" href="{% url 'order:order_detail' order.id %}">View</a>
+				</td>
+			</tr>
 {% endfor %}
-</tbody>
-</table>
+
+		</tbody>
+	</table>
+</div>
 </div>
 {% endblock %}

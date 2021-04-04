@@ -16,17 +16,34 @@ Best Value - Bookspace.
 {% endblock %}
 {% block content %}
 
+<div  class="container pt-1">
+	<div class="row">
+		<div class="col-4 mt-5 pt-5">
+			<nav style="text-transform: uppercase; " class="nav flex-column ">
+				<a style=" background-color:rgb(36, 114, 78); width: 350px; font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
+					<i class="fas fa-chevron-left"></i> Account dashboard
+				</a>
+				<a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify text-light btn  rounded-0">Profile </a>
+				<a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'shop:wishList_books'%}" class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
+				<a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'order:order_history'%}" class="text-justify text-light btn rounded-0">Orders</a>
+				<a href="{% url 'shop:reviewList'%}" style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify  text-light btn rounded-0" aria-disabled="true">Reviews</a>
+			</nav>
+		</div>
+
 {% if profile %}
 {% for p in profile%}
-<div class="text-center">
-<img style="width: 290px;;" src="{{p.profile_image.url}}" alt="profile-iamge">
-<h1>{{p.user}}</h1>
-<p>{{p.email_address}}</p>
-<p>{{p.colour}}</p>
-<p>Orders Placed {{orders|length}}</p>
-<p>Items in WishList {{wishlist|length}}</p>
-<p>Reviews By {{request.user}}: {{reviews|length}}</p>
-</div>
+
+		<div class="text-center">
+			<img style="width: 290px;;" src="{{p.profile_image.url}}" alt="profile-iamge">
+				<h1>{{p.user}}</h1>
+				<p>{{p.email_address}}</p>
+				<p>{{p.colour}}</p>
+				<p>Orders Placed {{orders|length}}</p>
+				<p>Items in WishList {{wishlist|length}}</p>
+				<p>Reviews By {{request.user}}: {{reviews|length}}</p>
+			</div>
+		</div>
+	</div>
 {%endfor%}
 {%endif%}
 
