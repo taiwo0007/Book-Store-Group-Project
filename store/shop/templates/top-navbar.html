@@ -19,9 +19,9 @@
 			<li  class="mt-2" style="float: left; margin-left: -21px;"><i class="fas fa-id-badge"></i>
 				<a href="{% url 'dashboard_view'%}"> ACCOUNT |</a>
 			</li>
-			{% if managerCheck %}
+			{% if request.user.groups.all.0.name == "Manager" %}
 			<li  class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;">
-				<a href="{% url 'dashboard:manager_dashboard' %}">Dashboard |</a>
+				<a href="{% url 'dashboard:manager_dashboard' %}">dashboard |</a>
 			</li>
 			{% endif %}
 			{% endif %}
