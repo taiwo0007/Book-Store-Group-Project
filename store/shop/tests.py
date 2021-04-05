@@ -3,6 +3,7 @@ from datetime import datetime
 from django.urls import reverse, resolve, reverse_lazy
 from shop.models import Category, Author, Book
 from shop.views import book_detail, allBookCat
+from shop.forms import BookForm
 import uuid
 
 
@@ -125,3 +126,60 @@ class TestUrls(SimpleTestCase):
     def test_wishLists_url_resolved(self):
         url = reverse()
     """
+
+class TestViews(TestCase):
+
+    def test_cheapBooks(self):
+        response = self.client.get(reverse('shop:cheapBooks'))
+        self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response,'shop/book_cheap.html')
+    
+    def test_topRatedBooks(self):
+        response = self.client.get(reverse('shop:topRatedBooks'))
+        self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response,'shop/book_rating.html')
+
+    def test_book_detail(self):
+        response = self.client.get(reverse('shop:book_detail', args=['Fiction','Circle']))
+        self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response,'shop/book.html')
+
+    def test_add_to_wishList(self):
+        response = self.client.get(reverse('shop:add_wishlist',args=['Fiction','Circle']))
+        self.assertEqual(response.status_code,302)
+    
+    def test_delete_from_wishList(self):
+        response = self.client.get(reverse('shop:wishList_delete',args=['Circle']))
+        self.assertEqual(response.status_code,302)
+    
+    def test_viewWishList(self):
+        response = self.client.get(reverse('shop:wishList_books'))
+        self.assertEqual(response.status_code,302)
+    
+    def test_allBookCat(self):
+        response = self.client.get(reverse('shop:allBookCat'))
+        self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response,'shop/category.html')
+    
+    def test_managerCreateView(self):
+        response = self.client.get(reverse('shop:book_new'))
+        self.assertEqual(response.status_code,302)
+    
+    def test_bookListView(self):
+        response = self.client.get(reverse('shop:book_list'))
+        self.assertEqual(response.status_code,302)
+
+    def test_bookUpdateView(self):
+        response = self.client.get(reverse('shop:book_edit',args=['Fiction','Circle']))
+        self.assertEqual(response.status_code,302)
+    
+    def test_bookDeleteView(self):
+        response = self.client.get(reverse('shop:book_delete', args=['Fiction','Circle']))
+        self.assertEqual(response.status_code,302)
+    
+    def test_addReview(self):
+        response = self.client.get(reverse('shop:book_delete', args=['Fiction','Circle']))
+        self.assertEqual(response.status_code,302)
+      
+        
+

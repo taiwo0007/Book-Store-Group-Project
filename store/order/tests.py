@@ -1,5 +1,6 @@
 from django.test import TestCase
 from . models import Order, OrderItem
+from django.urls import reverse, resolve, reverse_lazy
 from datetime import datetime
 
 class TestModels(TestCase):
@@ -56,3 +57,13 @@ class TestModels(TestCase):
         self.assertEqual(self.OrderItem1.quantity, 2)
         self.assertEqual(self.OrderItem1.price, 10.00)
         self.assertEqual(self.OrderItem1.order, self.Order1)
+
+class TestViews(TestCase):
+
+    def test_thanks(self):
+        response = self.client.get(reverse('order:thanks',args=['1']))
+        self.assertEqual(response.status_code,404)
+    
+    def test_thanks(self):
+        response = self.client.get(reverse('order:thanks',args=['1']))
+        self.assertEqual(response.status_code,404)
