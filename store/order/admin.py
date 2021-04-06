@@ -5,7 +5,10 @@ def make_refund_accepted(modeladmin, request, queryset):
     queryset.update(refund_requested=False, refund_granted=True)
 make_refund_accepted.short_description = 'Update orders to refund granted'
 
-# Register your models here.
+def make_order_shipped(modeladmin, request, queryset):
+    queryset.update(being_delivered=True)
+make_order_shipped.short_description = 'Update orders to shipped'
+
 class OrderItemAdmin(admin.TabularInline):
     model = OrderItem
     fieldset = [
@@ -36,7 +39,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [
         OrderItemAdmin,
     ]
-    actions = [make_refund_accepted]
+    actions = [make_refund_accepted, make_order_shipped]
     
 
     def has_delete_permission(self,request,obj=None):
