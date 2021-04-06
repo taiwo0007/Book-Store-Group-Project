@@ -23,7 +23,7 @@
 			<th scope="row">{{user.id}} </th>
 			<td> {{ user.username }}</td>
 			<td>{{ user.email }}</td>
-			<td>{{ user.is_staff }}</td>
+			<td>{% if user.is_staff == True %} <i class="fas fa-check-square"></i> {% else %} <i class="fas fa-times"></i> {% endif %} </td>
 		</tr>
 {% endfor %}
 

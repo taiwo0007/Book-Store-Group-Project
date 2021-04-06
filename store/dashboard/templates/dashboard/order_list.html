@@ -31,9 +31,9 @@
 				<td>{{ order.ref_code }}</td>
 				<td>{{ order.billingName }}</td>
 				<td>{{ order.emailAddress }}</td>
-				<td>{{ order.refund_requested }}</td>
-				<td>{{ order.refund_granted }}</td>
-				<td>{{ order.being_delivered }}</td>
+				<td>{% if order.refund_requested == True %} <i class="fas fa-check-square"></i> {% else %} <i class="fas fa-times"></i> {% endif %} </td>
+				<td>{% if order.refund_granted == True %} <i class="fas fa-check-square"></i> {% else %} <i class="fas fa-times"></i> {% endif %} </td>
+				<td>{% if order.being_delivered == True %} <i class="fas fa-check-square"></i> {% else %} <i class="fas fa-times"></i> {% endif %} </td>
 				<td>€{{ order.total }}</td>
 				<td>
 					<a style="font-size: 12px;" class="btn btn-sm btn-info" href="{% url 'order:order_detail' order.id %}">View</a>
