@@ -14,7 +14,7 @@ Manager - Bookspace.
 
 <h4>Total Sales All Time: €{{ total_sales.my_sum }}</h4>
 <h4>Total Sales This Month: €{{ this_month_sales.my_sum }}</h4>
-<h4>Total Sales Today: €{{ todays_sales.my_sum }}</h4>
+<h4>Total Sales Today: €{% if todays_sales.my_sum == Null %}0{% else %} {{ todays_sales.my_sum }} {% endif %}</h4>
 
 <!--Graphs-->
 <div class="container">
