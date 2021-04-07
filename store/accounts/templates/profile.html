@@ -15,47 +15,98 @@ Best Value - Bookspace.
 {% endif %}
 {% endblock %}
 {% block content %}
+<style>
+	.menu {
+		height: 100%;
+		width: 300px;
+		z-index: 1;
+		left: 0;
 
-<div  class="container pt-1">
+		padding-top: 20px;
+		background-color: #282d32;
+		position: absolute;
+		margin-bottom: -40px;
+
+	}
+
+	.menu a {
+		text-decoration: none;
+		list-style-type: none;
+		display: block;
+		text-transform: uppercase;
+	}
+
+	.menu a:hover {
+		background-color: grey;
+	}
+</style>
+
+
+
+
+
+
+<div class="container ">
+
+
+	<div class="menu">
+
+		<a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
+			<i class="fas fa-chevron-left"></i> Account dashboard
+		</a>
+		<a style=" font-weight:20px" class="text-justify text-light btn  rounded-0">Profile </a>
+		<a style=" font-weight:20px" href="{% url 'shop:wishList_books'%}"
+			class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
+		<a style=" font-weight:20px" href="{% url 'order:order_history'%}"
+			class="text-justify text-light btn rounded-0">Orders</a>
+		<a href="{% url 'shop:reviewList'%}" style="  font-weight:20px" class="text-justify  text-light btn rounded-0"
+			aria-disabled="true">Reviews</a>
+
+
+	</div>
+	<h1 style="font-weight: lighter;" class="mb-5">Profile - {{p.user}}</h1>
 	<div class="row">
-		<div class="col-4 mt-5 pt-5">
-			<nav style="text-transform: uppercase; " class="nav flex-column ">
-				<a style=" background-color:rgb(36, 114, 78); width: 350px; font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
-					<i class="fas fa-chevron-left"></i> Account dashboard
-				</a>
-				<a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify text-light btn  rounded-0">Profile </a>
-				<a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'shop:wishList_books'%}" class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
-				<a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'order:order_history'%}" class="text-justify text-light btn rounded-0">Orders</a>
-				<a href="{% url 'shop:reviewList'%}" style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify  text-light btn rounded-0" aria-disabled="true">Reviews</a>
-			</nav>
-		</div>
+		{% if p%}
 
-{% if p%}
+		<div class="col-4">
+			<div class="text-justify">
+				<img class="profile-pic "
+					style=" height: auto; border-radius: 50%; width: 350px; height: 350px; object-fit: cover;"
+					src="{{p.profile_image.url}}" alt="profile-iamge">
 
-
-		<div class="text-center">
-			<img style="max-width: 190px; max-height: auto; border-radius: 50%;" src="{{p.profile_image.url}}" alt="profile-iamge">
-				<h1>{{p.user}}</h1>
-				<p>{{p.email_address}}</p>
+				
+				<h1 style="font-size: 40px; font-family:Helvetica;" class=" pt-5 text-justify">{{p.first_name}} {{p.last_name}}</h1>
+				<h1 style="font-size: 30px;" class="text-justify text-secondary">{{p.user}}</h1>
+				<!--<p>{{p.email_address}}</p>
 				<p>{{p.colour}}</p>
 				<p>Orders Placed {{orders|length}}</p>
 				<p>Items in WishList {{wishlist|length}}</p>
-				<p>Reviews By {{request.user}}: {{reviews|length}}</p>
+				<p>Reviews By {{request.user}}: {{reviews|length}}</p>-->
+				
 			</div>
+			{%endif%}
 		</div>
+
+			<div class="col-8">
+				<form style="font-weight: lighter;" method="POST" action="" enctype="multipart/form-data">
+					{%csrf_token%}
+
+
+					<p style="font-weight: lighter;">{{form.as_p}}</p>
+
+
+					<input class="btn btn-primary" type="submit">
+				</form>
+
+			</div>
+
+
+
+
+
+
+		
 	</div>
-
-<form method="POST" action="" enctype="multipart/form-data">
-	{%csrf_token%}
-
-	{{form.as_p}}
-	
-	
-	<input class="btn btn-primary" type="submit">
-</form>
-
-{%endif%}
-
-
+</div>
 
 {% endblock content %}

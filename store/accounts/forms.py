@@ -21,4 +21,4 @@ class UserProfileForm(ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['colour', 'profile_image']
+        fields = ['first_name','last_name', 'colour', 'profile_image','phone_number']

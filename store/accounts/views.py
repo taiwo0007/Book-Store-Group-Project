@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
-
+from django.conf import settings
 
 
 def profileView(request):
@@ -18,6 +18,7 @@ def profileView(request):
     orders = Order.objects.filter(emailAddress = request.user.email)
     reviews = Review.objects.filter(user=request.user)
     form = UserProfileForm(instance = p)
+    form2 = CustomUserChangeForm(instance=request.user)
 
     
     if request.method == 'POST':
@@ -34,9 +35,11 @@ def profileView(request):
         'reviews':reviews,
         'orders':orders,
         'form':form,
+        'form2': form2
       
 
     }
+    
     return render(request, 'profile.html', context)
 
 def dashboardView(request):

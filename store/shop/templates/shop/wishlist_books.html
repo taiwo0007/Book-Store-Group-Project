@@ -1,21 +1,51 @@
 {% extends 'base.html'%}
 {% block content %}
 
+<style>
+	.menu {
+		height: 100%;
+		width: 300px;
+		z-index: 1;
+		left: 0;
+
+		padding-top: 20px;
+		background-color: #282d32;
+		position: absolute;
+		margin-bottom: -40px;
+
+	}
+
+	.menu a {
+		text-decoration: none;
+		list-style-type: none;
+		display: block;
+		text-transform: uppercase;
+	}
+
+	.menu a:hover {
+		background-color: grey;
+	}
+</style>
     <div  class="container pt-1">
 
-        <div class="row">
-            <div class="col-4 mt-5 pt-5">
+        <div class="menu">
 
-                <nav style="text-transform: uppercase; " class="nav flex-column ">
-                <a style=" background-color:rgb(36, 114, 78); width: 350px; font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0"><i class="fas fa-chevron-left"></i> Account dashboard</a>
-                <a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify text-light btn  rounded-0">Profile </a>
-                <a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'shop:wishList_books'%}" class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
-                <a style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" href="{% url 'order:order_history'%}" class="text-justify text-light btn rounded-0">Orders</a>
-                <a href="{% url 'shop:reviewList'%}" style="background-color:rgb(36, 114, 78);  width: 350px; font-weight:20px" class="text-justify  text-light btn rounded-0" aria-disabled="true">Reviews</a>
-                
-                </nav>
-                
-                    </div>
+            <a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
+                <i class="fas fa-chevron-left"></i> Account dashboard
+            </a>
+            <a style=" font-weight:20px" class="text-justify text-light btn  rounded-0">Profile </a>
+            <a style=" font-weight:20px" href="{% url 'shop:wishList_books'%}"
+                class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
+            <a style=" font-weight:20px" href="{% url 'order:order_history'%}"
+                class="text-justify text-light btn rounded-0">Orders</a>
+            <a href="{% url 'shop:reviewList'%}" style="  font-weight:20px" class="text-justify  text-light btn rounded-0"
+                aria-disabled="true">Reviews</a>
+    
+    
+        </div>
+
+        <div class="row">
+            
         
         <div class="col-8">
             <h1 style="font-weight: lighter;" class="text-center mb-5">{{request.user}}'s Wish List</h1>
