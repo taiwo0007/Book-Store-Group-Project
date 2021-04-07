@@ -30,11 +30,11 @@ Best Value - Bookspace.
 			</nav>
 		</div>
 
-{% if profile %}
-{% for p in profile%}
+{% if p%}
+
 
 		<div class="text-center">
-			<img style="width: 290px;;" src="{{p.profile_image.url}}" alt="profile-iamge">
+			<img style="max-width: 190px; max-height: auto; border-radius: 50%;" src="{{p.profile_image.url}}" alt="profile-iamge">
 				<h1>{{p.user}}</h1>
 				<p>{{p.email_address}}</p>
 				<p>{{p.colour}}</p>
@@ -44,7 +44,16 @@ Best Value - Bookspace.
 			</div>
 		</div>
 	</div>
-{%endfor%}
+
+<form method="POST" action="" enctype="multipart/form-data">
+	{%csrf_token%}
+
+	{{form.as_p}}
+	
+	
+	<input class="btn btn-primary" type="submit">
+</form>
+
 {%endif%}
 
 

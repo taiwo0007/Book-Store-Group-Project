@@ -1,7 +1,8 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import CustomUser
+from .models import CustomUser, UserProfile
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -14,3 +15,10 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = UserChangeForm.Meta.fields
+
+
+class UserProfileForm(ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ['colour', 'profile_image']

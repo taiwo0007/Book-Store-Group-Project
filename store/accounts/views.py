@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserProfileForm, CustomUserChangeForm
 from shop.models import WishList, Review
 from order.models import Order
 from .models import CustomUser, UserProfile
@@ -12,22 +12,31 @@ from django.contrib import messages
 
 def profileView(request):
 
-   
-    profile = UserProfile.objects.filter(user=request.user)
+    
+    p = UserProfile.objects.get(user=request.user)
     wishlist = WishList.objects.filter(user=request.user)
     orders = Order.objects.filter(emailAddress = request.user.email)
     reviews = Review.objects.filter(user=request.user)
-    
+    form = UserProfileForm(instance = p)
 
+    
+    if request.method == 'POST':
+       form = UserProfileForm(request.POST or None, request.FILES or None, instance = p)
+       if form.is_valid():
+           print(form)
+           form.save()
+           print(request.FILES)
+           print(request.POST)
+    
     context = {
-        'profile':profile,
+        'p':p,
         'wishlist' :wishlist,
         'reviews':reviews,
-        'orders':orders
+        'orders':orders,
+        'form':form,
+      
 
     }
-    print(profile)
-
     return render(request, 'profile.html', context)
 
 def dashboardView(request):
