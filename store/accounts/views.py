@@ -28,6 +28,7 @@ def profileView(request):
            form.save()
            print(request.FILES)
            print(request.POST)
+           messages.success(request,'Your pofile has been updated!')
     
     context = {
         'p':p,

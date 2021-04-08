@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags%}
 {% block metadescription %}
 {% if category %}
 {{ category.description|truncatewords:155 }}
@@ -16,16 +17,27 @@ Best Value - Bookspace.
 {% endblock %}
 {% block content %}
 <style>
+
 	.menu {
 		height: 100%;
 		width: 300px;
 		z-index: 1;
 		left: 0;
+		margin-top: -5px;
+	
 
 		padding-top: 20px;
 		background-color: #282d32;
 		position: absolute;
 		margin-bottom: -40px;
+		box-shadow: 0 20px 20px 0 black;
+
+
+	}
+
+	.card-profile {
+		border-radius: 20px;
+		;
 
 	}
 
@@ -34,6 +46,7 @@ Best Value - Bookspace.
 		list-style-type: none;
 		display: block;
 		text-transform: uppercase;
+	
 	}
 
 	.menu a:hover {
@@ -41,16 +54,8 @@ Best Value - Bookspace.
 	}
 </style>
 
-
-
-
-
-
-<div class="container ">
-
-
-	<div class="menu">
-
+<div class="container-fluid">
+	<div class="menu shadow-lg p-3 mb-5 ">
 		<a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
 			<i class="fas fa-chevron-left"></i> Account dashboard
 		</a>
@@ -61,9 +66,59 @@ Best Value - Bookspace.
 			class="text-justify text-light btn rounded-0">Orders</a>
 		<a href="{% url 'shop:reviewList'%}" style="  font-weight:20px" class="text-justify  text-light btn rounded-0"
 			aria-disabled="true">Reviews</a>
-
-
 	</div>
+	<div ><h4 style="margin-left: -60vw;" class="text-secondary text-center ">OVERVIEW</h4>
+		<h1 style="margin-left: -57vw;" class="text-dark text-center ">User Profile</h1></div>
+	
+	<div class="row mt-5">
+		<div class="col-2">
+
+		</div>
+	
+		<div class="col-2 ">
+			<div class=" text-center card-profile shadow p-3  mb-5 bg-white " style="width: auto; ">
+				<img class="p-3 "
+					style=" height: auto; border-radius: 50%; width: 250px; height: 250px; object-fit: cover;"
+					src="{{p.profile_image.url}}" alt="profile-iamge">
+				<div class="card-body">
+					<h2 class="card-title">
+						{{p.user}}
+					</h2>
+					<p class="card-title text-secondary  ">
+						{{p.email_address}}
+					</p>
+					<p class="mt-3 border-bottom">
+
+					</p>
+					<p class="card-text">
+						<p>Orders  {{orders|length}} |
+				WishLists {{wishlist|length}} |
+				Reviews  {{reviews|length}}
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-8">
+			<div class=" text-justify card-profile shadow p-3  mb-5 bg-white " style="width: auto;">
+				<form style="font-weight: lighter;" method="POST" action="" enctype="multipart/form-data">
+					{%csrf_token%}
+					<p style="font-weight: lighter;">{{form | crispy}}</p>
+					<input style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+</div>
+
+
+<!--
 	<h1 style="font-weight: lighter;" class="mb-5">Profile - {{p.user}}</h1>
 	<div class="row">
 		{% if p%}
@@ -77,11 +132,11 @@ Best Value - Bookspace.
 				
 				<h1 style="font-size: 40px; font-family:Helvetica;" class=" pt-5 text-justify">{{p.first_name}} {{p.last_name}}</h1>
 				<h1 style="font-size: 30px;" class="text-justify text-secondary">{{p.user}}</h1>
-				<!--<p>{{p.email_address}}</p>
+				<p>{{p.email_address}}</p>
 				<p>{{p.colour}}</p>
 				<p>Orders Placed {{orders|length}}</p>
 				<p>Items in WishList {{wishlist|length}}</p>
-				<p>Reviews By {{request.user}}: {{reviews|length}}</p>-->
+				<p>Reviews By {{request.user}}: {{reviews|length}}</p>
 				
 			</div>
 			{%endif%}
@@ -92,10 +147,10 @@ Best Value - Bookspace.
 					{%csrf_token%}
 
 
-					<p style="font-weight: lighter;">{{form.as_p}}</p>
+					<p style="font-weight: lighter;">{{form | crispy}}</p>
 
 
-					<input class="btn btn-primary" type="submit">
+					<input style ="background-color:{{p.colour}}" class="btn " type="submit">
 				</form>
 
 			</div>
@@ -107,6 +162,12 @@ Best Value - Bookspace.
 
 		
 	</div>
+	<div class="row">
+
+
+
+		
+	</div>-->
 </div>
 
 {% endblock content %}
