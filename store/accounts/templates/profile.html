@@ -70,6 +70,7 @@ Best Value - Bookspace.
 	<div ><h4 style="margin-left: -60vw;" class="text-secondary text-center ">OVERVIEW</h4>
 		<h1 style="margin-left: -57vw;" class="text-dark text-center ">User Profile</h1></div>
 	
+	
 	<div class="row mt-5">
 		<div class="col-2">
 
@@ -90,11 +91,22 @@ Best Value - Bookspace.
 					<p class="mt-3 border-bottom">
 
 					</p>
-					<p class="card-text">
-						<p>Orders  {{orders|length}} |
-				WishLists {{wishlist|length}} |
-				Reviews  {{reviews|length}}
-					</p>
+					
+					<span>Wihslists {{wishlist|length}}</span>
+					<div class="progress">
+						
+						<div class="progress-bar bg-warning" role="progressbar" style="width:{{wishlist|length}}%; " aria-valuenow="{{wishlist|length}}" aria-valuemin="0" aria-valuemax="{{totalW|length}}"></div>
+					</div>
+					<span>Reviews {{reviews|length}}</span>
+					<div class="progress">
+						
+						<div class="progress-bar bg-primary" role="progressbar" style="width:{{reviews|length}}%; " aria-valuenow="{{reviews|length}}" aria-valuemin="0" aria-valuemax="{{totalR|length}}"></div>
+					</div>
+					<span>Orders {{orders|length}}</span>
+					<div class="progress">
+						
+						<div class="progress-bar bg-success" role="progressbar" style="width:{{orders|length}}% " aria-valuenow="{{orders|length}}" aria-valuemin="0" aria-valuemax="{{totalO|length}}"></div>
+					</div>
 				</div>
 			</div>
 		</div>

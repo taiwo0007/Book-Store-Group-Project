@@ -14,6 +14,9 @@ def profileView(request):
 
     
     p = UserProfile.objects.get(user=request.user)
+    totalW = WishList.objects.all()
+    totalO = Order.objects.all()
+    totalR = Review.objects.all()
     wishlist = WishList.objects.filter(user=request.user)
     orders = Order.objects.filter(emailAddress = request.user.email)
     reviews = Review.objects.filter(user=request.user)
@@ -31,6 +34,9 @@ def profileView(request):
            messages.success(request,'Your pofile has been updated!')
     
     context = {
+        'totalR':totalR,
+        'totalO':totalO,
+        'totalW':totalW,
         'p':p,
         'wishlist' :wishlist,
         'reviews':reviews,
