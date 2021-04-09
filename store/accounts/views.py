@@ -22,15 +22,14 @@ def profileView(request):
     reviews = Review.objects.filter(user=request.user)
     form = UserProfileForm(instance = p)
     form2 = CustomUserChangeForm(instance=request.user)
+      
 
     
     if request.method == 'POST':
-       form = UserProfileForm(request.POST or None, request.FILES or None, instance = p)
+       print(request.POST)
+       form = UserProfileForm(request.POST, request.FILES, instance = p)
        if form.is_valid():
-           print(form)
            form.save()
-           print(request.FILES)
-           print(request.POST)
            messages.success(request,'Your pofile has been updated!')
     
     context = {
