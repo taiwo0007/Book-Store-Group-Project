@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Category, Book, WishList, Review
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
-from .forms import BookForm, ReviewForm
+from .forms import BookForm, ReviewForm, BookRatingForm
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
@@ -78,7 +78,15 @@ def topRatedBooks(request):
     return render(request, 'shop/book_rating.html', {'booksRatedChildren':booksRatedChildren, 'booksRatedFiction':booksRatedFiction,'booksRatedNon':booksRatedNon })
 
 def book_detail(request, category_slug, book_slug):
+    print(request.POST)
     form = ReviewForm()
+    try:
+        book = Book.objects.get(category__slug=category_slug, slug=book_slug)
+    except Exception as e:
+        raise e
+
+
+    rating_form = BookRatingForm()
     ratings = Review.objects.filter(review_item__slug = book_slug)
     one = 0
     two = 0
@@ -97,8 +105,15 @@ def book_detail(request, category_slug, book_slug):
             four = four +1
         if i.rating == 5:
             five = five +1
-    
-    total = (5*five + 4*four + 3*three + 2*two +1*one) / (one +two+three+four+five)
+    try:
+        total = (5*five + 4*four + 3*three + 2*two +1*one) / (one +two+three+four+five)
+    except ZeroDivisionError as e:
+        total = 0
+
+   
+    if rating_form.is_valid():
+        print("HELOOOOOD=========================================")
+        rating_form.save()
     rounded = round(total)
     print(total)
     print(rounded)
@@ -121,10 +136,10 @@ def book_detail(request, category_slug, book_slug):
     reviews = reviewss.order_by('-created_date')
 
     print(reviews)
-    try:
-        book = Book.objects.get(category__slug=category_slug, slug=book_slug)
-    except Exception as e:
-        raise e
+
+    
+
+    
 
     return render(request, 'shop/book.html', {'book':book,'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded})
 
@@ -232,6 +247,7 @@ def bookUpdateView(request, category_slug, book_slug):
 
     form = BookForm(request.POST or None, request.FILES or None , instance = book)
     if form.is_valid():
+        print(request.POST)
         form.save()
         return HttpResponseRedirect('/')
 

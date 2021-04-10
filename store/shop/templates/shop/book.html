@@ -14,6 +14,10 @@
 
 
     <div class="container ">
+        <form style="display:none" action="" method="POST">
+            {% csrf_token%}
+            {{rounded}}
+        </form>
 
 
         <div class="text-center mx-auto py-3">
@@ -39,6 +43,7 @@
                     <h1 class="my_prod_title">{{book.title}}</h1>
                     <p style="font-weight: 900;">€{{book.price}}</p>
                     <p class="star">
+                        {% if rounded %}
                         {% for i in "x"|rjust:rounded%}
                            
                                <i class="fas fa-star text-warning"></i>
@@ -48,6 +53,14 @@
                            {% if half %}
                            <i class="fas fa-star-half-alt text-warning"></i>
                            {% endif %}
+                           {%else %}
+                           {% if user.is_authenticated %}
+                           <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="#reviewlink">Leave a review</a></span>
+                            {%else%}
+                            <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="{% url 'signin' %}">Sign in to review</a></span>
+
+                           {%endif%}
+                    {% endif %}   
                            <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="#reviewlink">{{reviews|length}} Reviews</a></span>
                     </p>
                  
@@ -57,10 +70,10 @@
                     {% if book.stock == 0%}
                     <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
                     {% else %}
-                    <a class="btn btn-secondary" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
-                    <a style="background-color: #f3db15;" class="btn btn-alert" data-toggle="tooltip" title="Wishlist"
-                        href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i style="background-color: #f3db15;" class="fas fa-heart "></i></a>
-                        <a  id="share" class="btn btn-primary"><i style="" class="fas fa-share-alt text-light"></i></a>
+                    <a class="btn btn-secondary rounded-0" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
+                    <a style="background-color: white;" class="btn btn-alert border" data-toggle="tooltip" title="Wishlist"
+                        href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i style="background-color: white;" class="fas fa-heart "></i></a>
+                        <a  id="share" class="btn border"><i style="" class="fas fa-share-alt text-dark"></i></a>
                     {% endif %}
                     <br>
 

@@ -7,6 +7,11 @@ class BookForm(ModelForm):
         model = Book
         fields = '__all__'
 
+class BookRatingForm(ModelForm):
+    class Meta:
+        model = Book
+        fields = ['star_rating']
+
 
 class CategoryForm(ModelForm):
     class Meta:
