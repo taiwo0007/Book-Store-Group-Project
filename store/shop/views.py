@@ -118,16 +118,16 @@ def book_detail(request, category_slug, book_slug):
     print(total)
     print(rounded)
     if total >= 1.5 and total < 2:
-        rounded = rounded - 1
+        rounded = 1
         half = True
     if total >= 2.5 and total < 3:
-        rounded = rounded - 1
+        rounded = 2
         half = True
     if total >= 3.5 and total < 4:
-        rounded = rounded - 1
+        rounded = 3
         half = True
     if total >= 4.5 and total < 5:
-        rounded = rounded - 1
+        rounded = 4
         half = True
     
     print(rounded)
