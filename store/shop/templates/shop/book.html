@@ -38,6 +38,19 @@
                 <div>
                     <h1 class="my_prod_title">{{book.title}}</h1>
                     <p style="font-weight: 900;">€{{book.price}}</p>
+                    <p class="star">
+                        {% for i in "x"|rjust:rounded%}
+                           
+                               <i class="fas fa-star text-warning"></i>
+       
+                          
+                           {% endfor %}
+                           {% if half %}
+                           <i class="fas fa-star-half-alt text-warning"></i>
+                           {% endif %}
+                           <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="#reviewlink">{{reviews|length}} Reviews</a></span>
+                    </p>
+                 
 
                     <p class="text-justify my_prod_text">{{book.description}}</p>
                     <p class="text-justify my_prod_text"><i class="fas fa-check"></i> {{book.stock}} in stock</p>
@@ -83,6 +96,7 @@
             </form>
         </div>
     </div>
+    <a id="reviewlink"></a>
     <div class="row">
         <div class="col-12">
             <h4 class="text-center pb-4 border-bottom">Reviews </h5>

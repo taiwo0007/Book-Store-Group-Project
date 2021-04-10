@@ -79,7 +79,44 @@ def topRatedBooks(request):
 
 def book_detail(request, category_slug, book_slug):
     form = ReviewForm()
-   
+    ratings = Review.objects.filter(review_item__slug = book_slug)
+    one = 0
+    two = 0
+    three = 0
+    four = 0
+    five = 0
+    half = False
+    for i in ratings:
+        if i.rating == 1:
+            one = one +1
+        if i.rating == 2:
+            two = two +1
+        if i.rating == 3:
+            three = three +1
+        if i.rating == 4:
+            four = four +1
+        if i.rating == 5:
+            five = five +1
+    
+    total = (5*five + 4*four + 3*three + 2*two +1*one) / (one +two+three+four+five)
+    rounded = round(total)
+    print(total)
+    print(rounded)
+    if total >= 1.5 and total < 2:
+        rounded = rounded - 1
+        half = True
+    if total >= 2.5 and total < 3:
+        rounded = rounded - 1
+        half = True
+    if total >= 3.5 and total < 4:
+        rounded = rounded - 1
+        half = True
+    if total >= 4.5 and total < 5:
+        rounded = rounded - 1
+        half = True
+    
+    print(rounded)
+    
     reviewss = Review.objects.filter(review_item__slug=book_slug)
     reviews = reviewss.order_by('-created_date')
 
@@ -89,7 +126,7 @@ def book_detail(request, category_slug, book_slug):
     except Exception as e:
         raise e
 
-    return render(request, 'shop/book.html', {'book':book, 'form':form, 'reviews':reviews})
+    return render(request, 'shop/book.html', {'book':book,'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded})
 
 @login_required()
 def add_to_wishList(request, book_slug, category_slug):
