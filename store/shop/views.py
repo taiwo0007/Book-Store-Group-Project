@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.contrib import messages
 from order.models import Order
 from accounts.models import CustomUser
+from django.core.exceptions import ValidationError
 
 
 def group_check(user):
@@ -214,19 +215,29 @@ def bookDeleteView(request, category_slug, book_slug):
 @login_required()
 def addReview(request, category_slug, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
-    
+    obj = {}
     if request.method == "POST":
         obj = Review.objects.create(
             subject = request.POST['subject'],
             comment = request.POST['comment'],
             user = request.user, 
+            rating=request.POST['rating'],
             review_item=book,
             name = str(request.user),
 
             
             )
-        obj.save()
-        messages.success(request, "Review has been submitted")
+        try:
+            obj.full_clean()
+            obj.save()
+            messages.success(request, "Review has been submitted")
+            
+            
+        except ValidationError as e:
+            messages.warning(request, "error please enter rating 1 - 5 ")
+            obj.delete()
+        
+        
     
         
    

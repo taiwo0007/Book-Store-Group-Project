@@ -3,6 +3,7 @@ import uuid
 from django.urls import reverse
 from django.conf import settings
 from autoslug import AutoSlugField
+from django.core.validators import MinValueValidator,  MaxValueValidator
 
 
 class Category(models.Model):
@@ -99,6 +100,7 @@ class Review(models.Model):
     subject = models.CharField(max_length=40)
     comment = models.CharField(max_length=240)
     review_item = models.ForeignKey(Book, on_delete=models.CASCADE)
+    rating = models.IntegerField(default="1", validators=[MinValueValidator(1), MaxValueValidator(5)] )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
 

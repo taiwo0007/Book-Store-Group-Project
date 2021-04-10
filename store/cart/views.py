@@ -10,6 +10,7 @@ import string
 from vouchers.models import Voucher
 from vouchers.forms import VoucherApplyForm
 from decimal import Decimal
+import json
 
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
@@ -77,9 +78,12 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
         pass
 
     if request.method == 'POST':
-        print(request.POST)
-        print(request.POST, "hello")
+        
+        body = json.loads(request.body)
+        print(body)
+     
         try:
+           
             token = request.POST['stripeToken']
             if request.user.is_authenticated:
                 email = request.user.email
@@ -152,9 +156,9 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
         except stripe.error.CardError as e:
             return false, e
 
-   
+    
 
-    print(request.POST, "hello")
+    
     return render(request, 'cart.html', {'cart_items':cart_items, 'total':total, 'counter':counter,
     'data_key':data_key, 'stripe_total':stripe_total,
     'description':description,'voucher_apply_form':voucher_apply_form,'new_total':new_total,'voucher':voucher,'discount':discount})
