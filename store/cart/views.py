@@ -50,6 +50,7 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
     new_total=0
     voucher=None
     price=0
+
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, active=True)
@@ -76,6 +77,8 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
         pass
 
     if request.method == 'POST':
+        print(request.POST)
+        print(request.POST, "hello")
         try:
             token = request.POST['stripeToken']
             if request.user.is_authenticated:
@@ -150,7 +153,8 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
             return false, e
 
    
-    print(total)
+
+    print(request.POST, "hello")
     return render(request, 'cart.html', {'cart_items':cart_items, 'total':total, 'counter':counter,
     'data_key':data_key, 'stripe_total':stripe_total,
     'description':description,'voucher_apply_form':voucher_apply_form,'new_total':new_total,'voucher':voucher,'discount':discount})
