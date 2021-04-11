@@ -149,3 +149,10 @@ MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
 STRIPE_SECRET_KEY = 'sk_test_51HqLtRIcVPfBeesUUTmm5heIo7Kaxw8WzM1GdPCfIeVjFIryvlOHhsAyAk3encPxpdS4IwTdnb0Xi8lh92GdlZhy00Qz8CqgHF'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51HqLtRIcVPfBeesUa9iMcs1TGM2AX2lFFsU0TrFgJo0CD6QRzlSm0Kw0mXcgHub4atmQODnpQmMO8jloLDTXiN6t00nW8Rl12V'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'bookstoretestemail251'
+EMAIL_HOST_PASSWORD = 'Book1234'
