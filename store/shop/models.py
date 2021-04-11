@@ -54,7 +54,7 @@ class Book(models.Model):
         title = models.CharField(max_length=250, unique=True)
         synopsis = models.TextField(blank=True)
         price = models.DecimalField(max_digits=10, decimal_places=2)
-        star_rating = models.PositiveSmallIntegerField()
+        star_rating = models.FloatField()
         image = models.ImageField(upload_to='books', blank=True)
         stock = models.IntegerField()
         availible = models.BooleanField(default=True)

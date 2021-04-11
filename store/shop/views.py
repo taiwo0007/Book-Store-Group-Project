@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.contrib import messages
 from order.models import Order
-from accounts.models import CustomUser
+from accounts.models import CustomUser, UserProfile
 from django.core.exceptions import ValidationError
 
 
@@ -55,6 +55,8 @@ def cheapBooks(request):
 
 def topRatedBooks(request):
 
+    
+
     booksPopulateF = Book.objects.filter(category='b6e303f8-d681-4aa2-ab8a-ad3b27a62015')
     booksRatedFiction = booksPopulateF.order_by('-star_rating')[:6]
 
@@ -78,12 +80,17 @@ def topRatedBooks(request):
     return render(request, 'shop/book_rating.html', {'booksRatedChildren':booksRatedChildren, 'booksRatedFiction':booksRatedFiction,'booksRatedNon':booksRatedNon })
 
 def book_detail(request, category_slug, book_slug):
+  
+
+
     print(request.POST)
     form = ReviewForm()
     try:
         book = Book.objects.get(category__slug=category_slug, slug=book_slug)
     except Exception as e:
         raise e
+
+    Booker = Book.objects.all()
 
 
     rating_form = BookRatingForm()
@@ -110,10 +117,9 @@ def book_detail(request, category_slug, book_slug):
     except ZeroDivisionError as e:
         total = 0
 
-   
-    if rating_form.is_valid():
-        print("HELOOOOOD=========================================")
-        rating_form.save()
+    book.star_rating = total
+    book.save()
+        
     rounded = round(total)
     print(total)
     print(rounded)
@@ -131,7 +137,7 @@ def book_detail(request, category_slug, book_slug):
         half = True
     
     print(rounded)
-    
+    UserImage = UserProfile.objects.all()
     reviewss = Review.objects.filter(review_item__slug=book_slug)
     reviews = reviewss.order_by('-created_date')
 
@@ -141,7 +147,7 @@ def book_detail(request, category_slug, book_slug):
 
     
 
-    return render(request, 'shop/book.html', {'book':book,'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded})
+    return render(request, 'shop/book.html', {'book':book,'UserImage':UserImage, 'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded})
 
 @login_required()
 def add_to_wishList(request, book_slug, category_slug):

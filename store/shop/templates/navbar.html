@@ -9,13 +9,13 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li style="font-size: 11px; margin-left: 70px;" class="nav-item">
+        <li style="font-size: 13px; margin-left: 70px;" class="nav-item text-dark">
           <a style="display: inline-block; margin-right:0px;" class="nav-link text-dark" href="{% url 'shop:allBookCat'%}">All Books |</a>
           {% for cat in links %}
             <a style="display: inline-block; margin-left: -10px" class="nav-link text-dark" href="{{cat.get_absolute_url}}">{{cat.name}} |</a>
           {% endfor %}
           <a style="display: inline-block; margin-left: -10px;" class="nav-link text-dark" href="{%url 'shop:cheapBooks' %}">Best Value |</a>
-          <a style="display: inline-block; margin-left: -10px;" class="nav-link text-dark" href="{%url 'shop:topRatedBooks' %}">Top Rated |</a> 
+          <a style="display: inline-block; margin-left: -10px;" class="nav-link text-dark" href="{%url 'shop:topRatedBooks' %}">Top Star Rated |</a> 
         </li>
       </ul>
     </div>
