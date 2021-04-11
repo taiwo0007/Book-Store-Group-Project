@@ -125,11 +125,20 @@ Cart - Bookspace.
 							SUBTOTAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							{% if voucher %}
-							€{{ total|floatformat:"2" }}
+							
+								<del class="text-secondary">€{{ total|floatformat:"2" }}</del>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;€{{ new_total|floatformat:"2" }}
+								<div style="font-weight: lighter">
 							"{{ voucher.code }}" voucher
 							({{ voucher.discount }}% off)
 							- €{{ discount|floatformat:"2" }}
-							€{{ new_total|floatformat:"2" }}
+						</div>
+							
+							
+							
 							{% else %}
 							€{{ total|floatformat:"2" }}
 							{% endif %}
