@@ -118,6 +118,7 @@ body {
 .my_row_class {
 	padding-top: 15px;
 }
+
 .my_row_class .mx-auto p {
 	color: #000;
 	font-size: 12px;
@@ -131,7 +132,7 @@ body {
 	padding-top: 5px;
 }
 .my_bottom_margin {
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 
 .card-body h4 {
