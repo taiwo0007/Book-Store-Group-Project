@@ -34,7 +34,7 @@ Order History - Bookspace.
 		background-color: grey;
 	}
 </style>
-<div class="container">
+
 
 	<div class="menu">
 
@@ -52,6 +52,9 @@ Order History - Bookspace.
 
 	</div>
 <div class="row">
+	<div class="col-2">
+
+	</div>
 
 	
 
@@ -59,13 +62,15 @@ Order History - Bookspace.
 
 
 
+<div class="col-10">
+
 
 	<div class="text-center">
 		<br>
 		<h1 class="text-center my_title">Order History</h1>
 		<br>
 		{% if order_details %}
-		<table style="width: 700px;" class="table table-striped d-inline-block">
+		<table style="width: 80vw;" class="table table-striped">
 			<thead>
 				<tr>
 					<th>Order Number</th>
@@ -98,6 +103,7 @@ Order History - Bookspace.
 
 </div>
 </div>
+
 <br>
 <br>
 {% endblock %}

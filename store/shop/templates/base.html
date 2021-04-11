@@ -15,18 +15,10 @@
 </head>
 <body style="background-color:white">
 	<style>
-		.card-body{
-			background-color: white;
-			border:0px;
-			
-		}
-		.card{
-			box-shadow: 0px 0px;
-			border:0px;
-		}
+		
 	</style>
 	
-	<div class="container-fluid">
+	<div style="overflow-x: hidden;" class="container-fluid">
 		<div class="container-fluid navbar-fixed-top my_top_navbar_div">
 		{% include 'top-navbar.html' %}
 		</div>
@@ -46,7 +38,10 @@
     	</div>
 		{% block content %}
 		{% endblock %}
-		<hr style="margin-bottom:150px;"></hr>
+		<!--<hr style="margin-bottom:150px;"></hr>-->
+		
+	</div>
+	<div  style=" overflow-x: hidden; margin-left: -0px; " class="">
 		{% include 'footer.html' %}
 	</div>
 
