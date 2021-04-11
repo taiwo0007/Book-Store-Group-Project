@@ -55,14 +55,16 @@
             
         
         <div class="col-10">
-            <h1 style="font-weight: lighter;" class="text-center mb-5">{{request.user}}'s Wish List</h1>
+            <br>
+            <h1 class="text-justify my_title">Wish List</h1>
+            <br>
         {% if books %}
-        <div class="row "> 
+        <div class="row " style="margin: 0 ;"> 
             {% for book in books %}
         
                 <div class="my_bottom_margin col-2">
                     <div style="font-size: 10px; " class="card text-center h-50 border-0" style="min-width: 18rem;">
-                        <a href="{{book.wished_item.get_absolute_url}}"><img style="width: 100px;;" class="card-img-top my_image" src="{{book.wished_item.image.url}}" alt="{{book.title}}"></a>
+                        <a href="{{book.wished_item.get_absolute_url}}"><img style="width: 150px;;" class="card-img-top my_image" src="{{book.wished_item.image.url}}" alt="{{book.title}}"></a>
                         <div class="card-body">
                             <h4 class="card-text" >{{book.wished_item.title}}</h4>
                             <p class="card-text">€{{book.wished_item.price}}</p>

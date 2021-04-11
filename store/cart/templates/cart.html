@@ -21,188 +21,199 @@ Cart - Bookspace.
 	</div>
 </div>
 {% else %}
-<div>
-	<div class="text-center">
-		<br>
-		<h1 class="text-center my_title">
-			Your shopping cart
-		</h1>
-		<br>
-	</div>
-</div>
-<div class="row mx-auto">
-	<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
-		<table class="table my_custom_table">
-			<thead class="my_custom_thead">
-				<tr>
-					<th colspan="5">
-						Your items
-					</th>
-				</tr>
+<div class="container-fluid">
 
-			</thead>
-			<tbody>
-				{% for cart_item in cart_items %}
-				<tr>
-					<td>
-						<a href="{{cart_item.book.get_url}}"><img src="{{cart_item.book.image.url}}" alt=""
-								class="float-left h-auto mx-auto rounded custom_image"></a>
-					</td>
-					<td class="text-left">
-						{{cart_item.book.title}}
-						<br>
-						Unit Price: €{{cart_item.book.price}}
-						<br>
-						Qty: {{cart_item.quantity}} x €{{cart_item.book.price}}
-					</td>
-					<td>
-						€{{cart_item.sub_total}}
-					</td>
-					{% if cart_item.quantity < cart_item.book.stock %} <td>
-						<a href="{% url 'cart:add_cart' cart_item.book.slug %}" class="custom_a"><i
-								class="fas fa-plus-circle custom_icon"></i></a>&nbsp;
-						<a href="{% url 'cart:cart_remove' cart_item.book.slug%}" class="custom_a"><i
-								class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
-						<a href="{%url 'cart:full_remove' cart_item.book.slug%}" class="custom_icon"><i
-								class="fas fa-trash-alt custom_icon"></i></a>
-						</td>
-						{% else %}
-						<td>
-							&nbsp;<a href="{%url 'cart:cart_remove' cart_item.book.slug%}" class="custom_a"><i
-									class="fas fa-minus-circle custom_icon"></i></a>&nbsp;
-							<a href="{%url 'cart:full_remove' cart_item.book.slug%}" class="custom_icon"><i
-									class="fas fa-trash-alt custom_icon"></i></a>
-						</td>
-						<td></td>
-						{% endif %}
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-
-	</div>
-	<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
-		<table class="table my_custom_table">
-			<thead class="my_custom_thead">
-				<tr>
-					<th>
-						Checkout
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						Please review your shopping cart items before proceeding with the order payment.
-					</td>
-				</tr>
-				{% if voucher %}
-				<tr class="subtotal">
-					<td>Total</td>
-					<td colspan="4"></td>
-					<td class="num">€{{ total|floatformat:"2" }}</td>
-				</tr>
-				<tr>
-					<td>
-						"{{ voucher.code }}" voucher
-						({{ voucher.discount }}% off)
-					</td>
-					<td colspan="4"></td>
-					<td class="num neg">
-						- €{{ discount|floatformat:"2" }}
-					</td>
-				</tr>
-				<tr class="total">
-					<td>Total</td>
-					<td colspan="4"></td>
-					<td class="num">
-						€{{ new_total|floatformat:"2" }}
-					</td>
-				</tr>
-				{% else %}
-				<tr class="total">
-					<td>Total</td>
-					<td colspan="4"></td>
-					<td class="num">
-						€{{ total|floatformat:"2" }}
-					</td>
-				</tr>
-				{% endif %}
-			</tbody>
-		</table>
-		<p>Apply a voucher:</p>
-		<form action="{% url 'vouchers:apply' %}" method="post">
-			{{ voucher_apply_form }}
-			<input type="submit" value="Apply">
-			{% csrf_token %}
-		</form>
-
-		</tbody>
-		</table>
-		<div class="mx-auto">
-			<form action="" method="POST">
-				{% csrf_token %}
-				<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ data_key }}"
-					data-amount="{{ stripe_total }}" data-name="Book Shop" data-description="{{ description }}"
-					data-image="{% static 'images/logo.png' %}" data-locale="auto" data-currency="eur"
-					data-shipping-address="true" data-billing-address="true" data-zip-code="true">
-					</script>
-			</form>
-			<br>
-
-
-
-
-			<script
-				src="https://www.paypal.com/sdk/js?client-id=AR6cTJMtz5K2C0o6lZOD2uXxkpAtg7rrwNrWJbwzEfutJO-KfUGVa_S1tIMus1qZun20IBC1aGxreEKp&currency=EUR"> // Required. Replace YOUR_CLIENT_ID with your sandbox client ID.
-				</script>
-
-			<div id="paypal-button-container"></div>
-
-
-
-			<form action="" method="POST">
-				{% csrf_token %}
-				<script>
-
-					paypal.Buttons({
-						createOrder: function (data, actions) {
-							// This function sets up the details of the transaction, including the amount and line item details.
-							return actions.order.create({
-								purchase_units: [{
-									amount: {
-										value: "{{total}}"
-									}
-								}]
-							});
-						},
-
-						onApprove: function (data, actions) {
-							// This function captures the funds from the transaction.
-							return actions.order.capture().then(function (details) {
-								// This function shows a transaction success message to your buyer.
-								alert("hEY TGIS IS TEH ORDER" + data.links);
-								alert('Transaction completed by ' + '{{request.user}}' + data.orderID+data.shippingAddress+data.addresseeName+data.countryCode+data.capture+data.details);
-
-
-
-
-							});
-
-						}
-					}).render('#paypal-button-container');
-
-						//This function displays Smart Payment Buttons on your web page.
-
-				</script>
-			</form>
-
-
-			<a href="{% url 'shop:allBookCat' %}" class="btn btn-secondary btn-block my_custom_button">Continue
-				Shopping</a>
+	<div class="row mb-5 p-5" style="margin: 0 100px;;">
+		<div class="col-12">
+			<span>hELLO</span><span>| hellosir</span>
+			<h2 class="text-justfiy">
+				SHOPPING BAG
+			</h2>
 		</div>
+
+		<div style="border-bottom: 1px solid #9b9b9b" class="col-9">
+			{% for cart_item in cart_items %}
+			<div style="border-top: 1px solid #9b9b9b" class="row ">
+
+				<div class="col-2 py-5 ">
+
+					<a href="{{cart_item.book.get_url}}"><img src="{{cart_item.book.image.url}}" alt=""
+							style="height:230px; width: auto;" class="float-left rounded "></a>
+				</div>
+
+				<div class="col-8 py-5 ">
+					<h1 class=""
+						style="margin-left: -14px; font-family: Helvetica; font-weight: bolder; font-size: 25px;">
+						{{cart_item.book.title}}</h1>
+					<h1 class="mt-3"
+						style="font-weight: bolder; margin-left: -14px; font-family: sans-serif; font-weight: bolder; font-size: 17px;">
+						AVAILIBILITY:<span class="text-success">{% if cart_item.book.stock %} In stock {% else %}</span>
+						<span class="text-danger"> Out Of stock{%endif%}</span>
+					</h1>
+					<a style="font-weight: bolder; position:absolute;"
+						href="{%url 'cart:full_remove' cart_item.book.slug%}" class="pb-5 text-dark fixed-bottom">
+						REMOVE
+					</a>
+				</div>
+				<div class="col-2 py-5">
+
+					<h1 class=""
+						style="margin-left: -14px; font-family: Helvetica; font-weight: bolder; font-size: 20px;">
+						€{{cart_item.sub_total}}</h1>
+					<div style="position:absolute;" class="fixed-bottom pb-5 mb-5">
+						<p style="font-family: Helvetica; margin-bottom: -0.1px; font-weight: 300;">Quanity:</p>
+
+						{% if cart_item.quantity < cart_item.book.stock %} <div class="input-group-prepend ">
+							<span style="background-color: white; border: 1px solid #9b9b9b;" class="input-group-text btn text-dark rounded-0"
+								id="basic-addon1">
+								<a href="{% url 'cart:cart_remove' cart_item.book.slug%}" class="custom_a text-dark">-</a></span>
+							<span style="background-color: white; border: 1px solid #9b9b9b;" class="input-group-text btn text-dark  rounded-0"
+								id="basic-addon1">&nbsp;{{cart_item.quantity}}&nbsp;</span>
+							<span style="background-color: white; border: 1px solid #9b9b9b;" class="input-group-text btn text-dark rounded-0"
+								id="basic-addon1">
+								<a href="{% url 'cart:add_cart' cart_item.book.slug%}" class="custom_a text-dark">+</a></span>
+					</div>
+					{% else %}
+					<div class="input-group-prepend">
+						<span style="background-color: white; border: 1px solid #9b9b9b;" class="input-group-text btn text-dark rounded-0"
+							id="basic-addon1">
+							<a href="{% url 'cart:cart_remove' cart_item.book.slug%}" class="custom_a text-dark">-</a></span>
+						<span style="background-color: white; border: 1px solid #9b9b9b;" class="input-group-text btn text-dark rounded-0"
+							id="basic-addon1">&nbsp;{{cart_item.quantity}}&nbsp;</span>
+					</div>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+		{% endfor %}
 	</div>
+	<div class="col-3">
+		<div class="row">
+			<div class="col-12 ">
+
+
+				<div  style="border: 1px solid #9b9b9b" >
+
+
+					<form class="p-3" style="width: 100%;" action="{% url 'vouchers:apply' %}" method="post">
+						<style>
+							label {
+								display: none;
+
+							}
+
+							#go {
+								display: none;
+							}
+						</style>
+						<p style="font-weight: 300;">Have a voucher?</p>
+					{{voucher_apply_form }}
+
+						{% csrf_token %}
+						<button id="go" style="" class=" " type="submit"></button>
+					</form>
+
+				</div>
+			</div>
+			<div class="col-12 py-4">
+
+				<div style="border: 1px solid #9b9b9b" class="card rounded-0">
+					<div class="card-body">
+
+						<h5 style="border-bottom: 1px solid #9b9b9b;" class="card-title pb-3 ">
+							SUBTOTAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							{% if voucher %}
+							€{{ total|floatformat:"2" }}
+							"{{ voucher.code }}" voucher
+							({{ voucher.discount }}% off)
+							- €{{ discount|floatformat:"2" }}
+							€{{ new_total|floatformat:"2" }}
+							{% else %}
+							€{{ total|floatformat:"2" }}
+							{% endif %}
+						</h5>
+
+					</div>
+
+
+				</div>
+
+
+			</div>
+			<div class="col-12">
+				<form action="" method="POST">
+					{% csrf_token %}
+					<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+						data-key="{{ data_key }}" data-amount="{{ stripe_total }}" data-name="Book Shop"
+						data-description="{{ description }}" data-image="{% static 'images/logo.png' %}"
+						data-locale="auto" data-currency="eur" data-shipping-address="true" data-billing-address="true"
+						data-zip-code="true">
+						</script>
+				</form>
+			</div>
+			<div class="col-12">
+				<script
+					src="https://www.paypal.com/sdk/js?client-id=AR6cTJMtz5K2C0o6lZOD2uXxkpAtg7rrwNrWJbwzEfutJO-KfUGVa_S1tIMus1qZun20IBC1aGxreEKp&currency=EUR"> // Required. Replace YOUR_CLIENT_ID with your sandbox client ID.
+					</script>
+
+				<div id="paypal-button-container"></div>
+
+
+
+				<form action="" method="POST">
+					{% csrf_token %}
+					<script>
+
+						paypal.Buttons({
+							createOrder: function (data, actions) {
+								// This function sets up the details of the transaction, including the amount and line item details.
+								return actions.order.create({
+									purchase_units: [{
+										amount: {
+											value: "{{total}}"
+										}
+									}]
+								});
+							},
+
+							onApprove: function (data, actions) {
+								// This function captures the funds from the transaction.
+								return actions.order.capture().then(function (details) {
+									// This function shows a transaction success message to your buyer.
+									alert("hEY TGIS IS TEH ORDER" + data.links);
+									alert('Transaction completed by ' + '{{request.user}}' + data.orderID + data.shippingAddress + data.addresseeName + data.countryCode + data.capture + data.details);
+
+
+
+
+								});
+
+							}
+						}).render('#paypal-button-container');
+
+                        //This function displays Smart Payment Buttons on your web page.
+
+					</script>
+				</form>
+
+
+				<a href="{% url 'shop:allBookCat' %}" class="btn btn-secondary btn-block my_custom_button">Continue
+					Shopping</a>
+			</div>
+
+
+		</div>
+
+	</div>
+
 </div>
-<br>
+
+</div>
+
 {% endif %}
-{% endblock %}
+{% endblock content%}
+<!--
+
+-->
