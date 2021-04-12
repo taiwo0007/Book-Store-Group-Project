@@ -23,7 +23,7 @@ Cart - Bookspace.
 {% else %}
 <div class="container-fluid">
 
-	<div class="row pt-3" style="margin: 0 100px;;">
+	<div class="row py-3" style="margin: 0 100px;;">
 		<div style="border-bottom: 1px solid #9b9b9b" class="col-9">
 
 			<h2 class="text-justfiy pb-2">
@@ -50,6 +50,12 @@ Cart - Bookspace.
 						AVAILIBILITY:<span class="text-success">{% if cart_item.book.stock %} In stock {% else %}</span>
 						<span class="text-danger"> Out Of stock{%endif%}</span>
 					</h1>
+			
+					
+						<span style="position: absolute; font-weight: 800; background-color: white;  width: 20%; margin-top: 78px;; margin-left: -11px;"
+							class="  text-dark rounded-0"
+							id="">€{{cart_item.book.price}}</span>
+				
 					<a style="font-weight: bolder; position:absolute;"
 						href="{%url 'cart:full_remove' cart_item.book.slug%}" class="pb-5 text-dark fixed-bottom">
 						REMOVE
@@ -135,8 +141,9 @@ Cart - Bookspace.
 							<del class="text-secondary">€{{ total|floatformat:"2" }}</del>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							
 							€{{new_total|floatformat:"2" }}
 							<div style="font-weight: lighter">
 								"{{ voucher.code }}" voucher
