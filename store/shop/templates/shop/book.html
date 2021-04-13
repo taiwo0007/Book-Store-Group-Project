@@ -45,44 +45,49 @@
                     <p class="star">
                         {% if rounded %}
                         {% for i in "x"|rjust:rounded%}
-                           
-                               <i class="fas fa-star text-warning"></i>
-       
-                          
-                           {% endfor %}
-                           {% if half %}
-                           <i class="fas fa-star-half-alt text-warning"></i>
-                           {% endif %}
-                           {% for b in "x"|rjust:greyStars%}
-                           
-                           <i class="far text-warning fa-star"></i>
-   
-                      
-                       {% endfor %}
 
-                           {%else %}
-                           {% if user.is_authenticated %}
-                           <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="#reviewlink">Leave a review</a></span>
-                            {%else%}
-                            <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="{% url 'signin' %}">Sign in to review</a></span>
+                        <i class="fas fa-star text-warning"></i>
 
-                           {%endif%}
-                    {% endif %}   
-                           <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="#reviewlink">{{reviews|length}} Reviews</a></span>
+
+                        {% endfor %}
+                        {% if half %}
+                        <i class="fas fa-star-half-alt text-warning"></i>
+                        {% endif %}
+                        {% for b in "x"|rjust:greyStars%}
+
+                        <i class="far text-warning fa-star"></i>
+
+
+                        {% endfor %}
+
+                        {%else %}
+                        {% if user.is_authenticated %}
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black;" class=""
+                                href="#reviewlink">Leave a review</a></span>
+                        {%else%}
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black;" class=""
+                                href="{% url 'signin' %}">Sign in to review</a></span>
+
+                        {%endif%}
+                        {% endif %}
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black;" class=""
+                                href="#reviewlink">{{reviews|length}} Reviews</a></span>
                     </p>
-                 
+
 
                     <p class="text-justify my_prod_text">{{book.description}}</p>
-                    <p style="font-weight: 300;" class="text-justify my_prod_text"><i class="fas fa-check"></i> {{book.stock}} in stock</p>
+                    <p style="font-weight: 300;" class="text-justify my_prod_text"><i class="fas fa-check"></i>
+                        {{book.stock}} in stock</p>
                     {% if book.stock == 0%}
                     <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
                     {% elif book.availible == False%}
                     <p class="text-justify my_prod_text"><b>Not Availible</b></p>
                     {% else %}
-                    <a class="btn btn-secondary rounded-0" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
-                    <a style="background-color: white;" class="btn btn-alert border" data-toggle="tooltip" title="Wishlist"
-                        href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i style="background-color: white;" class="fas fa-heart "></i></a>
-                        <a  id="share" class="btn border"><i style="" class="fas fa-share-alt text-dark"></i></a>
+                    <a class="btn btn-dark rounded" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
+                    <a style="background-color: white;" class="btn btn-alert border" data-toggle="tooltip"
+                        title="Wishlist" href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i
+                            style="background-color: white;" class="fas fa-heart "></i></a>
+                    <a id="share" class="btn border"><i style="" class="fas fa-share-alt text-dark"></i></a>
                     {% endif %}
                     <br>
 
@@ -128,59 +133,68 @@
 
         {% for review in reviews%}
         <div class="col-4 reviewCard border-bottom">
-           
 
-            <div style="display: flex;  justify-content: space-evenly; flex-direction: column; border: none;" class="card ">
-                <div style="height: max-content; font-size: 20px; font-style: italic; font-family: Arial, Helvetica, sans-serif; background-color: white;"class="card-header border-0">
+
+            <div style="display: flex;  justify-content: space-evenly; flex-direction: column; border: none;"
+                class="card ">
+                <div style="height: max-content; font-size: 20px; font-style: italic; font-family: Arial, Helvetica, sans-serif; background-color: white;"
+                    class="card-header border-0">
                     "{{review.subject}}"
                     <br>
                 </div>
                 <span class="ml-4 star">
                     {% for i in "x"|rjust:review.rating%}
-                       
-                           <i class="fas fa-star text-warning"></i>
-   
-                      
-                       {% endfor %}
-                   </span>
-                
+
+                    <i class="fas fa-star text-warning"></i>
+
+
+                    {% endfor %}
+                </span>
+
                 <div class="card-body ">
                     <blockquote class="blockquote mb-0">
-                       
-                        <p style="font-size: 15px; font-weight: lighter; flex-direction: column; justify-content: center; ">{{review.comment}}</p>
-                        <footer  class="">
-                            
-                               
-                               
-                               {% for i in UserImage %}
 
-                               {% if i.user == review.user %}
-                             
-                                
-                               
-                           <p style="text-transform: uppercase; font-size: 12px; font-weight: bolder;"><span><img style="height: auto; border-radius: 50%; width: 25px; height: 25px; object-fit: cover;" src="{{i.profile_image.url}}" alt="{{book.title}}"> </span>{{review.name}}</p>
-                            <p style="text-transform: uppercase; font-size: 12px; margin-top: -17px; ">{{review.created_date}}</p>
+                        <p
+                            style="font-size: 15px; font-weight: lighter; flex-direction: column; justify-content: center; ">
+                            {{review.comment}}</p>
+                        <footer class="">
+
+
+
+                            {% for i in UserImage %}
+
+                            {% if i.user == review.user %}
+
+
+
+                            <p style="text-transform: uppercase; font-size: 12px; font-weight: bolder;"><span><img
+                                        style="height: auto; border-radius: 50%; width: 25px; height: 25px; object-fit: cover;"
+                                        src="{{i.profile_image.url}}" alt="{{book.title}}"> </span>{{review.name}}</p>
+                            <p style="text-transform: uppercase; font-size: 12px; margin-top: -17px; ">
+                                {{review.created_date}}</p>
                         </footer>
                         <blockquote>
                 </div>{%endif%}
-                               {%endfor%}
+                {%endfor%}
 
             </div>
 
 
         </div>
-       
+
         {%endfor%}
-        
+
     </div>
     <div class="row">
         {% if reviews.count > 3%}
-        <p id="more" class="btn text-center" style="text-decoration: underline; float: right; margin-right: 50px; display: block;">
+        <p id="more" class="btn text-center"
+            style="text-decoration: underline; float: right; margin-right: 50px; display: block;">
             view more</p>
         {% endif %}
-        
-       
-        <p id="less" class="btn text-center" style="text-decoration: underline; float: right; margin-right: 50px; display: none;">
+
+
+        <p id="less" class="btn text-center"
+            style="text-decoration: underline; float: right; margin-right: 50px; display: none;">
             See less</p>
 
     </div>
@@ -194,8 +208,8 @@
 
 <script>
     var input = document.createElement("input")
-   
-    
+
+
 
     var sharer = document.getElementById("share")
     sharer.addEventListener("click", copyFunction)
@@ -206,30 +220,30 @@
     var moreSelect = document.getElementById("more");
     var seeLesser = document.getElementById("less");
     var reviewsList = document.getElementsByClassName("reviewCard");
-    if(reviewsList.length == 1){
-    num.innerHTML = 1;
+    if (reviewsList.length == 1) {
+        num.innerHTML = 1;
     }
-    if(reviewsList.length == 2){
-    num.innerHTML = 2;
+    if (reviewsList.length == 2) {
+        num.innerHTML = 2;
     }
-    if(reviewsList.length == 3){
-    num.innerHTML = 3;
+    if (reviewsList.length == 3) {
+        num.innerHTML = 3;
     }
-    if(reviewsList.length > 3){
-    num.innerHTML = 3;
+    if (reviewsList.length > 3) {
+        num.innerHTML = 3;
     }
 
-function copyFunction(){
+    function copyFunction() {
 
-    text = window.location.href
-    document.body.appendChild(input)
-    input.value = text
-    input.select()
-    document.execCommand("copy")
-    document.body.removeChild(input)
-    alert("copied")
-}
-    
+        text = window.location.href
+        document.body.appendChild(input)
+        input.value = text
+        input.select()
+        document.execCommand("copy")
+        document.body.removeChild(input)
+        alert("copied")
+    }
+
 
 
     function gofunc() {
@@ -240,7 +254,7 @@ function copyFunction(){
     texter.addEventListener('click', gofunc)
 
 
-    
+
     for (var i = 0; i < reviewsList.length; i++) {
 
         if (i > 2) {
