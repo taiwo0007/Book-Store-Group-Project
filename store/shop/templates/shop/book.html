@@ -53,6 +53,13 @@
                            {% if half %}
                            <i class="fas fa-star-half-alt text-warning"></i>
                            {% endif %}
+                           {% for b in "x"|rjust:greyStars%}
+                           
+                           <i class="far text-warning fa-star"></i>
+   
+                      
+                       {% endfor %}
+
                            {%else %}
                            {% if user.is_authenticated %}
                            <span> <a class="pl-1" style="text-decoration: underline; color: black;" class="" href="#reviewlink">Leave a review</a></span>

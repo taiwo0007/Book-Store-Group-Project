@@ -144,10 +144,14 @@ def book_detail(request, category_slug, book_slug):
     print(reviews)
 
     
+    if half:
+        greyStars = 4 - rounded
+    else:
+        greyStars = 5 - rounded
 
     
 
-    return render(request, 'shop/book.html', {'book':book,'UserImage':UserImage, 'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded})
+    return render(request, 'shop/book.html', {'book':book,'UserImage':UserImage, 'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded, 'greyStars':greyStars})
 
 @login_required()
 def add_to_wishList(request, book_slug, category_slug):
