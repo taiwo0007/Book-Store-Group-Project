@@ -9,7 +9,7 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li style="font-size: 13px; margin-left: 70px;" class="nav-item text-dark">
+        <li style="font-size: 13px; margin-left: 30px;" class="nav-item text-dark">
           <a style="display: inline-block; margin-right:0px;" class="nav-link text-dark" href="{% url 'shop:allBookCat'%}">All Books |</a>
           {% for cat in links %}
             <a style="display: inline-block; margin-left: -10px" class="nav-link text-dark" href="{{cat.get_absolute_url}}">{{cat.name}} |</a>
@@ -23,7 +23,7 @@
       <form class="form-inline my-2 my-lg-0"  style="margin-right: 0px;" action="{% url 'search_app:searchResult'%}" method="get">
         {% csrf_token %}
         <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="Search" name="q">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-secondary my-1 my-sm-0" type="submit">Search</button>
       </form>
       
       <ul  class="navbar-nav mr-auto">
