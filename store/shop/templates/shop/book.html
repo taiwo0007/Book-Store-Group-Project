@@ -24,7 +24,7 @@
 
             <u>
                 <p><a href="{% url 'shop:allBookCat' %}">Home</a>
-            </u> | <u><a href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p>
+            </u> | <u class="text-center"><a class="text-center" href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p>
             </u>
         </div>
         <br>
@@ -32,17 +32,18 @@
             <div class="col-12 col-sm-12 col-lg-6 text-center">
                 <div>
                 
-                    <img id="hello" data-toggle="tooltip" data-delay='{"show":0,"hide":000}' title="{{book.title}}" src="{{book.image.url}}" alt="{{book.title}}">
+                    <img class="pt-2" id="hello" style="width: 330px;" data-toggle="tooltip" data-delay='{"show":0,"hide":000}' title="{{book.title}}" src="{{book.image.url}}" alt="{{book.title}}">
                     <br><br>
 
                     <span style="color: rgb(114, 91, 69);">{{book.author}}</span><span
                         style="font-size: small; font-weight: lighter;"> (author)</span>
+                        
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div>
-                    <h1 class="my_prod_title">{{book.title}}</h1>
-                    <p style="font-weight: 900;">€{{book.price}}</p>
+                    <h1 style="font-family: 'Baskervville', serif;" class="pb-2">{{book.title}}</h1>
+                    <h5 style="font-weight: 600;">€{{book.price}}</h5>
                     <p class="star">
                         {% if rounded %}
                         {% for i in "x"|rjust:rounded%}
@@ -73,8 +74,8 @@
 
                         {%endif%}
                         {% endif %}
-                        <span> <a class="pl-1" style="text-decoration: underline; color: black;" class=""
-                                href="#reviewlink">{{reviews|length}} Reviews</a></span>
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black; font-weight: 300;" class=""
+                                href="#reviewlink">{%if reviews|length == 1%}{{reviews|length}} Review {%else%}{{reviews|length}} Reviews{%endif%}</a></span>
                     </p>
 
 
@@ -86,23 +87,28 @@
                     {% elif book.availible == False%}
                     <p class="text-justify my_prod_text"><b>Not Availible</b></p>
                     {% else %}
-                    <a class="btn btn-dark rounded" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
-                    <a style="background-color: white;" class="btn btn-alert border" data-toggle="tooltip"
+                    <a class="btn btn-dark rounded-0" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
+                    <a style="background-color: white;" class="btn btn-alert border rounded-0" data-toggle="tooltip"
                         title="Wishlist" href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i
                             style="background-color: white;" class="fas fa-heart "></i></a>
-                    <a id="share" class="btn border"><i style="" class="fas fa-share-alt text-dark"></i></a>
+                    <a id="share" class="btn rounded-0 border"><i style="" class="fas fa-share-alt text-dark"></i></a>
                     {% endif %}
                     <br>
 
                     <h3 class="my_prod_title">Synopsis: </h3>
-                    <p style="width:400px; font-weight: 200;" class="text-justify my_prod_text my_title border p-3">
+                    <p style="width:400px; font-weight: 200; " class="text-justify my_prod_text my_title border p-3">
                         {{book.synopsis}}
                         <br>
                         <br>
+                        <span  class="text-secondary" style="font-weight: bold;">Pub Date:</span> {{book.pub_date}}<br>
+                        <span  class="text-secondary" style="font-weight: bold;">ISBN:</span> {{book.iban}}<br><br>
                         <span style="font-weight: bold;" class="text-secondary">Publisher: {{book.publisher}}</span>
                         <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span style="font-weight: bold;"
                             class="text-secondary"> Pages: {{book.num_pages}}</span>
+
+                            
                     </p>
+                    
                 </div>
             </div>
         </div>
@@ -111,7 +117,7 @@
 </div>
 <div class="container">
     <div class="row ">
-        <p id="b" class="btn" style="text-decoration: underline; float: right; margin-right: 50px;">write a review</p>
+        <p id="b" class="btn" style="font-family: 'Baskervville', serif;  font-size: 20px; text-decoration: underline; float: right; margin-right: 50px;">Write a review</p>
     </div>
     <div class="j row">
         <div class="col-12">
@@ -129,7 +135,7 @@
     <a id="reviewlink"></a>
     <div class="row">
         <div class="col-12">
-            <h4 class="text-center pb-4 border-bottom">Reviews </h5>
+            <h4 style="font-family: 'Baskervville', serif;" class="text-center pb-4 border-bottom">Reviews </h5>
                 <span style="float: right;">/{{reviews.count}}</span><span style="float: right;" id="num">0</span>
         </div>
         {% if reviews %}
