@@ -11,8 +11,10 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
+@login_required()
 def profileView(request):
     rForm = RefundForm()
     pForm = PasswordChangeForm(request.user)
@@ -57,6 +59,8 @@ def profileView(request):
     
     return render(request, 'profile.html', context)
 
+
+@login_required()
 def dashboardView(request):
 
     try:
@@ -144,10 +148,13 @@ def signinView(request):
        
     return render(request, 'signin.html', {'form':form})   
 
+
+
 def signoutView(request):
     logout(request)
     return redirect('signin')
 
+@login_required()
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
