@@ -135,6 +135,9 @@ def book_detail(request, category_slug, book_slug):
     if total >= 4.5 and total < 5:
         rounded = 4
         half = True
+    if total >= 5:
+        rounded = 5
+        half = False
     
     print(rounded)
     UserImage = UserProfile.objects.all()

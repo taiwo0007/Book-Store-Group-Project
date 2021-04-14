@@ -22,7 +22,7 @@
       {% if item_count > 0 %}
       <form class="form-inline my-2 my-lg-0"  style="margin-right: 0px;" action="{% url 'search_app:searchResult'%}" method="get">
         {% csrf_token %}
-        <input style="border: 1px solid #9b9b9b" class="form-control mr-sm-2 rounded-0" type="search" placeholder="search" aria-label="Search" name="q">
+        <input style="border: 2px solid black" class="form-control mr-sm-2 rounded-0" type="search" placeholder="search" aria-label="Search" name="q">
         <!--<button class="btn btn-dark my-1 my-sm-0" type="submit">Search</button>-->
           <button style="margin-left: -40px;" class="btn btn-dark  rounded-0" type="submit"><i class="fas fa-search"></i></button>
       </form>
@@ -30,7 +30,7 @@
       <ul  class="navbar-nav mr-auto">
         
           <li style="margin-right: 100px;" class="nav-item">
-          <a class=" text-dark nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i><span class="badge badge-danger">{{item_count}}</span></a>
+          <a class=" text-dark nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i><span class="  badge badge-danger">{{item_count}}</span></a>
           
         </li>
 
@@ -39,9 +39,9 @@
         {%else %}
         <form style="margin-right: 160px;" class="form-inline my-2 my-lg-0" action="{% url 'search_app:searchResult'%}" method="get">
           {% csrf_token %}
-          <input style="border: 1px solid #9b9b9b" class="form-control mr-sm-2 rounded-0" type="search" placeholder="search" aria-label="Search" name="q">
+          <input id="searcher" style="border: 1px solid #9b9b9b" class="form-control mr-sm-2 rounded-0" type="search" placeholder="search" aria-label="Search" name="q">
           <!--<button style="" class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>-->
-          <button style="margin-left: -40px;" class="btn btn-dark  rounded-0" type="submit"><i class="fas fa-search"></i></button>
+          <button style="margin-left: -40px;" class="btn btn-dark  rounded-0" type="submit"><i class=" fas fa-search"></i></button>
         
         </form>
         
