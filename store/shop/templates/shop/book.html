@@ -50,15 +50,17 @@
 
 
                         {% endfor %}
-                        {% if half  %}
+                        {% if half %}
                         <i class="fas fa-star-half-alt text-warning"></i>
                         {% endif %}
+                        {% if greyStars > 0 %}
                         {% for b in "x"|rjust:greyStars%}
 
                         <i class="far text-warning fa-star"></i>
 
 
                         {% endfor %}
+                        {% endif %}
 
                         {%else %}
                         {% if user.is_authenticated %}

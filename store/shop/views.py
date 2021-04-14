@@ -135,22 +135,26 @@ def book_detail(request, category_slug, book_slug):
     if total >= 4.5 and total < 5:
         rounded = 4
         half = True
-    if total >= 5:
+    if total >= 5.0:
         rounded = 5
         half = False
+        print("hello")
     
     print(rounded)
     UserImage = UserProfile.objects.all()
     reviewss = Review.objects.filter(review_item__slug=book_slug)
     reviews = reviewss.order_by('-created_date')
 
-    print(reviews)
+    
 
     
     if half:
         greyStars = 4 - rounded
     else:
         greyStars = 5 - rounded
+
+    print(greyStars)
+    print(rounded)
 
     
 
