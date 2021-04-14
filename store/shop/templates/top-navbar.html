@@ -21,7 +21,7 @@
 			</li>
 			{% if request.user.groups.all.0.name == "Manager" %}
 			<li  class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;">
-				<a href="{% url 'dashboard:manager_dashboard' %}">dashboard |</a>
+				<a href="{% url 'dashboard:manager_dashboard' %}"><i class="fas fa-chart-line"></i>dashboard |</a>
 			</li>
 			{% endif %}
 			{% endif %}

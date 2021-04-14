@@ -2,9 +2,43 @@ from django.shortcuts import render
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import Blog
 from shop.models import Review, Book
+from .forms import BlogForm
+from PIL import Image, ImageOps
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 
 # Create your views here.
+
+
+def addBlog(request):
+    try: 
+        books = Book.objects.get(id=request.POST['book_blog'])
+        obj = Blog.objects.create(
+            title = request.POST['title'],
+            author= request.user,
+            body = request.POST['body'],
+            image = request.FILES['image'],
+            book_blog = books
+
+        )
+        obj.save()
+        messages.success(request, " Blog has been created ")
+        return redirect('/accounts/profile/')
+    
+    except Exception as e:
+        messages.alert(request, " Blog has not been created ")
+        return redirect('/accounts/profile/')
+
+    """
+    if request.method == 'POST':
+        form = BlogForm(title = 'kbkb')
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('')
+        """
+
+
 
 def blogView(request):
     blogs = Blog.objects.all()

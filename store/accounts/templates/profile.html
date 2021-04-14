@@ -127,6 +127,13 @@ Best Value - Bookspace.
 							role="progressbar" style="width:{{orders|length}}% " aria-valuenow="{{orders|length}}"
 							aria-valuemin="0" aria-valuemax="{{totalO|length}}"></div>
 					</div>
+					<span>Blogs {{blog|length}}</span>
+					<div class="progress">
+
+						<div class="progress-bar bg-dark progress-bar-striped progress-bar-animated"
+							role="progressbar" style="width:{{blog|length}}%; " aria-valuenow="{{blog|length}}"
+							aria-valuemin="0" aria-valuemax="{{blog|length}}"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -172,10 +179,23 @@ Best Value - Bookspace.
 
 			</div>
 		</div>
+		<div class="col-4">
+
+
+		</div>
+		<div class="col-8">
+			<div class=" text-justify card-profile shadow p-3  mb-5 bg-white " style="width: auto;">
+				<h1 class="py-4">Create Blog</h1>
+		<form id="formG" class="form-group" style="font-weight: lighter; " method="POST" action="{% url 'blog:add_blog'%}"
+		enctype="multipart/form-data">
+		{%csrf_token%}
+		<p style="font-weight: lighter;">{{blogform | crispy}}</p>
+		<input class="text-center" style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
+	</form>
 	</div>
-
-
-
+	</div>
+	</div>
+	
 
 
 
