@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render,get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Blog
 from shop.models import Review, Book
 from .forms import BlogForm
@@ -10,7 +11,7 @@ from django.contrib import messages
 
 # Create your views here.
 
-
+@login_required()
 def addBlog(request):
     try: 
         books = Book.objects.get(id=request.POST['book_blog'])

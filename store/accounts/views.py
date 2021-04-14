@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, UserProfileForm, CustomUserChangeForm
 from shop.models import WishList, Review
+from order.forms import RefundForm
 from order.models import Order
 from blog.forms import BlogForm
 from blog.models import Blog
@@ -13,7 +14,8 @@ from django.conf import settings
 
 
 def profileView(request):
-
+    rForm = RefundForm()
+    pForm = PasswordChangeForm(request.user)
     blogform = BlogForm()
     blog = Blog.objects.filter(author=request.user)
     p = UserProfile.objects.get(user=request.user)
@@ -46,7 +48,9 @@ def profileView(request):
         'form':form,
         'form2': form2,
         'blogform':blogform,
-        'blog':blog
+        'blog':blog,
+        'pForm':pForm,
+        'rForm':rForm
       
 
     }

@@ -30,7 +30,7 @@ Best Value - Bookspace.
 		position: absolute;
 		margin-bottom: -40px;
 
-		
+
 
 	}
 
@@ -72,16 +72,16 @@ Best Value - Bookspace.
 
 			</div>
 			<div class="col-8">
-			
 
-				
+
+
 				<br>
 				<h1 class="text-justify my_title">Profile</h1>
 				<br>
 
 			</div>
-	</div>
-		
+		</div>
+
 	</div>
 
 
@@ -130,15 +130,15 @@ Best Value - Bookspace.
 					<span>Blogs {{blog|length}}</span>
 					<div class="progress">
 
-						<div class="progress-bar bg-dark progress-bar-striped progress-bar-animated"
-							role="progressbar" style="width:{{blog|length}}%; " aria-valuenow="{{blog|length}}"
-							aria-valuemin="0" aria-valuemax="{{blog|length}}"></div>
+						<div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar"
+							style="width:{{blog|length}}%; " aria-valuenow="{{blog|length}}" aria-valuemin="0"
+							aria-valuemax="{{blog|length}}"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<style>
-		
+
 		</style>
 
 		<div class="col-8">
@@ -166,36 +166,119 @@ Best Value - Bookspace.
 
 		<div class="col-4">
 			<div class=" text-justify card-profile shadow p-3  mb-5 bg-light " style="width: auto;">
-				
-				<a href="{% url 'change_password' %}" class="text-center text-dark bg-primary btn-primary  rounded"><h5 class="my-2">Password Change</h5> </a>
-				
+				<a style="cursor: pointer;" id="formPassword"
+					class="text-center text-dark bg-primary btn-primary rounded">
+					<h5 id="former" class="my-2">Password Reset</h5>
+				</a>
+				<form id="PasswordForm" style="display:none;" class="form-group" style="font-weight: lighter; "
+					method="POST" action="{% url 'change_password' %}" enctype="multipart/form-data">
+					{%csrf_token%}
+					<p style="font-weight: lighter;">{{pForm | crispy}}</p>
+					<input class="text-center" style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
+				</form>
 			</div>
 		</div>
 		<div class="col-4">
 			<div class=" text-justify card-profile shadow p-3  mb-5 bg-light " style="width: auto;">
-				
+				<a style="cursor: pointer;" id="formRefund" class="text-center text-dark bg-primary btn-primary  rounded">
+					<h5 id="former" class="my-2"> Request Refund</h5>
+				</a>
 
-				<a href="{% url 'order:request-refund' %}" class="text-center text-dark bg-primary btn-primary  rounded"><h5 class="my-2">Request Refund</h5> </a>
 
+
+				<form id="RefundForm" style="display:none;" class="form-group" style="font-weight: lighter; "
+					method="POST" action="{% url 'order:request-refund' %}" enctype="multipart/form-data">
+					{%csrf_token%}
+					<p style="font-weight: lighter;">{{rForm | crispy}}</p>
+					<input class="text-center" style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
+				</form>
 			</div>
 		</div>
 		<div class="col-4">
 
 
 		</div>
-		<div class="col-8">
-			<div class=" text-justify card-profile shadow p-3  mb-5 bg-white " style="width: auto;">
-				<h1 class="py-4">Create Blog</h1>
-		<form id="formG" class="form-group" style="font-weight: lighter; " method="POST" action="{% url 'blog:add_blog'%}"
-		enctype="multipart/form-data">
-		{%csrf_token%}
-		<p style="font-weight: lighter;">{{blogform | crispy}}</p>
-		<input class="text-center" style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
-	</form>
+		<style>
+			#former:hover {
+
+				text-decoration: underline;
+
+			}
+		</style>
+		<div class="col-4">
+			<div class=" text-justify card-profile shadow p-3  mb-5 bg-light " style="width: auto;">
+				<a style="cursor: pointer;" id="formBlog" class="text-center text-dark bg-primary btn-primary  rounded">
+					<h5 id="former" class="my-2">Create Blog</h5>
+				</a>
+
+
+
+				<form id="blogForm" style="display:none;" class="form-group" style="font-weight: lighter; "
+					method="POST" action="{% url 'blog:add_blog'%}" enctype="multipart/form-data">
+					{%csrf_token%}
+					<p style="font-weight: lighter;">{{blogform | crispy}}</p>
+					<input class="text-center" style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
+				</form>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-	
+	<script>
+
+		blogForm = document.getElementById("formBlog");
+		formBlog = document.getElementById("blogForm")
+		formRefund = document.getElementById("RefundForm")
+		RefundForm = document.getElementById("formRefund");
+		PasswordForm = document.getElementById("formPassword");
+		formPassword = document.getElementById("PasswordForm")
+		var flagger;
+		var flaggerPassowrd;
+		var flaggerRefund;
+		blogForm.addEventListener("click", toggleer);
+		PasswordForm.addEventListener("click", toggleerPassword);
+		RefundForm .addEventListener("click", toggleerRefund);
+
+		function toggleer() {
+			if (flagger) {
+				formBlog.style.display = "none";
+				flagger = false
+			}
+
+			else {
+				formBlog.style.display = "block";
+				flagger = true
+			}
+
+
+		}
+		function toggleerPassword() {
+			if (flaggerPassowrd) {
+				formPassword.style.display = "none";
+				flaggerPassowrd = false
+			}
+
+			else {
+				formPassword.style.display = "block";
+				flaggerPassowrd = true
+			}
+
+		}
+			function toggleerRefund() {
+			if (flaggerRefund) {
+				formRefund.style.display = "none";
+				flaggerRefund = false
+			}
+
+			else {
+				formRefund.style.display = "block";
+				flaggerRefund = true
+			}
+
+
+		
+		}
+
+
+	</script>
 
 
 
@@ -254,5 +337,7 @@ Best Value - Bookspace.
 		
 	</div>-->
 </div>
+
+
 
 {% endblock content %}
