@@ -21,7 +21,7 @@
     <tbody>
 {% for book in books %}
 <tr>
-<th scope="row"><a href="{{book.get_absolute_url}}"><img class="float-left h-auto mx-auto rounded custom_image" src="{{book.image.url}}" alt="{{book.title}}"></a></th>
+<th scope="row"><a href="{{book.get_absolute_url}}"><img class="float-left img-thumbnail" style="width:100px; height:auto;" src="{{book.image.url}}" alt="{{book.title}}"></a></th>
 <td>{{ book.title }}</td>
 <td>{{ book.category.slug }}</td>
 <td>{{ book.stock }}</td></a>

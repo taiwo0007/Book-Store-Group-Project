@@ -12,9 +12,9 @@ Manager - Bookspace.
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.1/dist/chart.min.js"></script>
 
-<h4>Total Sales All Time: €{{ total_sales.my_sum }}</h4>
-<h4>Total Sales This Month: €{{ this_month_sales.my_sum }}</h4>
-<h4>Total Sales Today: €{% if todays_sales.my_sum == Null %}0{% else %} {{ todays_sales.my_sum }} {% endif %}</h4>
+<h4>Total Sales All Time: €{% if total_sales.my_sum == Null %}0{% else %}{{ total_sales.my_sum }}{% endif %}</h4>
+<h4>Total Sales This Month: €{% if this_month_sales.my_sum == Null %}0{% else %}{{ this_month_sales.my_sum }}{% endif %}</h4>
+<h4>Total Sales Today: €{% if todays_sales.my_sum == Null %}0{% else %}{{ todays_sales.my_sum }}{% endif %}</h4>
 
 <!--Graphs-->
 <div class="container">
