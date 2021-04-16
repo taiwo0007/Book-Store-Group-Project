@@ -7,15 +7,42 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   
+    <style>
+      .nav-item>a{
+        color: black;
+        
+      }
+      .nav-item>a:hover{
+        color: white; 
+    
+      }
+      .mouse{
+        padding:10px 10px;
+        color: black;
+        text-decoration: none;
+        list-style-type: none;
+        font-style: normal;
+
+      }
+.mouse:hover{
+  background-color: rgb(243, 223, 40);
+  color: dark;
+
+
+}
+
+    </style>
+
+    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li style="font-size: 13px; margin-left: 30px;" class="nav-item text-dark">
-          <a style="font-size:10px;  display: inline-block; margin-right:0px;" class="nav-link text-dark" href="{% url 'shop:allBookCat'%}">All Books |</a>
+        <li style="font-size: 13px; margin-left: 30px;" class="nav-item">
+          <a style="font-size:10px;  display: inline-block; margin-right:0px;" class= "btn rounded-0 mouse" href="{% url 'shop:allBookCat'%}">All Books </a>|
           {% for cat in links %}
-            <a style="font-size:10px;  display: inline-block; margin-left: -10px" class="nav-link text-dark" href="{{cat.get_absolute_url}}">{{cat.name}} |</a>
+            <a style="font-size:10px;  display: inline-block; margin-left: -10px; " class="btn rounded-0 mouse" href="{{cat.get_absolute_url}}">{{cat.name}} </a>|
           {% endfor %}
-          <a style="font-size:10px; display: inline-block; margin-left: -10px;" class="nav-link text-dark" href="{%url 'shop:cheapBooks' %}">Best Value |</a>
-          <a style="font-size:10px;  display: inline-block; margin-left: -10px;" class="nav-link text-dark" href="{%url 'shop:topRatedBooks' %}">Top Star Rated |</a> 
+          <a style="font-size:10px; display: inline-block; margin-left: -10px;" class="btn rounded-0 mouse" href="{%url 'shop:cheapBooks' %}">Best Value </a>|
+          <a style="font-size:10px;  display: inline-block; margin-left: -10px;" class="btn rounded-0 mouse"  href="{%url 'shop:topRatedBooks' %}">Top Star Rated </a>|
         </li>
       </ul>
     </div>
@@ -49,4 +76,6 @@
      
         
     </div>
+
+
 </nav>

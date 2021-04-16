@@ -4,24 +4,25 @@
 		<ul  class="text-right">
 
 			<li  class="mt-2" style="float: left; margin-right: -10px;">
-				<i class="fas fa-book"></i>
+				<i class="fas fa-book text-warning"></i>
 				<a href="{% url 'shop:allBookCat' %}">Home |</a>
 			</li>
 
 			<li  class="mt-2" style="float: left;">
+				<i class="fas fa-phone-square"></i>
 				<a href="/contact">Contact |</a>
 			</li>
-			<li class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;;"><i class="fas fa-blog"></i>
+			<li class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;;"><i class="fas fa-blog text-danger"></i>
 				<a href="{% url 'blog:blog_list'%}"> Blog |</a>
 			</li>
 		
 			{% if user.is_authenticated %}
-			<li  class="mt-2" style="float: left; margin-left: -21px;"><i class="fas fa-id-badge"></i>
-				<a href="{% url 'dashboard_view'%}"> ACCOUNT |</a>
+			<li  class="mt-2" style="float: left; margin-left: -21px;"><i class="fas fa-id-badge text-primary"></i>
+				<a href="{% url 'dashboard_view'%}"> ACCOUNT </a>|
 			</li>
 			{% if request.user.groups.all.0.name == "Manager" %}
 			<li  class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;">
-				<a href="{% url 'dashboard:manager_dashboard' %}"><i class="fas fa-chart-line"></i>dashboard |</a>
+				<a href="{% url 'dashboard:manager_dashboard' %}"><i class="fas fa-chart-line text-success"></i>dashboard </a>|
 			</li>
 			{% endif %}
 			{% endif %}
