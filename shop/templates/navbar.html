@@ -1,0 +1,81 @@
+
+
+
+
+<nav   style=" margin-bottom: 4.9px;" class=" border-top navbar navbar-expand-lg navbar-light border-bottom">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <style>
+      .nav-item>a{
+        color: black;
+        
+      }
+      .ln>a:hover{
+        color: white; 
+    
+      }
+      .mouse{
+        padding:10px 10px;
+        color: black;
+        text-decoration: none;
+        list-style-type: none;
+        font-style: normal;
+
+      }
+.mouse:hover{
+  background-color: black;
+  color: white;
+
+
+}
+
+    </style>
+
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li style="font-size: 13px; margin-left: 30px;" class="nav-item ln">
+          <a style="font-size:10px;  display: inline-block; margin-right:0px;" class= "btn rounded-0 mouse" href="{% url 'shop:allBookCat'%}">All Books </a>|
+          {% for cat in links %}
+            <a style="font-size:10px;  display: inline-block; margin-left: -10px; " class="btn rounded-0 mouse" href="{{cat.get_absolute_url}}">{{cat.name}} </a>|
+          {% endfor %}
+          <a style="font-size:10px; display: inline-block; margin-left: -10px;" class="btn rounded-0 mouse" href="{%url 'shop:cheapBooks' %}">Best Value </a>|
+          <a style="font-size:10px;  display: inline-block; margin-left: -10px;" class="btn rounded-0 mouse"  href="{%url 'shop:topRatedBooks' %}">Top Star Rated </a>|
+        </li>
+      </ul>
+    </div>
+      {% if item_count > 0 %}
+      <form class="form-inline my-2 my-lg-0"  style="margin-right: 0px;" action="{% url 'search_app:searchResult'%}" method="get">
+        {% csrf_token %}
+        <input style="border: 2px solid black" class="form-control mr-sm-2 rounded-0" type="search" placeholder="search" aria-label="Search" name="q">
+        <!--<button class="btn btn-dark my-1 my-sm-0" type="submit">Search</button>-->
+          <button style="margin-left: -40px;" class="btn btn-dark  rounded-0" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+      
+      <ul  class="navbar-nav mr-auto">
+        
+          <li style="margin-right: 100px;" class="nav-item">
+          <a class=" text-dark nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i><span class="  badge badge-danger">{{item_count}}</span></a>
+          
+        </li>
+
+      </ul>
+    
+        {%else %}
+        <form style="margin-right: 160px;" class="form-inline my-2 my-lg-0" action="{% url 'search_app:searchResult'%}" method="get">
+          {% csrf_token %}
+          <input id="searcher" style="border: 1px solid #9b9b9b" class="form-control mr-sm-2 rounded-0" type="search" placeholder="search" aria-label="Search" name="q">
+          <!--<button style="" class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>-->
+          <button style="margin-left: -40px;" class="btn btn-dark  rounded-0" type="submit"><i class=" fas fa-search"></i></button>
+        
+        </form>
+        
+        {% endif%}
+     
+        
+    </div>
+
+
+</nav>

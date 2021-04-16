@@ -1,0 +1,266 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	letter-spacing: .2px;
+	word-spacing: 0px;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
+	background-color: #000;
+		
+}
+
+/****Book_list****/
+
+#carder{
+
+	color: red;
+	background-color: red;
+
+}
+
+/***Stripe Button***/
+.stripe-button-el {
+	width: 100% !important;
+	display: block !important;
+	background-color: #2639a8 !important;
+	border: 0px !important;
+	background-image: none !important;
+}
+.stripe-button-el span {
+	display: block;
+	position: relative;
+	padding: 0px 12px;
+	height: 36px !important;
+	line-height: 36px !important;
+	font-family: 'Roboto', sans-serif !important;
+	font-size: 16px !important;
+	color: #fff !important;
+	background-image: none !important;
+	background: none !important;
+}
+
+
+/****Navbar****/
+.nav-item {
+	letter-spacing: .2em;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+.dropdown-item {
+	font-size: 14px;
+	letter-spacing: .2em;
+	text-transform: uppercase;
+}
+
+.footer-dark {
+	padding:20px;
+	color:#f0f9ff;
+	background-color:#282d32;
+  }
+  
+.footer-dark h3 {
+	margin-top:0;
+	margin-bottom:12px;
+	font-weight:bold;
+	font-size:18px;
+	letter-spacing: 1px;
+}
+  
+@media (max-width:767px) {
+.footer-dark .item:not(.social) {
+		text-align:center;
+		padding-bottom:20px;
+	}
+}
+  
+.footer-dark .item.social {
+	text-align:center;
+}
+  
+@media (max-width:991px) {
+	.footer-dark .item.social {
+		text-align:center;
+		margin-top:20px;
+	}
+}
+  
+.footer-dark .item.social > a {
+	font-size:20px;
+	width:36px;
+	height:36px;
+	line-height:36px;
+	display:inline-block;
+	text-align:center;
+	border-radius:50%;
+	box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+	margin:0 8px;
+	color:#fff;
+	opacity:0.75;
+}
+  
+.footer-dark .item.social > a:hover {
+	opacity:0.9;
+}
+  
+.footer-dark .copyright {
+	text-align:center;
+	padding-top:24px;
+	opacity:0.5;
+	font-size:14px;
+	margin-bottom:0;
+}
+
+/****Category page****/
+.my_row_class {
+	padding-top: 15px;
+}
+
+.my_row_class .mx-auto p {
+	color: #000;
+	font-size: 12px;
+}
+.my_row_class .mx-auto p a {
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
+.my_image_padding {
+	padding-top: 5px;
+}
+.my_bottom_margin {
+	margin-bottom: 0px;
+}
+
+.card-body h4 {
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: .2em;
+}
+/****Product Page****/
+.my_prod_row_class {
+	padding-top: 15px;
+	padding-bottom: 20px;
+}
+.my_prod_row_class .mx-auto p {
+	color: #000;
+	font-size: 12px;
+}
+.my_prod_row_class .mx-auto p a {
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
+.my_prod_title {
+	font-size: 30px;
+	text-transform: uppercase;
+	letter-spacing: .2em;
+	padding-top: 15px;
+	padding-bottom: 10px;
+}
+.my_prod_text {
+	padding-right: 20px;
+}
+/****Cart Page****/
+.my_custom_table {
+	min-width: 400px;
+	font-size: 14px;
+}
+.my_custom_thead {
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: .2em;
+	background-color: #f8f9fa!important;
+}
+.custom_image {
+
+}
+.custom_a {
+	text-decoration: none;
+}
+.custom_icon {
+	text-decoration: none;
+	color: #868e96 !important;
+}
+.my_custom_button {
+	margin-top: 5px;
+}
+.errorlist li {
+	color: red;
+	font-weight: bold;
+}
+.my_custom_div {
+	margin-bottom: 20px !important;
+}
+.my_top_navbar_div {
+	height: 60px;
+	line-height: 50px;
+}
+.my_custom_menu {
+	margin-top: -10px;
+	text-align: right !important;
+}
+.my_custom_menu ul li {
+	list-style: none;
+	color: #000;
+	text-transform: uppercase;
+	letter-spacing: .2em;
+	font-size: 12px;
+	padding-right: 20px;
+	display: inline;
+}
+.my_custom_menu ul li a {
+	text-decoration: none;
+	color: #000;
+	list-style: none;
+	text-transform: uppercase;
+	letter-spacing: .2em;
+	font-size: 12px;
+}
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], select, textarea {
+	width: 100%; /* Full width */
+	padding: 12px; /* Some padding */ 
+	border: 1px solid #ccc; /* Gray border */
+	border-radius: 4px; /* Rounded borders */
+	box-sizing: border-box; /* Make sure that padding and width stays in place */
+	margin-top: 6px; /* Add a top margin */
+	margin-bottom: 16px; /* Bottom margin */
+	resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+  
+  /* Style the submit button with a specific background color etc */
+  input[type=submit] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+  }
+  
+  /* When moving the mouse over the submit button, add a darker green color */
+  input[type=submit]:hover {
+	background-color: #45a049;
+  }
+
+  .orders {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 6px;
+	padding-right: 6px;
+	margin-top: 10px;
+	background-color: #f6f6f6;
+	width: 100%;
+}
+
+.my-card:hover{
+	transform: scale(1.1);
+	transition: 0.2s ease-in-out;
+}
+
+
+

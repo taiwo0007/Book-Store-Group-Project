@@ -1,0 +1,124 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block metadescription %} 
+This page displays manager content. 
+{% endblock %} 
+{% block title %} 
+Manager - Bookspace. 
+{% endblock %} 
+{% block content %}
+{% include "dashboard/manager_navigation.html" %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.1/dist/chart.min.js"></script>
+
+<h4>Total Sales All Time: €{% if total_sales.my_sum == Null %}0{% else %}{{ total_sales.my_sum }}{% endif %}</h4>
+<h4>Total Sales This Month: €{% if this_month_sales.my_sum == Null %}0{% else %}{{ this_month_sales.my_sum }}{% endif %}</h4>
+<h4>Total Sales Today: €{% if todays_sales.my_sum == Null %}0{% else %}{{ todays_sales.my_sum }}{% endif %}</h4>
+
+<!--Graphs-->
+<div class="container">
+	<div class="row my-5">
+		<div class="col-md-6">
+			<div class="bg-white">
+				<canvas id="myChart1" width="400" height="300"></canvas>
+				<script>
+var ctx = document.getElementById('myChart1').getContext('2d');
+var myChart1 = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Jan '21 Sales", "Feb '21 Sales", "March '21 Sales", "April '21 Sales", "May '21 Sales", "June '21 Sales", "July '21 Sales", "August '21 Sales", 
+        "September '21 Sales", "October '21 Sales", "November '21 Sales", "December '21 Sales",],
+        datasets: [{
+            label: 'Sales by month',
+            data: [{{ jan_sales }}, {{ feb_sales }}, {{ march_sales.my_sum }}, {{ april_sales.my_sum }}, {{ may_sales }}, {{ june_sales }}, {{ july_sales }}, {{ aug_sales }},
+            {{ sep_sales }}, {{ oct_sales }}, {{ nov_sales }}, {{ dec_sales }},],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(238, 130, 238)',
+                'rgba(155, 66, 32, 1)',
+                'rgba(223, 56, 60, 1)',
+                'rgba(172, 215, 224, 1)',
+                'rgba(92, 92, 92, 1)',
+                'rgba(123, 142, 55, 1)',
+                'rgba(1, 1, 1, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(155, 66, 32, 1)',
+                'rgba(223, 56, 60, 1)',
+                'rgba(172, 215, 224, 1)',
+                'rgba(92, 92, 92, 1)',
+                'rgba(123, 142, 55, 1)',
+                'rgba(1, 1, 1, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="bg-white">
+				<canvas id="myChart" width="400" height="400"></canvas>
+				<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for book in books %} '{{ book.title }}', {% endfor %}],
+        datasets: [{
+            label: 'Stock Levels',
+            data: [{% for book in books %} {{ book.stock }}, {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+    }
+});
+</script>
+			</div>
+		</div>
+	</div>
+    </div>
+	<!--End Graphs-->
+</div>
+{% endblock content%}
