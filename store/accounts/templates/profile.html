@@ -17,6 +17,40 @@ Best Value - Bookspace.
 {% endblock %}
 {% block content %}
 <style>
+
+
+			#former:hover {
+
+				
+
+			}
+			.blue{
+				transition: 100.1ms ease-in;
+			}
+			.bluePassword{
+				transition: 100.1ms ease-in;
+			}
+			.blueRefund{
+				transition: 100.1ms ease-in;
+			}
+			.blue:hover{
+
+				background-color: #282d32;
+				color: white;
+				transform: translateY(-5px);
+			}
+
+			.bluePassword:hover{
+				background-color: #282d32;
+				color: white;
+				transform: translateY(-5px);
+			}
+			.blueRefund:hover{
+				background-color: #282d32;
+				color: white;
+				transform: translateY(-5px);
+			}
+	
 	.menu {
 		height: 30vh;
 		width: 300px;
@@ -165,9 +199,9 @@ Best Value - Bookspace.
 		</div>
 
 		<div class="col-4">
-			<div class=" text-justify card-profile shadow p-3  mb-5 bg-light " style="width: auto;">
+			<div class="bluePassword text-justify card-profile shadow p-3  mb-5  " style="width: auto; cursor: pointer;">
 				<a style="cursor: pointer;" id="formPassword"
-					class="text-center text-dark bg-primary btn-primary rounded">
+					class="text-center  bg-primary btn-primary rounded">
 					<h5 id="former" class="my-2">Password Reset</h5>
 				</a>
 				<form id="PasswordForm" style="display:none;" class="form-group" style="font-weight: lighter; "
@@ -179,8 +213,8 @@ Best Value - Bookspace.
 			</div>
 		</div>
 		<div class="col-4">
-			<div class=" text-justify card-profile shadow p-3  mb-5 bg-light " style="width: auto;">
-				<a style="cursor: pointer;" id="formRefund" class="text-center text-dark bg-primary btn-primary  rounded">
+			<div class=" text-justify card-profile shadow p-3  mb-5  blueRefund" style="width: auto; cursor: pointer;">
+				<a style="" id="formRefund" class="text-center bg-primary btn-primary  rounded">
 					<h5 id="former" class="my-2"> Request Refund</h5>
 				</a>
 
@@ -198,16 +232,10 @@ Best Value - Bookspace.
 
 
 		</div>
-		<style>
-			#former:hover {
-
-				text-decoration: underline;
-
-			}
-		</style>
+		
 		<div class="col-4">
-			<div class=" text-justify card-profile shadow p-3  mb-5 bg-light " style="width: auto;">
-				<a style="cursor: pointer;" id="formBlog" class="text-center text-dark bg-primary btn-primary  rounded">
+			<div id="ç" class=" text-justify card-profile shadow p-3  mb-5  blue" style="width: auto; cursor: pointer;">
+				<a style="" id="formBlog" class="text-center bg-primary btn-primary  rounded">
 					<h5 id="former" class="my-2">Create Blog</h5>
 				</a>
 
@@ -223,7 +251,9 @@ Best Value - Bookspace.
 		</div>
 	</div>
 	<script>
-
+		blogColour = document.querySelector(".blue")
+		blueColourPassword = document.querySelector(".bluePassword")
+		blueColourRefund = document.querySelector(".blueRefund")		
 		blogForm = document.getElementById("formBlog");
 		formBlog = document.getElementById("blogForm")
 		formRefund = document.getElementById("RefundForm")
@@ -240,11 +270,13 @@ Best Value - Bookspace.
 		function toggleer() {
 			if (flagger) {
 				formBlog.style.display = "none";
+				blogColour.classList.add("blue")
 				flagger = false
 			}
 
 			else {
 				formBlog.style.display = "block";
+				blogColour.classList.remove("blue")
 				flagger = true
 			}
 
@@ -253,23 +285,28 @@ Best Value - Bookspace.
 		function toggleerPassword() {
 			if (flaggerPassowrd) {
 				formPassword.style.display = "none";
+				blueColourPassword.classList.add("bluePassword")
 				flaggerPassowrd = false
 			}
 
 			else {
 				formPassword.style.display = "block";
+				blueColourPassword.classList.remove("bluePassword")
 				flaggerPassowrd = true
+
 			}
 
 		}
 			function toggleerRefund() {
 			if (flaggerRefund) {
 				formRefund.style.display = "none";
+				blueColourRefund.classList.add("blueRefund")
 				flaggerRefund = false
 			}
 
 			else {
 				formRefund.style.display = "block";
+				blueColourRefund.classList.remove("blueRefund")
 				flaggerRefund = true
 			}
 
