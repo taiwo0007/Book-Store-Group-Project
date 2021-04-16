@@ -27,7 +27,7 @@
 	{% if category %}
 		<div class="row my_row_class">
 			<div class="mx-auto">
-				<p><a href="{% url 'shop:allBookCat' %}">Our book Collection</a> | {{category.name}}</p>
+				<p><a style="font-weight: bolder; font-family: 'Baskervville', serif; font-size: 20px;" href="{% url 'shop:allBookCat' %}">Our book Collection</a> | {{category.name}}</p>
 			</div>
         </div>
     {% endif %}
@@ -73,12 +73,12 @@
 			{% for book in books %}
 		
 				<div class="mb-5 col-9 col-lg-2 col-sm-3 col-md-4">
-					<div style="font-size: 10px; " class="card text-center h-150 text-sm border-0" style="min-width: 1rem;">
+					<div style="font-size: 10px; " class="card text-center h-150 text-sm border-0" style="min-width: 1rem; ">
 						
 						<a href="{{book.get_absolute_url}}"><img  data-toggle="tooltip" title="{{book.title}}" class="card-img-top my_image imHover" style="width: 150px;;" src="{{book.image.url}}" alt="{{book.title}}">
 							</a>
 						<div  class="card-body">
-							<h4 style="font-weight: 900; font-family: 'Baskervville', serif;" class="card-text" >{{book.title}}</h4>
+							<h3 style="font-weight: bolder; font-family: 'Baskervville', serif; font-size: 14px;" class="card-text" >{{book.title}}</h3>
 							<p class="card-text">€{{book.price}}</p>
 							<p style="color: rgb(114, 91, 69);" class="card-text">{{book.author}}</p>
 						</div>
