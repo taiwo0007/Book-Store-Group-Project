@@ -120,16 +120,29 @@
         <p id="b" class="btn" style="font-family: 'Baskervville', serif;  font-size: 20px; text-decoration: underline; float: right; margin-right: 50px;">Write a review</p>
     </div>
     <div class="j row">
+        
         <div class="col-12">
-            <form style="display: none;" id="r" action="add_review/" method="post">
+            <div id="r" class=" text-justify card-profile border p-5 rounded mb-5 bg-ligh " style="background-color: white; width: auto; display: none;">
+            <form class="rounded" action="add_review/" method="post">
                 {% csrf_token %}
                 {{ form|crispy}}
                 {% if user.is_authenticated %}
-                <button class="btn btn-secondary" type="submit">Save</button>
+                <div class="row">
+                    <div class="col-5">
+
+                    </div>
+                    <div class="col-7 pt-4">
+                       <button class="btn btn-dark rounded px-5 text-center" type="submit">Save</button> 
+                    </div>
+                   
+                    
+                </div>
+                
                 {% else %}
                 <a href="{% url 'signin' %}"> Sign in to review </a>
                 {% endif %}
             </form>
+            </div>
         </div>
     </div>
     <a id="reviewlink"></a>
