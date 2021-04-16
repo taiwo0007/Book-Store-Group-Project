@@ -12,7 +12,7 @@
         color: black;
         
       }
-      .nav-item>a:hover{
+      .ln>a:hover{
         color: white; 
     
       }
@@ -36,7 +36,7 @@
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li style="font-size: 13px; margin-left: 30px;" class="nav-item">
+        <li style="font-size: 13px; margin-left: 30px;" class="nav-item ln">
           <a style="font-size:10px;  display: inline-block; margin-right:0px;" class= "btn rounded-0 mouse" href="{% url 'shop:allBookCat'%}">All Books </a>|
           {% for cat in links %}
             <a style="font-size:10px;  display: inline-block; margin-left: -10px; " class="btn rounded-0 mouse" href="{{cat.get_absolute_url}}">{{cat.name}} </a>|
