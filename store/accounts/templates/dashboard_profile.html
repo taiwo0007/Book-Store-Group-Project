@@ -23,17 +23,17 @@ Best Value - Bookspace.
     <div class="row mt-5">
         <div class="col-4">
             
-           <a href="{% url 'shop:wishList_books' %}" style="width: 15vw; " class="btn btn-dark   rounded-0 py-2">
+           <a href="{% url 'shop:wishList_books' %}" style="width: 360px; " class="btn btn-dark   rounded-0 py-3">
             <i style="font-size: 40px;" class="fas fa-male d-block "></i>Wish List</a> 
 
 
         </div>
         <div class="col-4">
-            <a href="{% url 'shop:reviewList'%}" style="width: 15vw;" class="btn btn-dark    rounded-0 py-2">
+            <a href="{% url 'shop:reviewList'%}" style="width: 360px;" class="btn btn-dark    rounded-0 py-3">
                 <i style="font-size: 40px;" class="fas fa-star d-block"></i>Reviews</a> 
         </div>
         <div class="col-4">
-            <a href="{% url 'order:order_history' %}" style="width: 15vw;" class="btn btn-dark   rounded-0 py-2">
+            <a href="{% url 'order:order_history' %}" style="width: 360px;;" class="btn btn-dark   rounded-0 py-3">
                 <i style="font-size: 40px;" class="fas fa-truck d-block"></i>Orders</a> 
         </div>
 
@@ -42,8 +42,16 @@ Best Value - Bookspace.
 
        
         <div class="col-4">
-            <a href="{% url 'profile_view'%}" style="width: 15vw;" class="btn btn-dark   rounded-0 py-2">
+            <a href="{% url 'profile_view'%}" style="width: 360px;" class="btn btn-dark   rounded-0 py-3">
                 <i style="font-size: 40px;" class="fas fa-key d-block"></i>View Profile</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'shop:allBookCat' %}" style="width: 360px;" class="btn btn-dark   rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-home d-block"></i>Home Page</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'cart:cart_detail' %}" style="width: 360px;" class="btn btn-dark   rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-shopping-cart d-block"></i>Home Page</a> 
         </div>
 
     </div>
