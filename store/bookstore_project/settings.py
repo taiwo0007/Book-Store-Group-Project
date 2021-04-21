@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'shop.context_processors.menu_links',
                 'shop.context_processors.managerChecker',
+                'shop.context_processors.profileImage',
                 'cart.context_processors.counter',
             ],
         },
