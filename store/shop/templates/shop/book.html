@@ -8,6 +8,17 @@
 {{ book.title }} - Bookspace.
 {% endblock %}
 {% block content %}
+<style>
+.imHover{
+    transition: 100.1ms ease-in;
+}
+.imHover:hover{
+
+    background-color: #282d32;
+    color: white;
+    transform: translateY(-9px);
+}
+</style>
 
 
 <div class="row my_prod_row_class">
@@ -115,15 +126,33 @@
     </div>
 
 </div>
-<div class="container">
-    <div class="row ">
-        <p id="b" class="btn" style="font-family: 'Baskervville', serif;  font-size: 20px; text-decoration: underline; float: right; margin-right: 50px;">Write a review</p>
+<div class="container mt-5">
+  <h3 style="font-family: 'Baskervville', serif;" class="my-5">Books in the same Cateogry</h3>
+    <div class="row border-bottom pb-2">
+        
+        {% for random in booksInCategory%}
+                <div class="col-2">
+                    <a href="{{random.get_absolute_url}}"><img class="imHover" style="width:150px" src="{{random.image.url}}" alt="book"></a>
+                    <div class="p-3">
+                      
+                    <h6 class="text-center h-auto" style="font-family: 'Baskervville', serif;">{{random.title}}</h6>
+                    <p  class="text-center h-auto" style="color: rgb(114, 91, 69);">{{random.author}}</p>
+                    <p style="font-weight: 300;" class="text-center h-auto" >€{{random.price}}</p>
+                </div>
+                </div>
+                {%endfor%}
+            </div>
+    <div class="row pt-5 pb-4 mx-auto">
+        <p id="b" class="btn btn-dark text-center mx-auto" style="font-family: 'Baskervville', serif;  font-size: 15px; ">Write a review</p>
     </div>
+    
     <div class="j row">
         
         <div class="col-12">
             <div id="r" class=" text-justify card-profile border p-5 rounded mb-5 bg-ligh " style="background-color: white; width: auto; display: none;">
-            <form class="rounded" action="add_review/" method="post">
+ 
+                <h1 class="text-center">Review</h1>
+                <form class="rounded" action="add_review/" method="post">
                 {% csrf_token %}
                 {{ form|crispy}}
                 {% if user.is_authenticated %}
@@ -148,7 +177,7 @@
     <a id="reviewlink"></a>
     <div class="row">
         <div class="col-12">
-            <h4 style="font-family: 'Baskervville', serif;" class="text-center pb-4 border-bottom">Reviews </h5>
+            <h4 style="font-family: 'Baskervville', serif; font-size: ;" class="text-left pb-4 border-bottom">Reviews </h5>
                 <span style="float: right;">/{{reviews.count}}</span><span style="float: right;" id="num"> 0</span></span>
         </div>
         {% if reviews %}
@@ -207,6 +236,7 @@
         {%endfor%}
 
     </div>
+   
     <div class="row">
         {% if reviews.count > 3%}
         <p id="more" class="btn text-center"

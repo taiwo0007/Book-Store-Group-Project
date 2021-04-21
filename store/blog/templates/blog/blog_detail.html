@@ -37,7 +37,7 @@ Best Value - Bookspace.
       </div>
         <div class="col-3">
             <div class="row">
-                <h1 style="font-weight: lighter; font-size: 20px; margin-top: 90px; margin-left: 20px;;" class="">Some Reviews By {{blogs.author}}</h1>
+                <h1 style="font-weight: lighter; font-size: 20px; margin-top: 90px; margin-left: 20px;;" class="">{% if reviews %}Some Reviews By {{blogs.author}} {%else%}{%endif%}</h1>
                 {% for review in reviews %}
                 <div class="col-12 my-2">
                     <div style="backgrund-color: rgb(247, 243, 243);  " class="card border bg-light">

@@ -81,7 +81,8 @@ def topRatedBooks(request):
 
 def book_detail(request, category_slug, book_slug):
   
-
+    bookCategory = Book.objects.filter(category__slug =category_slug)
+    booksInCategory = bookCategory.order_by('?')[:6]
 
     print(request.POST)
     form = ReviewForm()
@@ -158,7 +159,7 @@ def book_detail(request, category_slug, book_slug):
 
     
 
-    return render(request, 'shop/book.html', {'book':book,'UserImage':UserImage, 'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded, 'greyStars':greyStars})
+    return render(request, 'shop/book.html', {'booksInCategory':booksInCategory, 'book':book,'UserImage':UserImage, 'half':half, 'form':form, 'reviews':reviews, 'rounded':rounded, 'greyStars':greyStars})
 
 @login_required()
 def add_to_wishList(request, book_slug, category_slug):
@@ -199,8 +200,7 @@ def viewWishList(request):
 def allBookCat(request, category_slug=None):
     managerCheck = False
 
-    print(category_slug)
-    print(category_slug)
+  
 
     if request.user.groups.filter(name="Manager").exists() == True:
         managerCheck = True

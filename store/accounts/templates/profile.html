@@ -53,7 +53,7 @@ Best Value - Bookspace.
 	
 	.menu {
 		height: 30vh;
-		width: 300px;
+		width: 200px;
 		z-index: 1;
 		left: 0;
 		margin-top: 55px;
@@ -90,7 +90,7 @@ Best Value - Bookspace.
 <div class="container-fluid">
 	<div class="menu shadow-lg p-3 mb-5 ">
 		<a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
-			<i class="fas fa-chevron-left"></i> Account dashboard
+			<i class="fas fa-chevron-left"></i> dashboard
 		</a>
 		<a style=" font-weight:20px" class="text-justify text-light btn disabled rounded-0">Profile </a>
 		<a style=" font-weight:20px" href="{% url 'shop:wishList_books'%}"
@@ -124,9 +124,9 @@ Best Value - Bookspace.
 
 		</div>
 
-		<div class="col-2 ">
-			<div class=" text-center card-profile shadow p-3  mb-5 bg-white " style="width: auto;">
-				<img class="p-3 card-img-top "
+		<div class="col-3 ">
+			<div class=" text-center card-profile shadow p-3  mb-5 bg-white ">
+				<img class="p-3 "
 					style="position: inherit; height: auto; border-radius: 50%; width: 250px; height: 250px; object-fit: cover;"
 					src="{{p.profile_image.url}}" alt="profile-iamge">
 				<div class="card-body">
@@ -175,13 +175,13 @@ Best Value - Bookspace.
 
 		</style>
 
-		<div class="col-8">
+		<div class="col-7">
 			<div class=" text-justify card-profile shadow p-3  mb-5 bg-white " style="width: auto;">
 				<form id="formG" class="form-group" style="font-weight: lighter; " method="POST" action=""
 					enctype="multipart/form-data">
 					{%csrf_token%}
 					<p style="font-weight: lighter;">{{form | crispy}}</p>
-					<input style="background-color:rgb(9, 108, 255)" class="btn " type="submit">
+					<input style="" class="btn btn-dark" type="submit">
 				</form>
 			</div>
 		</div>

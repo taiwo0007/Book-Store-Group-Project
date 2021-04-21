@@ -19,6 +19,17 @@
 	body{
 		background-image: "{% static 'images/logoOne.png' %}";
 	}
+
+	.imHover {
+		transition: 100.1ms ease-in;
+	}
+
+	.imHover:hover {
+
+		background-color: #282d32;
+		color: white;
+		transform: translateY(-9px);
+	}
 </style>
 
 
@@ -68,7 +79,7 @@
 		
 				<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
 					<div style="font-size: 10px; " class="card text-center h-100 text-sm border-0" style="min-width: 18rem;">
-						<a href="{{bookC.get_absolute_url}}"><img class="card-img-top my_image" src="{{bookC.image.url}}" alt="{{bookC.title}}"></a>
+						<a href="{{bookC.get_absolute_url}}"><img class="card-img-top my_image imHover" src="{{bookC.image.url}}" alt="{{bookC.title}}"></a>
 						<div class="card-body">
 							<h4 class="card-text" >{{bookC.title}}</h4>
 							<p class="card-text">€{{bookC.price}}</p>
@@ -86,7 +97,7 @@
 		
 				<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
 					<div style="font-size: 10px; " class="card text-center h-100 text-sm border-0" style="min-width: 18rem;">
-						<a href="{{bookF.get_absolute_url}}"><img class="card-img-top my_image" src="{{bookF.image.url}}" alt="{{bookF.title}}"></a>
+						<a href="{{bookF.get_absolute_url}}"><img class="card-img-top my_image imHover" src="{{bookF.image.url}}" alt="{{bookF.title}}"></a>
 						<div class="card-body">
 							<h4 class="card-text" >{{bookF.title}}</h4>
 							<p class="card-text">€{{bookF.price}}</p>
@@ -105,7 +116,7 @@
 		
 				<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
 					<div style="font-size: 10px; " class="card text-center h-100 text-sm border-0" style="min-width: 18rem;">
-						<a href="{{bookF.get_absolute_url}}"><img class="card-img-top my_image" src="{{bookF.image.url}}" alt="{{bookF.title}}"></a>
+						<a href="{{bookF.get_absolute_url}}"><img class="card-img-top my_image imHover" src="{{bookF.image.url}}" alt="{{bookF.title}}"></a>
 						<div class="card-body">
 							<h4 class="card-text" >{{bookF.title}}</h4>
 							<p class="card-text">€{{bookF.price}}</p>
