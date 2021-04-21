@@ -1,3 +1,5 @@
+
+
 <div   class="container" >
 	<div  class="my_custom_menu">
 		
@@ -29,9 +31,11 @@
 
 			{% if user.is_authenticated %}
 			<li class="dropdown">
-                <!--Welcome,--> <a style="height: 0px;" href="#" class="dropdown-toggle" data-toggle="dropdown" 
-                aria-haspopup="true" aria-expanded="false">{{ user.username }} 
-               </a>
+                <!--Welcome,--> 
+				<a style="height: 0px;" href="{% url 'profile_view'%}" class="" 
+                aria-haspopup="true" aria-expanded="false">{{ user.username }} {%for i in profile%}<img style="position: inherit; height: auto; border-radius: 50%; width: 25px; height: 25px; object-fit: cover;"
+				src="{{i.profile_image.url}}">{%endfor%}
+			</a>
 				<div class="dropdown-menu dropdown-menu-right"> 
 			<!--	<a  href="{% url 'order:order_history' %}" class="dropdown-item">Order History</a>
 					<a  href="{% url 'order:request-refund' %}" class="dropdown-item">Request Refund</a>-->	

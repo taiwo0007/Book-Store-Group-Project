@@ -81,6 +81,7 @@ TEMPLATES = [
                 'shop.context_processors.menu_links',
                 'shop.context_processors.managerChecker',
                 'shop.context_processors.profileImage',
+                'shop.context_processors.annouceFunction',
                 'cart.context_processors.counter',
             ],
         },
