@@ -1,4 +1,8 @@
-
+<style>
+	ul>li>a:hover{
+		text-decoration: underline;
+	}
+</style>
 
 <div   class="container" >
 	<div  class="my_custom_menu">
@@ -7,24 +11,24 @@
 
 			<li  class="mt-2" style="float: left; margin-right: -10px;">
 				{{profile.user}} 
-				<a href="{% url 'shop:allBookCat' %}">Home |</a>
+				<a href="{% url 'shop:allBookCat' %}">Home</a> |
 			</li>
 
 			<li  class="mt-2" style="float: left;">
 				
-				<a href="/contact">Contact |</a>
+				<a href="/contact">Contact</a> |
 			</li>
 			<li class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;;">
-				<a href="{% url 'blog:blog_list'%}"> Blog |</a>
+				<a href="{% url 'blog:blog_list'%}"> Blog</a> |
 			</li>
 		
 			{% if user.is_authenticated %}
 			<li  class="mt-2" style="float: left; margin-left: -21px;">
-				<a href="{% url 'dashboard_view'%}">ACCOUNT </a>|
+				<a href="{% url 'dashboard_view'%}">ACCOUNT</a> |
 			</li>
 			{% if request.user.groups.all.0.name == "Manager" %}
 			<li  class="mt-2" style="float: left; margin-left: -12px; margin-right: 12px;">
-				<a href="{% url 'dashboard:manager_dashboard' %}">dashboard </a>|
+				<a href="{% url 'dashboard:manager_dashboard' %}">dashboard</a> |
 			</li>
 			{% endif %}
 			{% endif %}
@@ -33,9 +37,9 @@
 			<li class="dropdown">
                 <!--Welcome,--> 
 				<a style="height: 0px;" href="{% url 'profile_view'%}" class="" 
-                aria-haspopup="true" aria-expanded="false">{{ user.username }} {%for i in profile%}<img style="position: inherit; height: auto; border-radius: 50%; width: 25px; height: 25px; object-fit: cover;"
+                aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+			{%for i in profile%}<img style="position: inherit; height: auto; border-radius: 50%; width: 25px; height: 25px; object-fit: cover;"
 				src="{{i.profile_image.url}}">{%endfor%}
-			</a>
 				<div class="dropdown-menu dropdown-menu-right"> 
 			<!--	<a  href="{% url 'order:order_history' %}" class="dropdown-item">Order History</a>
 					<a  href="{% url 'order:request-refund' %}" class="dropdown-item">Request Refund</a>-->	
@@ -49,7 +53,7 @@
 			<span style="margin-left: -14px; margin-right: 5px;">|</span>
 		
 			<li>
-				<a href="{% url 'signout' %}">Sign Out |</a>
+				<a href="{% url 'signout' %}">Sign Out</a> |
 			</li>
 			<li  style="display: inline-block; margin-right: -170px; margin-left: -18px; padding-right: 120px;" class="nav-item">
 				
