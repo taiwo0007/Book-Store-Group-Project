@@ -8,7 +8,7 @@ class Voucher(models.Model):
     valid_to = models.DateTimeField()
     discount = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(100)])
     active = models.BooleanField()
-    anounce = models.BooleanField(default="False")
+    anounce = models.BooleanField()
 
 def __str__(self):
     return self.code

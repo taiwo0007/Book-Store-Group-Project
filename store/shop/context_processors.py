@@ -24,6 +24,8 @@ def annouceFunction(request):
     anouncemnets = Voucher.objects.filter(anounce=True)
     anouncemnet = anouncemnets.last()
     print(anouncemnets)
+    for i in anouncemnets:
+        print(i)
 
     return{'anouncemnet':anouncemnet}
     
