@@ -2,10 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <h1>Edit</h1>
+  <div class=" text-justify card-profile shadow p-3  mb-5  blueRefund" style="width: auto; cursor: pointer;">
+  <h1 class="text-center">Edit</h1>
   <form action="" method="post">{% csrf_token %}
     {{ form|crispy}}
     <button class="btn btn-info mt-3" type="submit">Update</button>
   </form>
+</div>
 </div>
 {% endblock content %}

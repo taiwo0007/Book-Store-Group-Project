@@ -228,7 +228,13 @@ def allBookCat(request, category_slug=None):
 
 @user_passes_test(group_check)
 def managerCreateView(request):
-    
+
+    vouchers_count = Voucher.objects.count()
+    managerCheck = True
+    books = Book.objects.all()
+    books_count = Book.objects.count()
+    orders_count = Order.objects.count()
+    users_count = CustomUser.objects.count() 
     books = Book.objects.all().filter(availible=True)
     managerCheck = True
     if request.method == 'POST':
@@ -240,7 +246,15 @@ def managerCreateView(request):
     else:
         form = BookForm()
 
-    return render(request, 'shop/book_new.html', {'form':form,'managerCheck':managerCheck})
+    return render(request, 'shop/book_new.html', {'form':form,'managerCheck':managerCheck,
+            'books_count' : books_count,
+        'orders_count' : orders_count,
+        'users_count' : users_count,
+        'books':books,
+        'managerCheck':managerCheck,
+        "vouchers_count":vouchers_count
+    
+    })
 
 @user_passes_test(group_check)
 def bookListView(request):
