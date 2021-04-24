@@ -75,6 +75,16 @@
 						</a>
 					</div>
 					<div class="col-md-4">
+						<a class="text-decoration-none text-dark" href="{% url 'dashboard:voucher_list' %}">
+							<div class="card my-card shadow text-center p-3">
+								<h4>Vocuhers 
+									<i class="fas fa-users"></i>
+								</h4>
+								<h3>{{vouchers_count}}</h3>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4">
 						<a class="text-decoration-none text-dark" href="{% url 'shop:book_list' %}">
 							<div class="card my-card shadow text-center p-3">
 								<h4>Products 

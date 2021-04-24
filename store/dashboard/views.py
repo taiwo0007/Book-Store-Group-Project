@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from vouchers.models import Voucher
 from order.models import Order, OrderItem
 from shop.models import Book
 from accounts.models import CustomUser
@@ -9,9 +10,20 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models.functions import Cast
 from shop.views import group_check
 from datetime import datetime
+from django.http import HttpResponseRedirect
+from vouchers.forms import VoucherForm
+from django.urls import reverse
+
+
+
+
+
 
 @user_passes_test(group_check)
 def manager_dashboard(request):
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
+    
     orders = Order.objects.all()
     books = Book.objects.all()
     books_count = books.count()
@@ -39,6 +51,7 @@ def manager_dashboard(request):
     context = {
         "orders" : orders,
         "books" : books,
+        "vouchers_count": vouchers_count,
         "books_count" : books_count,
         "orders_count" : orders_count,
         "users_count" : users_count,
@@ -59,7 +72,7 @@ def manager_dashboard(request):
         "dec_sales" : dec_sales,
     }
     return render(request, "dashboard/manager_dashboard.html", context)
-    
+
 @user_passes_test(group_check)
 def orders_list(request):
     orders = Order.objects.all()
@@ -87,4 +100,86 @@ def userListView(request):
         'users_count' : users_count,
         }
     return render(request, 'dashboard/user_list.html', context)
+
+
+""""""   """   """   """   """   """   """   """   """   """   """   """   """   """   """   """   """   """    """
+
+@user_passes_test(group_check)
+def voucherCreateView(request):
+    if request.method == 'POST':
+        form = VoucherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('dashboard:voucher_list'))
+
+    else:
+        form = VoucherForm()
+
+    return render(request, 'dashboard/voucher_add.html', {'form':form})
+
+@user_passes_test(group_check)
+def voucherListView(request):
+
+    vouchers = Voucher.objects.all()
+    vouchers_count = Voucher.objects.count()
+    books_count = Book.objects.count()
+    orders_count = Order.objects.count()
+    users_count = CustomUser.objects.count() 
+    context = {
+        'books_count' : books_count,
+        'orders_count' : orders_count,
+        'users_count' : users_count,
+        'vouchers':vouchers,
+        'vouchers_count': vouchers_count,
+     
+        }
+    return render(request, 'dashboard/voucher_list.html', context)
+
+@user_passes_test(group_check)
+def voucherEditView(request, voucher_id):
+
+    orders = Order.objects.all()
+    books = Book.objects.all()
+    books_count = books.count()
+    orders_count = orders.count()
+    users_count = CustomUser.objects.count()
+    voucher = Voucher.objects.get(id=voucher_id)
+
+    form = VoucherForm(request.POST or None , instance = voucher)
+    if form.is_valid():
+        print(request.POST)
+        form.save()
+        return HttpResponseRedirect(reverse('dashboard:voucher_list'))
+
+    return render(request, 'dashboard/voucher_edit.html', {'form':form,
+    "orders" : orders,
+        "books" : books,
+        "books_count" : books_count,
+        "orders_count" : orders_count,
+        "users_count" : users_count,
+    
+    })
+
+@user_passes_test(group_check)
+def voucherDeleteView(request, voucher_id):
+
+    orders = Order.objects.all()
+    books = Book.objects.all()
+    books_count = books.count()
+    orders_count = orders.count()
+    users_count = CustomUser.objects.count()
+    voucher = Voucher.objects.get(id=voucher_id)
+    
+    if request.method =="POST":
+        voucher.delete()
+        return HttpResponseRedirect(reverse('dashboard:voucher_list'))
+
+    return render(request, 'dashboard/voucher_delete.html', {'voucher':voucher,
+    "orders" : orders,
+        "books" : books,
+        "books_count" : books_count,
+        "orders_count" : orders_count,
+        "users_count" : users_count,
+    
+    })
 

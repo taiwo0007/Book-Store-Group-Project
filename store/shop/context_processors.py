@@ -1,7 +1,7 @@
 from .models import Category
 from accounts.models import UserProfile
 from vouchers.models import Voucher
-from django.utils.timezone import datetime
+
 
 def menu_links(request):
     links = Category.objects.all()
@@ -24,10 +24,7 @@ def annouceFunction(request):
    
     anouncemnets = Voucher.objects.filter(anounce=True)
     anouncemnet = anouncemnets.last()
-    print(anouncemnets)
-  
-    for i in anouncemnets:
-        print(i)
+    
 
     return{'anouncemnet':anouncemnet}
     

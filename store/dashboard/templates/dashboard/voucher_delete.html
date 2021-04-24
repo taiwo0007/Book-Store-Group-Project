@@ -1,0 +1,10 @@
+{% include "dashboard/manager_navigation.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+  <h1 class="text-center">Delete</h1>
+  <form class="text-center" action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ voucher.code }}"?</p>
+    <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+  </form>
+{% endblock content %}

@@ -1,0 +1,59 @@
+
+{% block content %}
+{% include "dashboard/manager_navigation.html" %}
+<div class="container">
+<div class="row py-5">
+<div class="col-md-4">
+<a style="font-size: 20px;" class="btn btn-lg btn-info" href="{% url 'dashboard:voucher_add' %}">Add Voucher +</a>
+</div>
+<div class="col-md-8">
+<h1 class="py-5">Vouchers</h1>
+<table class="table">
+<thead>
+    <tr>
+      <th scope="col">CODE</th>
+      <th scope="col">Valid From</th>
+      <th scope="col">Valid to</th>
+	  <th scope="col">Currently Accouncing</th>
+      <th scope="col">Active</th>
+      <th scope="col">Discount</th>
+    </tr>
+  </thead>
+    <tbody>
+{% for voucher in vouchers %}
+<tr>
+<th scope="row"><span class="badge badge-primary">{{voucher.code}}</span></th>
+<td>{{voucher.valid_from}}</td>
+<td>{{ voucher.valid_to}}</td>
+<td>
+    {% if voucher.anounce%}
+    <span class="badge badge-success">&nbsp; </span> 
+    {% else %}
+    <span class="badge badge-danger"> &nbsp;</span>
+    {%endif%}
+</td>
+<td>
+    {% if voucher.active%}
+    <span class="badge badge-success">&nbsp; </span> 
+    {% else %}
+    <span class="badge badge-danger"> &nbsp;</span>
+    {%endif%}
+</td>
+<td>{{ voucher.discount}}%</td>
+<td><a class="btn btn-primary" href="{% url 'dashboard:voucher_edit' voucher.id%}">Edit</a></td>
+<td><a class="btn btn-danger" href="{% url 'dashboard:voucher_delete' voucher.id %}">Delete</a></td>
+
+
+
+
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content%}
