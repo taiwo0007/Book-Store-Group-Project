@@ -79,25 +79,32 @@ def orders_list(request):
     books_count = Book.objects.count()
     orders_count = Order.objects.count()
     users_count = CustomUser.objects.count()
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
     context = {
         "orders" : orders,
         'books_count' : books_count,
         'orders_count' : orders_count,
         'users_count' : users_count,
+        "vouchers_count": vouchers_count,
         }
     return render(request, "dashboard/order_list.html", context)
 
 @user_passes_test(group_check)
 def userListView(request):
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
     users = CustomUser.objects.all()
     books_count = Book.objects.count()
     orders_count = Order.objects.count()
     users_count = CustomUser.objects.count()
     context = {
+     
         'users':users,
         'books_count' : books_count,
         'orders_count' : orders_count,
         'users_count' : users_count,
+         "vouchers_count": vouchers_count,
         }
     return render(request, 'dashboard/user_list.html', context)
 
@@ -106,6 +113,13 @@ def userListView(request):
 
 @user_passes_test(group_check)
 def voucherCreateView(request):
+
+
+    books_count = Book.objects.count()
+    orders_count = Order.objects.count()
+    users_count = CustomUser.objects.count()
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
     if request.method == 'POST':
         form = VoucherForm(request.POST)
         if form.is_valid():
@@ -115,17 +129,29 @@ def voucherCreateView(request):
     else:
         form = VoucherForm()
 
-    return render(request, 'dashboard/voucher_add.html', {'form':form})
+    return render(request, 'dashboard/voucher_add.html', {'form':form,
+   
+        'books_count' : books_count,
+        'orders_count' : orders_count,
+        'users_count' : users_count,
+         "vouchers_count": vouchers_count,
+    
+    
+    
+    
+    })
 
 @user_passes_test(group_check)
 def voucherListView(request):
 
-    vouchers = Voucher.objects.all()
-    vouchers_count = Voucher.objects.count()
+    
     books_count = Book.objects.count()
     orders_count = Order.objects.count()
-    users_count = CustomUser.objects.count() 
+    users_count = CustomUser.objects.count()
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
     context = {
+           
         'books_count' : books_count,
         'orders_count' : orders_count,
         'users_count' : users_count,
@@ -137,12 +163,12 @@ def voucherListView(request):
 
 @user_passes_test(group_check)
 def voucherEditView(request, voucher_id):
-
-    orders = Order.objects.all()
-    books = Book.objects.all()
-    books_count = books.count()
-    orders_count = orders.count()
+  
+    books_count = Book.objects.count()
+    orders_count = Order.objects.count()
     users_count = CustomUser.objects.count()
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
     voucher = Voucher.objects.get(id=voucher_id)
 
     form = VoucherForm(request.POST or None , instance = voucher)
@@ -152,22 +178,22 @@ def voucherEditView(request, voucher_id):
         return HttpResponseRedirect(reverse('dashboard:voucher_list'))
 
     return render(request, 'dashboard/voucher_edit.html', {'form':form,
-    "orders" : orders,
-        "books" : books,
+    
         "books_count" : books_count,
         "orders_count" : orders_count,
         "users_count" : users_count,
+        "vouchers_count": vouchers_count,
     
     })
 
 @user_passes_test(group_check)
 def voucherDeleteView(request, voucher_id):
 
-    orders = Order.objects.all()
-    books = Book.objects.all()
-    books_count = books.count()
-    orders_count = orders.count()
+    books_count = Book.objects.count()
+    orders_count = Order.objects.count()
     users_count = CustomUser.objects.count()
+    vouchers = Voucher.objects.all()
+    vouchers_count = vouchers.count()
     voucher = Voucher.objects.get(id=voucher_id)
     
     if request.method =="POST":
@@ -175,11 +201,11 @@ def voucherDeleteView(request, voucher_id):
         return HttpResponseRedirect(reverse('dashboard:voucher_list'))
 
     return render(request, 'dashboard/voucher_delete.html', {'voucher':voucher,
-    "orders" : orders,
-        "books" : books,
+    
         "books_count" : books_count,
         "orders_count" : orders_count,
         "users_count" : users_count,
+        "vouchers_count": vouchers_count,
     
     })
 

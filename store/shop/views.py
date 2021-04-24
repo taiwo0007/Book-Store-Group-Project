@@ -14,6 +14,7 @@ from django.contrib import messages
 from order.models import Order
 from accounts.models import CustomUser, UserProfile
 from django.core.exceptions import ValidationError
+from vouchers.models import Voucher
 
 
 def group_check(user):
@@ -243,6 +244,7 @@ def managerCreateView(request):
 
 @user_passes_test(group_check)
 def bookListView(request):
+    vouchers_count = Voucher.objects.count()
     managerCheck = True
     books = Book.objects.all()
     books_count = Book.objects.count()
@@ -253,7 +255,8 @@ def bookListView(request):
         'orders_count' : orders_count,
         'users_count' : users_count,
         'books':books,
-        'managerCheck':managerCheck
+        'managerCheck':managerCheck,
+        "vouchers_count":vouchers_count
         }
     return render(request, 'shop/book_list.html', context)
 
@@ -261,6 +264,7 @@ def bookListView(request):
 def bookUpdateView(request, category_slug, book_slug):
     managerCheck = True
     managerCheck = True
+    vouchers_count = Voucher.objects.count()
     orders = Order.objects.all()
     books = Book.objects.all()
     books_count = books.count()
@@ -280,11 +284,13 @@ def bookUpdateView(request, category_slug, book_slug):
         "books_count" : books_count,
         "orders_count" : orders_count,
         "users_count" : users_count,
+        "vouchers_count":vouchers_count
     
     })
 
 @user_passes_test(group_check)
 def bookDeleteView(request, category_slug, book_slug):
+    vouchers_count = Voucher.objects.count()
     managerCheck = True
     orders = Order.objects.all()
     books = Book.objects.all()
@@ -303,6 +309,7 @@ def bookDeleteView(request, category_slug, book_slug):
         "books_count" : books_count,
         "orders_count" : orders_count,
         "users_count" : users_count,
+         "vouchers_count":vouchers_count
     
     })
 
