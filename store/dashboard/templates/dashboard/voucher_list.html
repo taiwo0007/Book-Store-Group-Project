@@ -27,16 +27,16 @@
 <td>{{ voucher.valid_to}}</td>
 <td>
     {% if voucher.anounce%}
-    <span class="badge badge-success">&nbsp; </span> 
+    <span class="badge badge-success py-1">On </span> 
     {% else %}
-    <span class="badge badge-danger"> &nbsp;</span>
+    <span class="badge badge-danger py-1 "> Off</span>
     {%endif%}
 </td>
 <td>
     {% if voucher.active%}
-    <span class="badge badge-success">&nbsp; </span> 
+    <span class="badge badge-success  py-1">On</span> 
     {% else %}
-    <span class="badge badge-danger"> &nbsp;</span>
+    <span class="badge badge-danger  py-1"> Off</span>
     {%endif%}
 </td>
 <td>{{ voucher.discount}}%</td>
