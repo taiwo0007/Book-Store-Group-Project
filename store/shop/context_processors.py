@@ -26,7 +26,7 @@ def annouceFunction(request):
     anouncemnet = anouncemnets.last()
     
 
-    return{'anouncemnet':anouncemnet}
+    return{'anouncemnets':anouncemnets}
     
 
 

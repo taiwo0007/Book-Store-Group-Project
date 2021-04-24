@@ -19,17 +19,22 @@
 	<style>
 		
 	</style>
-	{%if anouncemnet%}
-	<div class="bg-warning pt-2 pb-1">
+	{%if anouncemnets %}
+
+	{%for anouncemnet in anouncemnets%}
+
+
+	<div class="bg-danger pt-2 pb-1">
 	
 		
 
 		
-		<h6 style="font-weight: bolder; font-family: Helvetica;" class="  text-center">Get <span class="badge badge-danger">{{anouncemnet.discount}}% </span>with CODE: <span class="badge badge-danger">{{anouncemnet.code}}</span> </h6>
-	
+		<h6 style="font-weight: bolder; font-family: Helvetica;" class=" text-light text-center">Get <span style="text-decoration: underline;" class="bade bage-warning"> {{anouncemnet.discount}}% off</span> with code: <span class="badge badge-warning">{{anouncemnet.code}}</span> 
+	| Ends <span style="text-decoration: ;" class="badge badge-primary text-light">{{anouncemnet.valid_to}}</span></h6>
 	
 		
 		</div>
+		{%endfor%}
 		{%endif%}
 	
 	<div style="overflow-x: hidden;" class="container-fluid">

@@ -48,6 +48,8 @@
 
                     <span style="color: rgb(114, 91, 69);">{{book.author}}</span><span
                         style="font-size: small; font-weight: lighter;"> (author)</span>
+                        <br>
+                        <span style="margin-right: 20px;" class="badge badge-primary">{{book.category}}</span>
                         
                 </div>
             </div>
@@ -55,6 +57,14 @@
                 <div>
                     <h1 style="font-family: 'Baskervville', serif;" class="pb-2">{{book.title}}</h1>
                     <h5 style="font-weight: 600;">€{{book.price}}</h5>
+                    {%if anouncemnets %}
+
+	{%for anouncemnet in anouncemnets%}
+    <h6 style="font-weight: bolder; font-family: Helvetica;" class=""> <span style="text-decoration:underline; " class="bade bdge-warning">{{anouncemnet.discount}}% off</span> with code: <span class="badge badge-warning">{{anouncemnet.code}}</span> </h6>
+
+    {%endfor%}
+		{%endif%}
+
                     <p class="star">
                         {% if rounded %}
                         {% for i in "x"|rjust:rounded%}
