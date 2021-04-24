@@ -260,6 +260,12 @@ def bookListView(request):
 @user_passes_test(group_check)
 def bookUpdateView(request, category_slug, book_slug):
     managerCheck = True
+    managerCheck = True
+    orders = Order.objects.all()
+    books = Book.objects.all()
+    books_count = books.count()
+    orders_count = orders.count()
+    users_count = CustomUser.objects.count()
     book = Book.objects.get(category__slug=category_slug, slug=book_slug)
 
     form = BookForm(request.POST or None, request.FILES or None , instance = book)
@@ -268,18 +274,37 @@ def bookUpdateView(request, category_slug, book_slug):
         form.save()
         return HttpResponseRedirect('/')
 
-    return render(request, 'shop/book_edit.html', {'form':form,'managerCheck':managerCheck})
+    return render(request, 'shop/book_edit.html', {'form':form,'managerCheck':managerCheck,
+    "orders" : orders,
+        "books" : books,
+        "books_count" : books_count,
+        "orders_count" : orders_count,
+        "users_count" : users_count,
+    
+    })
 
 @user_passes_test(group_check)
 def bookDeleteView(request, category_slug, book_slug):
     managerCheck = True
+    orders = Order.objects.all()
+    books = Book.objects.all()
+    books_count = books.count()
+    orders_count = orders.count()
+    users_count = CustomUser.objects.count()
     book = Book.objects.get(category__slug=category_slug, slug=book_slug)
     
     if request.method =="POST":
         book.delete()
         return HttpResponseRedirect('/')
 
-    return render(request, 'shop/book_delete.html', {'book':book,'managerCheck':managerCheck})
+    return render(request, 'shop/book_delete.html', {'book':book,'managerCheck':managerCheck,
+    "orders" : orders,
+        "books" : books,
+        "books_count" : books_count,
+        "orders_count" : orders_count,
+        "users_count" : users_count,
+    
+    })
 
 
 @login_required()
