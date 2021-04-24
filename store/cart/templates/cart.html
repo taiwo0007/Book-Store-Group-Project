@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+This is the shopping cart page. Proceed to review your items and place the order.
+{% endblock %}
+{% block title %}
+Cart - Bookspace.
+{% endblock %}
+{% block content %}
+{% if not cart_items %}
+<div>
+	<div class="text-center">
+		<br>
+		<h1 class="text-center my_title">
+			Your shopping cart is empty
+		</h1>
+		<br>
+		<p class="text-center">
+			Please click <a href="{% url 'shop:allBookCat' %}">here</a> to continue shopping.
+		</p>
+	</div>
+</div>
+{% else %}
+<div class="container-fluid">
+
+	<div class="row py-3" style="margin: 0 20px;;">
+		<div style="border-bottom: 1px solid #9b9b9b" class="col-9">
+
+			<h2 class="text-justfiy pb-2">
+				SHOPPING BAG
+			</h2>
+		</div>
+
+		<div style="border-bottom: 1px solid #9b9b9b" class="col-9">
+			{% for cart_item in cart_items %}
+			<div style="border-bottom: 1px solid #9b9b9b" class="row ">
+
+				<div class="col-2 py-5 ">
+
+					<a href="{{cart_item.book.get_url}}"><img src="{{cart_item.book.image.url}}" alt=""
+							style="height:230px; width: auto;" class="float-left rounded "></a>
+				</div>
+
+				<div class="col-8 py-5 ">
+					<h1 class=""
+						style="margin-left: -14px; font-family: Helvetica; font-weight: bolder; font-size: 25px;">
+						{{cart_item.book.title}}</h1>
+					<h1 class="mt-3"
+						style="font-weight: bolder; margin-left: -14px; font-family: sans-serif; font-weight: bolder; font-size: 17px;">
+						AVAILIBILITY:<span class="text-success">{% if cart_item.book.stock %} In stock {% else %}</span>
+						<span class="text-danger"> Out Of stock{%endif%}</span>
+					</h1>
+			
+					
+						<span style="position: absolute; font-weight: 800; background-color: white;  width: 20%; margin-top: 78px;; margin-left: -11px;"
+							class="  text-dark rounded-0"
+							id="">€{{cart_item.book.price}}</span>
+				
+					<a style="font-weight: bolder; position:absolute;"
+						href="{%url 'cart:full_remove' cart_item.book.slug%}" class="pb-5 text-dark fixed-bottom">
+						REMOVE
+					</a>
+				</div>
+				<div class="col-2 py-5">
+
+					<h1 class=""
+						style="margin-left: -14px; font-family: Helvetica; font-weight: bolder; font-size: 20px;">
+						€{{cart_item.sub_total}}</h1>
+					<div style="position:absolute;" class="fixed-bottom pb-5 mb-5">
+						<p style="font-family: Helvetica; margin-bottom: -0.1px; font-weight: 300;">Quanity:</p>
+
+						{% if cart_item.quantity < cart_item.book.stock %} <div class="input-group-prepend ">
+							<span style="background-color: white; border: 1px solid #9b9b9b;"
+								class="input-group-text btn text-dark rounded-0" id="basic-addon1">
+								<a href="{% url 'cart:cart_remove' cart_item.book.slug%}"
+									class="custom_a text-dark">-</a></span>
+							<span style="background-color: white; border: 1px solid #9b9b9b;"
+								class="input-group-text btn text-dark  rounded-0"
+								id="basic-addon1">&nbsp;{{cart_item.quantity}}&nbsp;</span>
+							<span style="background-color: white; border: 1px solid #9b9b9b;"
+								class="input-group-text btn text-dark rounded-0" id="basic-addon1">
+								<a href="{% url 'cart:add_cart' cart_item.book.slug%}"
+									class="custom_a text-dark">+</a></span>
+					</div>
+					{% else %}
+					<div class="input-group-prepend">
+						<span style="background-color: white; border: 1px solid #9b9b9b;"
+							class="input-group-text btn text-dark rounded-0" id="basic-addon1">
+							<a href="{% url 'cart:cart_remove' cart_item.book.slug%}"
+								class="custom_a text-dark">-</a></span>
+						<span style="background-color: white; border: 1px solid #9b9b9b;"
+							class="input-group-text btn text-dark rounded-0"
+							id="basic-addon1">&nbsp;{{cart_item.quantity}}&nbsp;</span>
+					</div>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="col-3">
+		<div class="row">
+			<div class="col-12 ">
+
+
+				<div style="border: 1px solid #9b9b9b">
+
+
+					<form class="p-3" style="width: 100%;" action="{% url 'vouchers:apply' %}" method="post">
+						<style>
+							label {
+								display: none;
+
+							}
+
+							#go {
+								display: none;
+							}
+						</style>
+						<p style="font-weight: 300;">Have a voucher?</p>
+						{{voucher_apply_form }}
+
+						{% csrf_token %}
+						<button  id="go" style="" class=" " type="submit"></button>
+					</form>
+
+				</div>
+			</div>
+			<div class="col-12 py-4">
+
+				<div style="border: 1px solid #9b9b9b" class="card rounded-0">
+					<div class="card-body">
+
+						<h5 style="border-bottom: 1px solid #9b9b9b;" class="card-title pb-3 ">
+							SUBTOTAL
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							{% if voucher %}
+
+							<del class="text-secondary">€{{ total|floatformat:"2" }}</del>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							
+							€{{new_total|floatformat:"2" }}
+							<div style="font-weight: lighter">
+								"{{ voucher.code }}" voucher
+								({{ voucher.discount }}% off)
+								- €{{ discount|floatformat:"2" }}
+							</div>
+
+
+
+							{% else %}
+							€{{ total|floatformat:"2" }}
+							{% endif %}
+						</h5>
+
+					</div>
+					<form style=" margin-top: -20px;" action="" method="POST" class="px-4 pb-2">
+						{% csrf_token %}
+						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+							data-key="{{ data_key }}" data-amount="{{ stripe_total }}" data-name="Book Shop"
+							data-description="{{ description }}" data-image="{% static 'images/logo.png' %}"
+							data-locale="auto" data-currency="eur" data-shipping-address="true"
+							data-billing-address="true" data-zip-code="true">
+							</script>
+					</form>
+					<div class="mb-3">
+						<a style="width: 18vw; " href="{% url 'shop:allBookCat' %}"
+							class="btn btn-dark btn-block mx-auto">Continue
+							Shopping</a>
+					</div>
+
+				</div>
+				<div style="text-decoration: underline;" class="text-right " id="seeMore">
+					<p style="cursor: pointer;">Pay with papal?</p>
+				</div>
+			</div>
+
+
+
+		</div>
+		<div class="col-12">
+
+		</div>
+		<div class="col-12">
+			<script
+				src="https://www.paypal.com/sdk/js?client-id=AR6cTJMtz5K2C0o6lZOD2uXxkpAtg7rrwNrWJbwzEfutJO-KfUGVa_S1tIMus1qZun20IBC1aGxreEKp&currency=EUR"> // Required. Replace YOUR_CLIENT_ID with your sandbox client ID.
+				</script>
+
+			<div style="display: none;" id="paypal-button-container"></div>
+
+
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				<script>
+
+					paypal.Buttons({
+
+
+						createOrder: function (data, actions) {
+							// This function sets up the details of the transaction, including the amount and line item details.
+							return actions.order.create({
+								purchase_units: [{
+									amount: {
+										value: "{{total}}"
+									}
+								}]
+							});
+						},
+
+						onApprove: function (data, actions) {
+							// This function captures the funds from the transaction.
+							return actions.order.capture().then(function (details) {
+								// This function shows a transaction success message to your buyer.
+								alert("hEY TGIS IS TEH ORDER" + data.links);
+								alert('Transaction completed by ' + '{{request.user}}' + data.orderID + data.shippingAddress + data.addresseeName + data.countryCode + data.capture + data.details);
+
+
+
+
+							});
+
+
+
+						}
+					}).render('#paypal-button-container');
+
+                        //This function displays Smart Payment Buttons on your web page.
+
+				</script>
+			</form>
+
+
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+</div>
+<script>
+
+	var paypal = document.getElementById("paypal-button-container")
+	var seeMore = document.getElementById("seeMore")
+	
+
+	
+
+	seeMore.addEventListener("click", showMoreFunction)
+
+	function showMoreFunction() {
+		
+			paypal.style.display = "block";
+
+	
+		
+	}
+</script>
+
+{% endif %}
+{% endblock content%}
+<!--
+
+-->

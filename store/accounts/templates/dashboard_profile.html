@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+{% if category %}
+{{ category.description|truncatewords:155 }}
+{% else %}
+Welcome to the Online Book Store where you can buy awesome books.
+{% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+{{ category.name }} - Bookspace.
+{% else %}
+Best Value - Bookspace.
+{% endif %}
+{% endblock %}
+{% block content %}
+
+
+<div class="container mb-5 pb-5">
+<h1>Account Dashboard</h1>
+<p style="font-weight: lighter;">Hi {{request.user}}, this is your account dashbaord</p>
+    <div class="row mt-5">
+        <div class="col-4">
+            
+           <a href="{% url 'shop:wishList_books' %}" style="width: 360px; " class="btn btn-dark   rounded-0 py-3">
+            <i style="font-size: 40px;" class="fas fa-male d-block "></i>Wish List</a> 
+
+
+        </div>
+        <div class="col-4">
+            <a href="{% url 'shop:reviewList'%}" style="width: 360px;" class="btn btn-dark    rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-star d-block"></i>Reviews</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'order:order_history' %}" style="width: 360px;;" class="btn btn-dark   rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-truck d-block"></i>Orders</a> 
+        </div>
+
+    </div>
+    <div class="row mt-3">
+
+       
+        <div class="col-4">
+            <a href="{% url 'profile_view'%}" style="width: 360px;" class="btn btn-dark   rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-key d-block"></i>View Profile</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'shop:allBookCat' %}" style="width: 360px;" class="btn btn-dark   rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-home d-block"></i>Home Page</a> 
+        </div>
+        <div class="col-4">
+            <a href="{% url 'cart:cart_detail' %}" style="width: 360px;" class="btn btn-dark   rounded-0 py-3">
+                <i style="font-size: 40px;" class="fas fa-shopping-cart d-block"></i>Cart Page</a> 
+        </div>
+
+    </div>
+
+    
+</div>
+
+{% endblock content%}

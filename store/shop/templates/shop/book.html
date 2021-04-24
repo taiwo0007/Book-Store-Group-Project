@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block metadescription %}
+{{ book.description|truncatewords:155 }}
+{% endblock %}
+{% block title %}
+{{ book.title }} - Bookspace.
+{% endblock %}
+{% block content %}
+<style>
+.imHover{
+    transition: 100.1ms ease-in;
+}
+.imHover:hover{
+
+    background-color: #282d32;
+    color: white;
+    transform: translateY(-9px);
+}
+</style>
+
+
+<div class="row my_prod_row_class">
+
+
+    <div class="container ">
+        <form style="display:none" action="" method="POST">
+            {% csrf_token%}
+            {{rounded}}
+        </form>
+
+
+        <div class="text-center mx-auto py-3">
+
+            <u>
+                <p><a href="{% url 'shop:allBookCat' %}">Home</a>
+            </u> | <u class="text-center"><a class="text-center" href="{{ book.category.get_absolute_url }}">{{book.category}}</a></u> | <u>{{book.title}}</p>
+            </u>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-6 text-center">
+                <div>
+                
+                    <img class="pt-2" id="hello" style="width: 330px;" data-toggle="tooltip" data-delay='{"show":0,"hide":000}' title="{{book.title}}" src="{{book.image.url}}" alt="{{book.title}}">
+                    <br><br>
+
+                    <span style="color: rgb(114, 91, 69);">{{book.author}}</span><span
+                        style="font-size: small; font-weight: lighter;"> (author)</span>
+                        
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div>
+                    <h1 style="font-family: 'Baskervville', serif;" class="pb-2">{{book.title}}</h1>
+                    <h5 style="font-weight: 600;">€{{book.price}}</h5>
+                    <p class="star">
+                        {% if rounded %}
+                        {% for i in "x"|rjust:rounded%}
+
+                        <i class="fas fa-star text-warning"></i>
+
+
+                        {% endfor %}
+                        {% if half %}
+                        <i class="fas fa-star-half-alt text-warning"></i>
+                        {% endif %}
+                        {% if greyStars > 0 %}
+                        {% for b in "x"|rjust:greyStars%}
+
+                        <i class="far text-warning fa-star"></i>
+
+
+                        {% endfor %}
+                        {% endif %}
+
+                        {%else %}
+                        {% if user.is_authenticated %}
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black;" class=""
+                                href="#reviewlink">Leave a review</a></span>
+                        {%else%}
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black;" class=""
+                                href="{% url 'signin' %}">Sign in to review</a></span>
+
+                        {%endif%}
+                        {% endif %}
+                        <span> <a class="pl-1" style="text-decoration: underline; color: black; font-weight: 300;" class=""
+                                href="#reviewlink">{%if reviews|length == 1%}{{reviews|length}} Review {%else%}{{reviews|length}} Reviews{%endif%}</a></span>
+                    </p>
+
+
+                    <p class="text-justify my_prod_text">{{book.description}}</p>
+                    <p style="font-weight: 300;" class="text-justify my_prod_text"><i class="fas fa-check"></i>
+                        {{book.stock}} in stock</p>
+                    {% if book.stock == 0%}
+                    <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
+                    {% elif book.availible == False%}
+                    <p class="text-justify my_prod_text"><b>Not Availible</b></p>
+                    {% else %}
+                    <a class="btn btn-dark rounded-0" href="{% url 'cart:add_cart' book.slug %}">Add to Cart</a>
+                    <a style="background-color: white;" class="btn btn-alert border rounded-0" data-toggle="tooltip"
+                        title="Wishlist" href="{% url 'shop:add_wishlist' book.category.slug book.slug %}"><i
+                            style="background-color: white;" class="fas fa-heart "></i></a>
+                    <a id="share" class="btn rounded-0 border"><i style="" class="fas fa-share-alt text-dark"></i></a>
+                    {% endif %}
+                    <br>
+
+                    <h3 class="my_prod_title">Synopsis: </h3>
+                    <p style="width:400px; font-weight: 200; " class="text-justify my_prod_text my_title border p-3">
+                        {{book.synopsis}}
+                        <br>
+                        <br>
+                        <span  class="text-secondary" style="font-weight: bold;">Pub Date:</span> {{book.pub_date}}<br>
+                        <span  class="text-secondary" style="font-weight: bold;">ISBN:</span> {{book.iban}}<br><br>
+                        <span style="font-weight: bold;" class="text-secondary">Publisher: {{book.publisher}}</span>
+                        <span>&nbsp;&nbsp; |&nbsp; &nbsp;</span> <span style="font-weight: bold;"
+                            class="text-secondary"> Pages: {{book.num_pages}}</span>
+
+                            
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container mt-5">
+
+   
+
+    <img src="{{profile.profile_image.url}}">
+  <h3 style="font-family: 'Baskervville', serif;" class="my-5">Books in the same Cateogry</h3>
+    <div class="row border-bottom pb-2">
+        
+        {% for random in booksInCategory%}
+                <div class="col-2">
+                    <a href="{{random.get_absolute_url}}"><img class="imHover" style="width:150px" src="{{random.image.url}}" alt="book"></a>
+                    <div class="p-3">
+                      
+                    <h6 class="text-center h-auto" style="font-family: 'Baskervville', serif;">{{random.title}}</h6>
+                    <p  class="text-center h-auto" style="color: rgb(114, 91, 69);">{{random.author}}</p>
+                    <p style="font-weight: 300;" class="text-center h-auto" >€{{random.price}}</p>
+                </div>
+                </div>
+                {%endfor%}
+            </div>
+    <div class="row pt-5 pb-4 mx-auto">
+        <p id="b" class="btn btn-dark text-center mx-auto" style="font-family: 'Baskervville', serif;  font-size: 15px; ">Write a review</p>
+    </div>
+    
+    <div class="j row">
+        
+        <div class="col-12">
+            <div id="r" class=" text-justify card-profile border p-5 rounded mb-5 bg-ligh " style="background-color: white; width: auto; display: none;">
+ 
+                <h1 class="text-center">Review</h1>
+                <form class="rounded" action="add_review/" method="post">
+                {% csrf_token %}
+                {{ form|crispy}}
+                {% if user.is_authenticated %}
+                <div class="row">
+                    <div class="col-5">
+
+                    </div>
+                    <div class="col-7 pt-4">
+                       <button class="btn btn-dark rounded px-5 text-center" type="submit">Save</button> 
+                    </div>
+                   
+                    
+                </div>
+                
+                {% else %}
+                <a href="{% url 'signin' %}"> Sign in to review </a>
+                {% endif %}
+            </form>
+            </div>
+        </div>
+    </div>
+    <a id="reviewlink"></a>
+    <div class="row">
+        <div class="col-12">
+            <h4 style="font-family: 'Baskervville', serif; font-size: ;" class="text-left pb-4 border-bottom">Reviews </h5>
+                <span style="float: right;">/{{reviews.count}}</span><span style="float: right;" id="num"> 0</span></span>
+        </div>
+        {% if reviews %}
+
+        {% for review in reviews%}
+        <div class="col-4 reviewCard border-bottom">
+
+
+            <div style="display: flex;  justify-content: space-evenly; flex-direction: column; border: none;"
+                class="card ">
+                <div style="height: max-content; font-size: 20px; font-style: italic; font-family: Arial, Helvetica, sans-serif; background-color: white;"
+                    class="card-header border-0">
+                    "{{review.subject}}"
+                    <br>
+                </div>
+                <span class="ml-4 star">
+                    {% for i in "x"|rjust:review.rating%}
+
+                    <i class="fas fa-star text-warning"></i>
+
+
+                    {% endfor %}
+                </span>
+
+                <div class="card-body ">
+                    <blockquote class="blockquote mb-0">
+
+                        <p
+                            style="font-size: 15px; font-weight: lighter; flex-direction: column; justify-content: center; ">
+                            {{review.comment}}</p>
+                        <footer class="">
+
+
+
+                            {% for i in UserImage %}
+
+                            {% if i.user == review.user %}
+
+
+
+                            <p style="text-transform: uppercase; font-size: 12px; font-weight: bolder;"><span><img
+                                        style="height: auto; border-radius: 50%; width: 25px; height: 25px; object-fit: cover;"
+                                        src="{{i.profile_image.url}}" alt="{{book.title}}"> </span>{{review.name}}</p>
+                            <p style="text-transform: uppercase; font-size: 12px; margin-top: -17px; ">
+                                {{review.created_date}}</p>
+                        </footer>
+                        <blockquote>
+                </div>{%endif%}
+                {%endfor%}
+
+            </div>
+
+
+        </div>
+
+        {%endfor%}
+
+    </div>
+   
+    <div class="row">
+        {% if reviews.count > 3%}
+        <p id="more" class="btn text-center"
+            style="text-decoration: underline; float: right; margin-right: 50px; display: block;">
+            view more</p>
+        {% endif %}
+
+
+        <p id="less" class="btn text-center"
+            style="text-decoration: underline; float: right; margin-right: 50px; display: none;">
+            See less</p>
+
+    </div>
+
+    {% else %}
+    <div class="row">
+        <p class="text-center">No reviews</p>
+    </div>
+    {%endif%}
+</div>
+
+<script>
+    var input = document.createElement("input")
+
+
+
+    var sharer = document.getElementById("share")
+    sharer.addEventListener("click", copyFunction)
+    var num = document.getElementById("num");
+    console.log(num)
+    var texter = document.querySelector("#b");
+    var para = document.querySelector("#r");
+    var moreSelect = document.getElementById("more");
+    var seeLesser = document.getElementById("less");
+    var reviewsList = document.getElementsByClassName("reviewCard");
+    if (reviewsList.length == 1) {
+        num.innerHTML = 1;
+    }
+    if (reviewsList.length == 2) {
+        num.innerHTML = 2;
+    }
+    if (reviewsList.length == 3) {
+        num.innerHTML = 3;
+    }
+    if (reviewsList.length > 3) {
+        num.innerHTML = 3;
+    }
+
+    function copyFunction() {
+
+        text = window.location.href
+        document.body.appendChild(input)
+        input.value = text
+        input.select()
+        document.execCommand("copy")
+        document.body.removeChild(input)
+        alert("copied")
+    }
+
+
+
+    function gofunc() {
+        para.style.display = "block"
+
+    }
+
+    texter.addEventListener('click', gofunc)
+
+
+
+    for (var i = 0; i < reviewsList.length; i++) {
+
+        if (i > 2) {
+            reviewsList[i].style.display = "none";
+
+        }
+    }
+    function viewMore() {
+
+        for (var i = 0; i < reviewsList.length; i++) {
+
+
+            reviewsList[i].style.display = "block";
+            console.log("hello")
+
+        }
+        moreSelect.style.display = "none";
+        seeLesser.style.display = "block";
+        num.innerHTML = reviewsList.length
+
+    }
+
+    function seeLess() {
+        for (var i = 0; i < reviewsList.length; i++) {
+
+            if (i > 2) {
+                reviewsList[i].style.display = "none";
+
+            }
+        }
+        moreSelect.style.display = "block";
+        seeLesser.style.display = "none";
+        num.innerHTML = 3
+
+    }
+    seeLesser.addEventListener('click', seeLess)
+    moreSelect.addEventListener('click', viewMore);
+
+</script>
+
+{% endblock %}

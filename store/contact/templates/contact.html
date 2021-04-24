@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+	Contact - Bookspace.
+{% endblock %}
+{% block content %}
+	<div class = "container">
+    
+    <div style="width: 80%;" class="mx-auto mt-5 card-profile shadow p-3  mb-5 bg-white ">
+        <h2 class="my-4 text-center">Contact Us</h2>
+    <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type='submit' class="btn btn-primary my-3">Submit</button> 
+    </form>
+</div>
+    </div>
+		
+{% endblock content%}

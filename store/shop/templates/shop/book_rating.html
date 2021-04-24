@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+{% if category %}
+{{ category.description|truncatewords:155 }}
+{% else %}
+Welcome to the Online Book Store where you can buy awesome books.
+{% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+{{ category.name }} - Bookspace.
+{% else %}
+Top Rated - Bookspace.
+{% endif %}
+{% endblock %}
+{% block content %}
+<style>
+	body {
+		background-image: "{% static 'images/logoOne.png' %}";
+	}
+
+	.imHover {
+		transition: 100.1ms ease-in;
+	}
+
+	.imHover:hover {
+
+		background-color: #282d32;
+		color: white;
+		transform: translateY(-9px);
+	}
+</style>
+
+
+{% if managerCheck %}
+
+
+
+{% endif %}
+<!--Breadcrumb navigation-->
+{% if category %}
+<div class="row my_row_class">
+	<div class="mx-auto">
+		<p><a href="{% url 'shop:allBookCat' %}">Our book Collection</a> | {{category.name}}</p>
+	</div>
+</div>
+{% endif %}
+<div style=" overflow-x: hidden; margin-top: -10px;;" class="mx-auto">
+	{% if category.image %}
+	<a href="{% url 'shop:allBookCat' %}">
+		<img style="width:100vw" class="my_image " src="{{category.image.url}}" alt="{{category.name}}">
+	</a>
+</div>
+
+<br>
+<div>
+	<h1 class="text-center my_title">{{category.name}}</h1>
+	<p class="text-justify">{{category.description}}</p>
+</div>
+{% else %}
+<a href="{% url 'shop:allBookCat' %}">
+	<img style="width:100vw;" class="my_image my_image_padding " src="{% static 'images/toprated.jpg' %}"
+		alt="Our Book Collection">
+</a>
+</div>
+<br>
+<div>
+	<h1 class="text-center my_title">Our Book Collection</h1>
+	<p class="text-justify"></p>
+
+</div>
+{% endif %}
+<div class="container">
+	<!--POPULAR CHILDRENS BOOKS 5 -->
+	<i>
+		<h1 class="text-center text-secondary" style="font-size: 20px; margin-bottom: 70px;  margin-top: 70px;">Top
+			Rated Children Books</h1>
+	</i>
+	<div style="margin-bottom: 70px; " class=" text-center row mx-auto border-bottom">
+
+		{% for bookC in booksRatedChildren %}
+
+		<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
+			<div style="font-size: 10px; " class="card text-center h-100 text-sm border-0" style="min-width: 18rem;">
+				<a href="{{bookC.get_absolute_url}}"><img class="card-img-top my_image imHover"
+						src="{{bookC.image.url}}" alt="{{bookC.title}}"></a>
+				<div style="display: flex; justify-content: space-evenly; flex-direction: column;" class="card-body">
+					<h4 style="font-weight: 900; font-family: 'Baskervville', serif;" class="card-text">{{bookC.title}}
+					</h4>
+					<p class="card-text">€{{bookC.price}}</p>
+
+
+					<p class="card-text"><i class="fas fa-star text-warning"></i> {{bookC.star_rating}}</p>
+
+
+
+					<p style="color: rgb(114, 91, 69);" class="card-text">{{bookC.author}}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<!--POPULAR Fiction BOOKS 5-->
+	<i>
+		<h1 class="text-center text-secondary" style="font-size: 20px; margin-bottom: 70px;  margin-top: 70px;">Top
+			Rated Fiction Books</h1>
+	</i>
+	<div style="margin-bottom: 70px; " class="row mx-auto border-bottom">
+
+		{% for bookF in booksRatedFiction %}
+
+		<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
+			<div style="font-size: 10px; " class="card text-center h-100 text-sm border-0" style="min-width: 18rem;">
+				<a href="{{bookF.get_absolute_url}}"><img class="card-img-top my_image imHover"
+						src="{{bookF.image.url}}" alt="{{bookF.title}}"></a>
+				<div style="display: flex; justify-content: space-evenly; flex-direction: column;" class="card-body">
+					<h4 style="font-weight: 900; font-family: 'Baskervville', serif;" class="card-text">{{bookF.title}}
+					</h4>
+					<p class="card-text">€{{bookF.price}}</p>
+
+					<p class="card-text"><i class="fas fa-star text-warning"></i>{{bookF.star_rating}}</p>
+					<p style="color: rgb(114, 91, 69);" class="card-text">{{bookF.author}}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<!--POPULAR Fiction BOOKS 5-->
+	<i>
+		<h1 class="text-center text-secondary" style="font-size: 20px; margin-bottom: 70px;  margin-top: 70px;">Top
+			Rated Non-Fiction Books</h1>
+	</i>
+	<div style="margin-bottom: 70px; " class="row mx-auto border-bottom">
+
+		{% for bookF in booksRatedNon %}
+
+		<div class="my_bottom_margin col-9 col-lg-2 col-sm-3 col-md-4">
+			<div style="font-size: 10px; " class="card text-center h-100 text-sm border-0" style="min-width: 18rem;">
+				<a href="{{bookF.get_absolute_url}}"><img class="card-img-top my_image imHover"
+						src="{{bookF.image.url}}" alt="{{bookF.title}}"></a>
+				<div style="display: flex; justify-content:space-evenly; flex-direction:column" class="card-body">
+					<h4 style="font-weight: 900; font-family: 'Baskervville', serif;" class="card-text">{{bookF.title}}
+					</h4>
+					<p class="card-text">€{{bookF.price}}</p>
+					<p class="card-text"><i class="fas fa-star text-warning"></i>{{bookF.star_rating}}</p>
+					<p style="color: rgb(114, 91, 69);" class="card-text">{{bookF.author}}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+</div>
+
+{%endblock content%}

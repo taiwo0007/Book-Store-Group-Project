@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+{% if category %}
+{{ category.description|truncatewords:155 }}
+{% else %}
+Welcome to the Online Book Store where you can buy awesome books.
+{% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+{{ category.name }} - Bookspace.
+{% else %}
+Best Value - Bookspace.
+{% endif %}
+{% endblock %}
+{% block content %}
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        
+        <div class="col-9">
+            <h1 class="my-4" style="font-weight: lighter;">Blog</h1>
+            
+            <img style="width: 100%;" src=" {{blogs.image.url}}"/>
+            <h1 class="my-4">{{blogs.title}}</h1>
+            <p>Posted on {{blogs.created_date}}</p>
+            <p>-{{blogs.author}}</p>
+            <p style="font-weight: lighter;">{{blogs.body|linebreaks}}</p>
+
+            
+
+      </div>
+        <div class="col-3">
+            <div class="row">
+                <h1 style="font-weight: lighter; font-size: 20px; margin-top: 90px; margin-left: 20px;;" class="">{% if reviews %}Some Reviews By {{blogs.author}} {%else%}{%endif%}</h1>
+                {% for review in reviews %}
+                <div class="col-12 my-2">
+                    <div style="backgrund-color: rgb(247, 243, 243);  " class="card border bg-light">
+                        <span style="font-size: 10px;color:black;"><span style="margin-top: 20px; display:inline-block; margin-left: 50px; width:150px; color:white;"><a style="width:10px; text-decoration: none; color:black; font-style: italic;" href="{{review.get_absolute_url}}">"{{review.subject}}"</a></span><img style=" width: 15%; float:right" src=" {{review.review_item.image.url}}"/></span>
+                        
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+
+        </div>
+    </div>
+    <div class="row border-top ">
+        <div class="col-2 my-4">
+        
+        <a href="{{books.get_absolute_url}}"><img style="width: 100%;" src="{{books.image.url}}"/></a>
+        
+    </div>
+    
+    <div style="font-size: 30px; " class="col-10 my-4">
+        <h1 style="font-size: 30px; margin-bottom: -10px; font-weight: lighter;">{{books.title}}</h1>
+        <span style="margin-top:-4px; color: rgb(114, 91, 69); font-size: 14px;">{{books.author}}</span>
+        <p class ="text-bold" style="font-size: 15px; font-weight: bolder;">€{{books.price}}</p>
+        <p style="font-size: 15px;" class="mt-2"><i class="fas fa-check text-primary"></i> {{books.stock}} in stock | {% if books.availible %}<i class="fas fa-clock text-primary"></i> Availible {% else %} <i class="far fa-clock"></i> Unavailible{%endif%}
+        <p style="font-weight: lighter; font-size:20px">{{books.synopsis}}</p>
+        <a class="btn btn-secondary" href="{% url 'cart:add_cart' books.slug %}">Add to Cart</a>
+        <a style="background-color: #f3db15;" class="btn btn-alert" data-toggle="tooltip" title="Wishlist"
+            href="{% url 'shop:add_wishlist' books.category.slug books.slug %}"><i style="background-color: #f3db15;" class="fas fa-heart "></i></a>
+            <a  id="share" class="btn btn-primary"><i style="" class="fas fa-share-alt text-light"></i></a>
+      
+
+    </div>
+        
+
+     
+    </div>
+</div>
+</div>
+
+<script>
+    var input = document.createElement("input")
+ var sharer = document.getElementById("sharee")
+    sharer.addEventListener("click", copyFunction)
+    var num = document.getElementById("num");
+
+
+function copyFunction(){
+
+text = window.location.href
+document.body.appendChild(input)
+input.value = text
+input.select()
+document.execCommand("copy")
+document.body.removeChild(input)
+alert("copied")
+}
+</script>
+
+{%endblock content%}

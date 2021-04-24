@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+	.menu {
+		height: 30vh;
+		width: 200px;
+		z-index: 1;
+		left: 0;
+		margin-top: 55px;
+
+
+		padding-top: 20px;
+		background-color: #282d32;
+		position: absolute;
+		margin-bottom: -40px;
+
+		
+
+	}
+	.menu a {
+		text-decoration: none;
+		list-style-type: none;
+		display: block;
+		text-transform: uppercase;
+	}
+
+	.menu a:hover {
+		background-color: grey;
+	}
+</style>
+<div class="container">
+
+    <div class="menu">
+
+		<a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
+			<i class="fas fa-chevron-left"></i>dashboard
+		</a>
+		<a style=" font-weight:20px" href="{% url 'profile_view'%}" class="text-justify text-light btn  rounded-0">Profile </a>
+		<a style=" font-weight:20px" href="{% url 'shop:wishList_books'%}"
+			class="text-justify text-light btn rounded-0 ">Wishlist</a>
+		<a style=" font-weight:20px" href="{% url 'order:order_history'%}"
+			class="text-justify text-light btn rounded-0">Orders</a>
+		<a href="{% url 'shop:reviewList'%}" style="  font-weight:20px" class="text-justify disabled text-light btn rounded-0"
+			aria-disabled="true">Reviews</a>
+
+
+	</div>
+
+
+
+
+   
+	<br>
+	<h1  class="text-justify my_title ml-5 pl-5">Reviews</h1>
+	<br>
+	
+<div class="row">
+	<div class="col-1">
+
+	</div>
+	<div class="col-11">
+
+	<div class="row">
+
+	
+    
+    {% if reviews %}
+
+        {% for review in reviews%}
+
+        <div class="col-3 reviewCard border-bottom">
+
+
+            <div class="card border-0">
+                <div style=" font-size: 20px; font-style: italic; font-family: Arial, Helvetica, sans-serif; background-color: white;"class="card-header border-0">
+					<img style="width: 200px;" src="{{review.review_item.image.url}}">
+					"{{review.subject}}"
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p style="font-size: 15px; font-weight: lighter;">{{review.comment}}</p>
+                        <footer class="">
+                            <p style="text-transform: uppercase; font-size: 12px; font-weight: bolder;">{{review.name}}</p>
+                            <p style="text-transform: uppercase; font-size: 12px; margin-top: -17px; ">{{review.created_date}}</p>
+                        </footer>
+                        <blockquote>
+                </div>
+            </div>
+
+        </div>
+   
+
+        {%endfor%}
+	</div>
+</div>
+    </div>
+ 
+{%else%}
+<h1 class="text-center my-5 py-5">No Reviews by {{request.user}}</h1>
+
+{%endif%}
+
+</div>
+
+
+</div>
+
+{%endblock content%}
