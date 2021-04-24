@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+	{% if category %}
+		{{ category.description|truncatewords:155 }}
+	{% else %}
+		Welcome to the Online Book Store where you can buy awesome books.
+	{% endif %}
+{% endblock %}
+{% block title %}
+	{% if category %}
+		{{ category.name }} - Bookspace.
+	{% else %}
+		Best Value - Bookspace.
+	{% endif %}
+{% endblock %}
+{% block content %}
+
+
+
+<div class="container-fluid">
+
+    <h1 class="my-4" style="font-style: italic; font-size: 30px; margin-left: 20px;">Blogs</h1>
+<div class="row mx-auto">
+    
+    {% for blog in blogs %}
+    <div class="col-4">
+
+        <a href="{% url 'blog:blog_detail' blog.id %}"><img style="width: 450px;" id="" src="{{blog.image.url}}"/></a>
+
+        <h1 class="my-4" style="font-style: italic; font-size: 30px;">{{blog.title}}</h1>
+        <p style="font-weight: lighter;">{{blog.body|truncatechars:400}}<span><a  style="color: black; font-weight: bolder;" class="streched-link" href="{% url 'blog:blog_detail' blog.id %}">more</a> </span></p>
+
+    </div>
+    {% endfor%}
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock content%}

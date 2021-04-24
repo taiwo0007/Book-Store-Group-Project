@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Order History - Bookspace.
+{% endblock %}
+{% block content %}
+
+<style>
+	.menu {
+		height: 30vh;
+		width: 200px;
+		z-index: 1;
+		left: 0;
+		margin-top: 55px;
+
+
+		padding-top: 20px;
+		background-color: #282d32;
+		position: absolute;
+		margin-bottom: -40px;
+	
+	
+
+	}
+
+	.menu a {
+		text-decoration: none;
+		list-style-type: none;
+		display: block;
+		text-transform: uppercase;
+	}
+
+	.menu a:hover {
+		background-color: grey;
+	}
+</style>
+
+
+	<div class="menu">
+
+		<a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
+			<i class="fas fa-chevron-left"></i> dashboard
+		</a>
+		<a style=" font-weight:20px" href="{% url 'profile_view'%}" class="text-justify text-light btn  rounded-0">Profile </a>
+		<a style=" font-weight:20px" href="{% url 'shop:wishList_books'%}"
+			class="text-justify text-light btn rounded-0 ">Wishlist</a>
+		<a style=" font-weight:20px" href="{% url 'order:order_history'%}"
+			class="text-justify disabled text-light btn rounded-0">Orders</a>
+		<a href="{% url 'shop:reviewList'%}" style="  font-weight:20px" class="text-justify  text-light btn rounded-0"
+			aria-disabled="true">Reviews</a>
+
+
+	</div>
+<div class="row">
+	<div class="col-2">
+
+	</div>
+
+	
+
+
+
+
+
+<div class="col-10">
+
+
+	<div class="text-center">
+		<br>
+		<h1 class="text-justify my_title">Order History</h1>
+		<br>
+		{% if order_details %}
+		<table style="width: 80vw;" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Order Number</th>
+					<th>Order Date</th>
+					<th>Total Amount</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for order in order_details %}
+				<tr>
+					<td>{{ order.id }}</td>
+					<td>{{ order.created|date:"d M Y" }}</td>
+					<td>{{ order.total }}</td>
+					<td><i class="fas fa-check"></i>&nbsp;Complete</td>
+					<td><a href="{% url 'order:order_detail' order.id %}">View order</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>You have not placed any orders yet.<br><br><a href="{% url 'shop:allBookCat' %}"
+				class="btn btn-secondary">Continue shopping</a></p>
+		{% endif %}
+	</div>
+
+
+
+
+</div>
+</div>
+
+<br>
+<br>
+{% endblock %}

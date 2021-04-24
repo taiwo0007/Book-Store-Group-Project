@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+	{% if category %}
+		{{ category.description|truncatewords:155 }}
+	{% else %}
+		Welcome to the Online Book Store where you can buy awesome books.
+	{% endif %}
+{% endblock %}
+{% block title %}
+	{% if category %}
+		{{ category.name }} - Online Book Store
+	{% else %}
+		Bookspace.
+	{% endif %}
+{% endblock %}
+{% block content %}
+
+
+
+{% if managerCheck %}
+
+
+	
+{% endif %}
+	<!--Breadcrumb navigation-->
+	{% if category %}
+		<div class="row my_row_class">
+			<div class="mx-auto">
+				<p><a style="font-weight: bolder; font-family: 'Baskervville', serif; font-size: 20px;" href="{% url 'shop:allBookCat' %}">Our book Collection</a> | {{category.name}}</p>
+			</div>
+        </div>
+    {% endif %}
+	<div style=" overflow-x: hidden; margin-top: -10px;;" class="mx-auto">
+	{% if category.image %}
+	<a href="{% url 'shop:allBookCat' %}">
+		<img style="width:100vw" class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
+	</a>
+	</div>
+	
+	<br>
+	<div>
+		<h1 class="text-center my_title" >{{category.name}}</h1>
+		<p class="text-justify">{{category.description}}</p>
+    </div>
+   {% else %}
+
+   <a href="{% url 'shop:allBookCat' %}">
+		<img style="width:100vw;" class="my_image my_image_padding " src="{% static 'images/banner2.jpeg' %}" alt="Our Book Collection">
+	</a>
+	</div>
+	<br>
+	<div>
+		<h1 style=" font-family: 'Baskervville', serif; margin-bottom: -50px;"class=" text-center my_title" >Our Book Collection</h1>
+		<p class="text-justify"></p>
+	
+	</div>
+    {% endif %}
+
+	<style>
+.imHover{
+				transition: 100.1ms ease-in;
+			}
+			.imHover:hover{
+
+				background-color: #282d32;
+				color: white;
+				transform: translateY(-9px);
+			}
+	</style>
+   <div class="container-fluid">
+		<div style=" margin: 100px 200px;" class="row"> 
+			{% for book in books %}
+		
+				<div class="mb-5 col-9 col-lg-2 col-sm-3 col-md-4">
+					<div style="font-size: 10px; " class="card text-center h-150 text-sm border-0" style="min-width: 1rem; ">
+						
+						<a href="{{book.get_absolute_url}}"><img  data-toggle="tooltip" title="{{book.title}}" class="card-img-top my_image imHover" style="width: 150px;;" src="{{book.image.url}}" alt="{{book.title}}">
+							</a>
+						<div  class="card-body">
+							<h3 style="font-weight: bolder; font-family: 'Baskervville', serif; font-size: 14px;" class="card-text" >{{book.title}}</h3>
+							<p class="card-text">€{{book.price}}</p>
+							<p style="color: rgb(114, 91, 69);" class="card-text">{{book.author}}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<script>
+			images = document.querySelector(".imHover")
+			text = document.querySelector(".hoverer")
+
+			images.addEventListener("",myFunction )
+
+			function myFunction(){
+
+				images.appendChild(text)
+				
+			}
+		</script>
+		<div class="mx-auto" style="margin-top: 30px; margin-bottom: 130px;">
+			{% if books.paginator.num_pages > 1 %}
+				<hr>
+				<div class="text-center">
+					{% for pg in books.paginator.page_range %}
+						<a href="?page={{pg}}" class="btn btn-light btn-sm
+							{% if books.number == pg %}active{% endif %}">{{pg}}
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		
+	</div>		
+	</div>
+
+		
+
+
+{% endblock %}

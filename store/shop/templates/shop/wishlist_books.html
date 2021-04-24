@@ -1,0 +1,90 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<style>
+	.menu {
+		height: 30vh;
+		width: 200px;
+		z-index: 1;
+		left: 0;
+		margin-top: 55px;
+
+
+		padding-top: 20px;
+		background-color: #282d32;
+		position: absolute;
+		margin-bottom: -40px;
+
+		
+
+	}
+
+	.menu a {
+		text-decoration: none;
+		list-style-type: none;
+		display: block;
+		text-transform: uppercase;
+	}
+
+	.menu a:hover {
+		background-color: grey;
+	}
+</style>
+    <div  class="container-fluid pt-1">
+
+        <div class="menu">
+
+            <a style=" font-weight:20px; " href="{% url 'dashboard_view'%}" class="text-justify text-light btn rounded-0">
+                <i class="fas fa-chevron-left"></i> dashboard
+            </a>
+            <a style=" font-weight:20px" href="{% url 'profile_view'%}" class="text-justify text-light btn  rounded-0">Profile </a>
+            <a style=" font-weight:20px" href="{% url 'shop:wishList_books'%}"
+                class="text-justify text-light btn rounded-0 disabled">Wishlist</a>
+            <a style=" font-weight:20px" href="{% url 'order:order_history'%}"
+                class="text-justify text-light btn rounded-0">Orders</a>
+            <a href="{% url 'shop:reviewList'%}" style="  font-weight:20px" class="text-justify  text-light btn rounded-0"
+                aria-disabled="true">Reviews</a>
+    
+    
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            
+        
+        <div class="col-10">
+            <br>
+            <h1 class="text-justify my_title">Wish List</h1>
+            <br>
+        {% if books %}
+        <div class="row " style="margin: 0 ;"> 
+            {% for book in books %}
+        
+                <div class="my_bottom_margin col-2">
+                    <div style="font-size: 10px; " class="card text-center h-50 border-0" style="min-width: 18rem;">
+                        <a href="{{book.wished_item.get_absolute_url}}"><img style="width: 150px;;" class="card-img-top my_image" src="{{book.wished_item.image.url}}" alt="{{book.title}}"></a>
+                        <div class="card-body">
+                            <h4 class="card-text" >{{book.wished_item.title}}</h4>
+                            <p class="card-text">€{{book.wished_item.price}}</p>
+                            <p style="color: rgb(114, 91, 69);" class="card-text">{{book.wished_item.author}}</p>
+                            <a style="font-size: 10px;"class="btn btn-danger" href="{% url 'shop:wishList_delete' book.wished_item.slug %}">Delete</a>
+                            <br>
+                            <a  style="font-size: 10px;"class="btn btn-secondary mt-2" href="{% url 'cart:add_cart' book.wished_item.slug %}">Add to Cart</a>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+        {% else %}
+        <p class="card-text text-center mt-3">No books in wishlist</p>
+        {% endif %}
+        </div>
+</div>
+</div>
+ 
+{% endblock content%}
