@@ -32,6 +32,11 @@
 			</li>
 			{% endif %}
 			{% endif %}
+			{%if request.user.groups.all.0.name == "Manager" %}
+		
+				<span class="badge badge-dark">Manager</span>
+			
+			{%endif%}
 
 			{% if user.is_authenticated %}
 			<li class="dropdown">
