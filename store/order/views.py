@@ -14,7 +14,9 @@ from django.template.loader import render_to_string
 
 def thanks(request,order_id):
     if request.user.is_authenticated:
-        template = render_to_string('email_template.html',{'name':request.user.username})
+        order = Order.objects.get(id=order_id)
+        order_items =OrderItem.objects.filter(order=order)
+        template = render_to_string('email_template.html',{'name':request.user.username , 'product':order_items})
     
         email = EmailMessage(
             'subject',
