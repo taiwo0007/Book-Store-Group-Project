@@ -37,6 +37,7 @@ class Author(models.Model):
         editable =False)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
+    full_name = models.CharField(max_length=250,default='SOME STRING')
     age = models.PositiveSmallIntegerField()
     about = models.TextField(blank=True)
 
