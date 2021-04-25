@@ -74,3 +74,8 @@ class TestUrls(SimpleTestCase):
         url = reverse('blog:blog_detail', args=['1'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, blogDetail)
+
+    def test_add_blog_url_resolved(self):
+        url = reverse('blog:add_blog')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, addBlog)

@@ -167,8 +167,12 @@ class TestUrls(SimpleTestCase):
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, cheapBooks)
     
-
     def test_add_review_url_resolved(self):
         url = reverse('shop:add_review', args=['childrens', 'diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, addReview)
+
+    def test_reviewList_url_resolved(self):
+        url = reverse('shop:reviewList')
+        print(resolve(url).func)
+        self.assertEquals(resolve(url).func, reviewList)

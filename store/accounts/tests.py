@@ -43,3 +43,18 @@ class TestUrls(SimpleTestCase):
        # print(resolve(url).func)
         self.assertEquals(resolve(url).func, change_password)
 
+    #new
+
+    def test_profile_view_url_resolved(self):
+        url = reverse('profile_view')
+       # print(resolve(url).func)
+        self.assertEquals(resolve(url).func, profileView)
+
+    def test_dashboard_view_url_resolved(self):
+        url = reverse('dashboard_view')
+       # print(resolve(url).func)
+        self.assertEquals(resolve(url).func, dashboardView)
+
+    
+
+
