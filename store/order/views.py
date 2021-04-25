@@ -5,10 +5,26 @@ from . forms import RefundForm
 from django.views.generic import View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
 
 # Create your views here.
 
 def thanks(request,order_id):
+    if request.user.is_authenticated:
+        template = render_to_string('email_template.html',{'name':request.user.username})
+    
+        email = EmailMessage(
+            'subject',
+            template,
+            settings.EMAIL_HOST_USER,
+            [request.user.email],
+            )
+        email.fail_silently = False
+        email.send()
+
     if order_id:
         customer_order = get_object_or_404(Order,id=order_id)
     return render(request,'thanks.html',{'customer_order':customer_order})
