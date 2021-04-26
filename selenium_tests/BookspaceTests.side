@@ -1,0 +1,798 @@
+{
+  "id": "57679d35-d13d-4db6-b0d0-955ee4875452",
+  "version": "2.0",
+  "name": "BookspaceTests",
+  "url": "http://taiwo.pythonanywhere.com/",
+  "tests": [{
+    "id": "6292075d-adac-4446-949b-29cd034bd338",
+    "name": "Sign in/out",
+    "commands": [{
+      "id": "f7c3469d-9da0-46d3-b24a-6b7f702c7b2e",
+      "comment": "",
+      "command": "open",
+      "target": "http://taiwo.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "18e1c4b8-4ee0-4747-afaf-f4a7c0ac9245",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1734x1400",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e56211fe-d7a6-48b4-8e57-87886dd08ddc",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(5) > a",
+      "targets": [
+        ["css=li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/login/')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3caa9ddb-bee7-425c-91ab-85dffa86bb18",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_username",
+      "targets": [
+        ["id=id_username", "id"],
+        ["name=username", "name"],
+        ["css=#id_username", "css:finder"],
+        ["xpath=//input[@id='id_username']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_username']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "newuser10"
+    }, {
+      "id": "0205d2c4-d5cf-4d75-944e-3aa474cf4208",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_password",
+      "targets": [
+        ["id=id_password", "id"],
+        ["name=password", "name"],
+        ["css=#id_password", "css:finder"],
+        ["xpath=//input[@id='id_password']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_password']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "easypass"
+    }, {
+      "id": "6a4e8bcb-bf27-49a2-bbd4-b93aa6fb99b2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-dark:nth-child(6)",
+      "targets": [
+        ["css=.btn-dark:nth-child(6)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1693e566-07f0-4545-81a8-b4373c842569",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.dropdown > a",
+      "targets": [
+        ["css=.dropdown > a", "css:finder"],
+        ["xpath=//a[contains(text(),'newuser10')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/profile/')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6ca83d0-857d-4a26-829a-cd88df0d0915",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(7) > a",
+      "targets": [
+        ["css=li:nth-child(7) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Out')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/logout/')]", "xpath:href"],
+        ["xpath=//li[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef28e139-f903-40d1-99e4-8450b65e8440",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "6a7f8644-d440-490b-bdc4-ef8aea0b0b37",
+    "name": "Add/remove book from cart",
+    "commands": [{
+      "id": "befd4341-dbc9-4366-95b8-db75f9c2c890",
+      "comment": "",
+      "command": "open",
+      "target": "http://taiwo.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "facfb2bf-7666-4ae9-be75-6a87a5c71e10",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1705x1380",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b0562a8f-92df-4803-8087-17dff0313c75",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(5) > a",
+      "targets": [
+        ["css=li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/login/')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df32cc20-6092-4cb0-9412-d5cc59f8a473",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_username",
+      "targets": [
+        ["id=id_username", "id"],
+        ["name=username", "name"],
+        ["css=#id_username", "css:finder"],
+        ["xpath=//input[@id='id_username']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_username']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "newuser10"
+    }, {
+      "id": "92659b4a-c0a4-4b5d-88bf-bcf8b346ef8c",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_password",
+      "targets": [
+        ["id=id_password", "id"],
+        ["name=password", "name"],
+        ["css=#id_password", "css:finder"],
+        ["xpath=//input[@id='id_password']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_password']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "easypass"
+    }, {
+      "id": "4698ee56-a881-47c3-b8c1-32d2b59c6b89",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-dark:nth-child(6)",
+      "targets": [
+        ["css=.btn-dark:nth-child(6)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b72c2233-13c2-4800-b840-020bcc53a4f4",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.mb-5:nth-child(1) .card-img-top",
+      "targets": [
+        ["css=.mb-5:nth-child(1) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='A Thousand Ships']", "xpath:img"],
+        ["xpath=//div/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8746c2de-06eb-482d-8d1f-2bb1c85baec3",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.mb-5:nth-child(1) .card-img-top",
+      "targets": [
+        ["css=.mb-5:nth-child(1) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='A Thousand Ships']", "xpath:img"],
+        ["xpath=//div/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7158e3ba-f248-4859-b6a0-21f87440236c",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.mb-5:nth-child(2) .card-img-top",
+      "targets": [
+        ["css=.mb-5:nth-child(2) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='A promised Land']", "xpath:img"],
+        ["xpath=//div[2]/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "97a286c6-9cd5-4244-9e76-c4819fe26acb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-5:nth-child(2) .card-img-top",
+      "targets": [
+        ["css=.mb-5:nth-child(2) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='A promised Land']", "xpath:img"],
+        ["xpath=//div[2]/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2580945-a331-49f0-804e-f850cb3c73d2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Add to Cart",
+      "targets": [
+        ["linkText=Add to Cart", "linkText"],
+        ["css=.btn-dark:nth-child(7)", "css:finder"],
+        ["xpath=//a[contains(text(),'Add to Cart')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/cart/add/a-promised-land/')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Add to Cart')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a885ceab-7a34-42ef-9d02-03e7b580ad22",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=REMOVE",
+      "targets": [
+        ["linkText=REMOVE", "linkText"],
+        ["css=.pb-5:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'REMOVE')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/cart/full_remove/a-promised-land/')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'REMOVE')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "45259d8c-fd57-4ea3-b41f-db7f78d78af0",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.my_title",
+      "targets": [
+        ["css=.my_title", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Your shopping cart is empty')]", "xpath:innerText"]
+      ],
+      "value": "Your shopping cart is empty"
+    }, {
+      "id": "5f515954-827a-4122-85c5-3ee11dbf7e1d",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(7) > a",
+      "targets": [
+        ["css=li:nth-child(7) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Out')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/logout/')]", "xpath:href"],
+        ["xpath=//li[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f9839fd-67e0-4a6c-9b74-6f423f9feb46",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "267e4358-f837-45e9-9132-f10edaba7668",
+    "name": "Add item to wishlist",
+    "commands": [{
+      "id": "aed8bd40-e77a-421f-8a47-9f96fe6acc47",
+      "comment": "",
+      "command": "open",
+      "target": "http://taiwo.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5d6426b1-f1d0-4d38-b8b6-6e99e8cbbce2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1705x1380",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eb5c69a8-884e-431e-9c30-fc38cb9b5ac9",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(5) > a",
+      "targets": [
+        ["css=li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/login/')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "31c9b5b6-4ba3-407f-8b80-a441544855d5",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_username",
+      "targets": [
+        ["id=id_username", "id"],
+        ["name=username", "name"],
+        ["css=#id_username", "css:finder"],
+        ["xpath=//input[@id='id_username']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_username']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "newuser10"
+    }, {
+      "id": "e6ac50d0-4113-40df-ae1f-3ba15c59b263",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_password",
+      "targets": [
+        ["id=id_password", "id"],
+        ["name=password", "name"],
+        ["css=#id_password", "css:finder"],
+        ["xpath=//input[@id='id_password']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_password']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "easypass"
+    }, {
+      "id": "def14814-420f-46a3-9cc2-91f710cc2628",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-dark:nth-child(6)",
+      "targets": [
+        ["css=.btn-dark:nth-child(6)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8625e9b6-dd8c-4bfd-93d9-8f4b25f98552",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.mb-5:nth-child(1) .card-img-top",
+      "targets": [
+        ["css=.mb-5:nth-child(1) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='A Thousand Ships']", "xpath:img"],
+        ["xpath=//div/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "06ae1247-1105-4675-a6e1-1d8db19f12a9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-5:nth-child(1) .card-img-top",
+      "targets": [
+        ["css=.mb-5:nth-child(1) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='A Thousand Ships']", "xpath:img"],
+        ["xpath=//div/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "24adeb0d-719b-4902-9156-327ae893f188",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-alert > .fas",
+      "targets": [
+        ["css=.btn-alert > .fas", "css:finder"],
+        ["xpath=//a[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "661d9af7-678b-4f96-acea-ca7b54c41dea",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.alert",
+      "targets": [
+        ["css=.alert", "css:finder"],
+        ["xpath=//div[3]/div", "xpath:position"]
+      ],
+      "value": "\"A Thousand Ships\" added to Wish List\\n×"
+    }, {
+      "id": "7abae515-bcef-4673-9ba8-2cdf2c63c5ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav-link",
+      "targets": [
+        ["css=.nav-link", "css:finder"],
+        ["xpath=//a[contains(@href, '/wishlists/')]", "xpath:href"],
+        ["xpath=//li[7]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a71d849-b51c-4796-a0e2-0d26559cd48f",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.card-text:nth-child(1)",
+      "targets": [
+        ["css=.card-text:nth-child(1)", "css:finder"],
+        ["xpath=//h4", "xpath:position"]
+      ],
+      "value": "A THOUSAND SHIPS"
+    }, {
+      "id": "b0499dd3-90fa-4d59-b835-85b7647b4e14",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Delete",
+      "targets": [
+        ["linkText=Delete", "linkText"],
+        ["css=.btn-danger", "css:finder"],
+        ["xpath=//a[contains(text(),'Delete')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/books/a-thousand-ships/delete')]", "xpath:href"],
+        ["xpath=//div[2]/div[2]/div/div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a895895-016d-4afd-8fdc-ebabb71226b4",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(7) > a",
+      "targets": [
+        ["css=li:nth-child(7) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Out')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/logout/')]", "xpath:href"],
+        ["xpath=//li[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1652a06e-8b9d-4d02-90dc-5d6c2f04daac",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "3734cb1d-427d-4180-a47e-65350fd1cd02",
+    "name": "Submit contact form",
+    "commands": [{
+      "id": "8f4ce027-9dbd-4bf0-8c65-814c36f7c38f",
+      "comment": "",
+      "command": "open",
+      "target": "http://taiwo.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "98ce7809-f400-40aa-8349-e48c7b5ce6e1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1705x1380",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "818f5ba2-61b2-4a09-bae7-e4bf20029786",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mt-2:nth-child(2) > a",
+      "targets": [
+        ["css=.mt-2:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Contact')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/contact')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c0fc84d-a922-40e5-9eea-e3b093e67d06",
+      "comment": "",
+      "command": "click",
+      "target": "id=id_firstname",
+      "targets": [
+        ["id=id_firstname", "id"],
+        ["name=firstname", "name"],
+        ["css=#id_firstname", "css:finder"],
+        ["xpath=//input[@id='id_firstname']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_firstname']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5e3a41b-b80b-47b5-8595-f60d6129b0c0",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_firstname",
+      "targets": [
+        ["id=id_firstname", "id"],
+        ["name=firstname", "name"],
+        ["css=#id_firstname", "css:finder"],
+        ["xpath=//input[@id='id_firstname']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_firstname']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "fname"
+    }, {
+      "id": "4e884235-47c5-4c2c-b9dc-de1f1e4202d1",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_lastname",
+      "targets": [
+        ["id=id_lastname", "id"],
+        ["name=lastname", "name"],
+        ["css=#id_lastname", "css:finder"],
+        ["xpath=//input[@id='id_lastname']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_lastname']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "lname"
+    }, {
+      "id": "fe2e5af6-1aa1-439a-a448-d2f90b06d876",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_email",
+      "targets": [
+        ["id=id_email", "id"],
+        ["name=email", "name"],
+        ["css=#id_email", "css:finder"],
+        ["xpath=//input[@id='id_email']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_email']/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "fname@email.com"
+    }, {
+      "id": "1e37f4cd-1995-4eab-91cc-02fe2a1f5a5d",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_subject",
+      "targets": [
+        ["id=id_subject", "id"],
+        ["name=subject", "name"],
+        ["css=#id_subject", "css:finder"],
+        ["xpath=//textarea[@id='id_subject']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_subject']/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "selenium test"
+    }, {
+      "id": "ee0a0d4c-f33b-434d-8a77-fe3aab1ac465",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e33898ca-2a27-4fe6-a585-a7f97f2dc50c",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.my_title",
+      "targets": [
+        ["css=.my_title", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Thanks for contacting us!')]", "xpath:innerText"]
+      ],
+      "value": "Thanks for contacting us!"
+    }, {
+      "id": "d55a3f9b-c760-4d34-8e63-b746c8918902",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "265731d6-20da-440b-bf2e-46d0f2f2059f",
+    "name": "Search book",
+    "commands": [{
+      "id": "c03a4215-00b0-4e13-b116-5c358228304c",
+      "comment": "",
+      "command": "open",
+      "target": "http://taiwo.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7ed0c600-ded9-4073-9f76-773398024b96",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1705x1380",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "520c56e2-6c56-475a-8d2a-74911004ccec",
+      "comment": "",
+      "command": "click",
+      "target": "id=searcher",
+      "targets": [
+        ["id=searcher", "id"],
+        ["name=q", "name"],
+        ["css=#searcher", "css:finder"],
+        ["xpath=//input[@id='searcher']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc8b552c-e04e-4592-86e7-d48d3932cbd8",
+      "comment": "",
+      "command": "type",
+      "target": "id=searcher",
+      "targets": [
+        ["id=searcher", "id"],
+        ["name=q", "name"],
+        ["css=#searcher", "css:finder"],
+        ["xpath=//input[@id='searcher']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "beautiful"
+    }, {
+      "id": "3d25155b-9ad2-4f02-8972-1657f4ef82b5",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=searcher",
+      "targets": [
+        ["id=searcher", "id"],
+        ["name=q", "name"],
+        ["css=#searcher", "css:finder"],
+        ["xpath=//input[@id='searcher']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "d7931b3f-8dff-4a04-817a-dece9620be88",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"]
+      ],
+      "value": "BEAUTIFUL WORLD WHERE YOU ARE"
+    }, {
+      "id": "de46d5af-0ccb-4844-87f2-14c6e419f2cb",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "b096c278-7237-4484-ba8d-0b299b911f6e",
+    "name": "login manager/ view dashboard",
+    "commands": [{
+      "id": "696bf8a5-1dc8-45f3-aaed-e16e016cb00a",
+      "comment": "",
+      "command": "open",
+      "target": "http://taiwo.pythonanywhere.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "95e6d2e7-fd5d-4be0-8a02-6e33f8dc6861",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1705x1380",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ecabd66d-1b0b-47a0-9c03-89c77d7c129d",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(5) > a",
+      "targets": [
+        ["css=li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/login/')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0ae6818c-4699-4e07-8a3c-f9de639ab982",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_username",
+      "targets": [
+        ["id=id_username", "id"],
+        ["name=username", "name"],
+        ["css=#id_username", "css:finder"],
+        ["xpath=//input[@id='id_username']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_username']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "manager2"
+    }, {
+      "id": "810d9baf-fa24-4c91-9479-8a686e1435c1",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_password",
+      "targets": [
+        ["id=id_password", "id"],
+        ["name=password", "name"],
+        ["css=#id_password", "css:finder"],
+        ["xpath=//input[@id='id_password']", "xpath:attributes"],
+        ["xpath=//div[@id='div_id_password']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "easypass"
+    }, {
+      "id": "42390c4c-76ef-446d-8e63-2888fc01af9c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-dark:nth-child(6)",
+      "targets": [
+        ["css=.btn-dark:nth-child(6)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "304eb51f-f923-4c1d-81c1-16587f3ca044",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.mt-2:nth-child(5) > a",
+      "targets": [
+        ["css=.mt-2:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'dashboard')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/dashboard/')])[2]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e4bc0aa7-ec22-4d6f-b456-68aa24efc0ab",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mt-2:nth-child(5) > a",
+      "targets": [
+        ["css=.mt-2:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'dashboard')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/dashboard/')])[2]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3eb5044-9cbd-461f-ac1d-c865b3c1601d",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.badge-warning",
+      "targets": [
+        ["css=.badge-warning", "css:finder"],
+        ["xpath=//body/div/h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Total Sales All Time: €1384')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8063a4dc-f199-4d47-87ab-9463b5823ab3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Home",
+      "targets": [
+        ["linkText=Home", "linkText"],
+        ["css=.navbar-brand", "css:finder"],
+        ["xpath=//a[contains(text(),'Home')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Home')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8c264b5-4f55-46b4-a0c1-ff75fd620696",
+      "comment": "",
+      "command": "click",
+      "target": "css=li:nth-child(9) > a",
+      "targets": [
+        ["css=li:nth-child(9) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Out')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/logout/')]", "xpath:href"],
+        ["xpath=//li[7]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a7a7c15-0b6e-4587-a472-1586d3fcd635",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "2f9bdeff-ba67-42e9-80d7-a181fd21f560",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://taiwo.pythonanywhere.com/"],
+  "plugins": []
+}
