@@ -294,6 +294,18 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "2aff272c-d3b3-4dad-b081-cd16a973eb31",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=li:nth-child(5) > a",
+      "targets": [
+        ["css=li:nth-child(5) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign In')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/accounts/login/')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
       "id": "eb5c69a8-884e-431e-9c30-fc38cb9b5ac9",
       "comment": "",
       "command": "click",
@@ -589,6 +601,19 @@
       "target": "1705x1380",
       "targets": [],
       "value": ""
+    }, {
+      "id": "dc48c013-6216-4dea-8383-45f613f2ee70",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "id=searcher",
+      "targets": [
+        ["id=searcher", "id"],
+        ["name=q", "name"],
+        ["css=#searcher", "css:finder"],
+        ["xpath=//input[@id='searcher']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "30000"
     }, {
       "id": "520c56e2-6c56-475a-8d2a-74911004ccec",
       "comment": "",
