@@ -1,0 +1,36 @@
+
+{% block content %}
+{% include "dashboard/manager_navigation.html" %}
+<div class="container">
+<div class="row py-5">
+
+<div class="col-md-12">
+<h4 class="py-5 text-center">Searched for "{{query}}"</h4>
+<table class="table">
+<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Category</th>
+      <th scope="col">Quantity</th>
+	  <th scope="col">Activity</th>
+    </tr>
+  </thead>
+    <tbody>
+{% for book in books %}
+<tr>
+<th scope="row"><a href="{{book.get_absolute_url}}"><img class="float-left img-thumbnail" style="width:100px; height:auto;" src="{{book.image.url}}" alt="{{book.title}}"></a></th>
+<td>{{ book.title }}</td>
+<td>{{ book.category.slug }}</td>
+<td>{{ book.stock }}</td></a>
+<td><a style="font-size: 15px;" class="btn btn-secondary btn-sm my-2" href="{% url 'shop:book_edit' book.category.slug book.slug %}">Edit</a><a style="font-size: 15px;" class="btn btn-danger btn-sm my-2" href="{% url 'shop:book_delete' book.category.slug book.slug %}">Delete</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content%}

@@ -1,6 +1,24 @@
 
 {% include "dashboard/manager_navigation.html" %}
 
+<div class="col-12 mb-5 ">
+    <div class="card shadow">
+        <div class="card-header text-center text-light bg-dark">
+            search
+        </div>
+    
+            <form style="" class="card-body " action="{% url 'search_app:managerSearchResult' %}" method="get">
+                {% csrf_token %}
+                <input  id="searcher"  class="form-control  rounded-0" type="search" placeholder="" aria-label="Search" name="q">
+                <br>
+                <button style="" class="btn btn-dark my-2 my-sm-0 text-center" type="submit">Search</button>
+                
+              
+              </form>
+        
+    </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.1/dist/chart.min.js"></script>
 
