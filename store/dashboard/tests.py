@@ -48,3 +48,15 @@ class TestUrls(SimpleTestCase):
             print(resolve(url).func)
             self.assertEquals(resolve(url).func, voucherDeleteView)
 
+class TestViews(TestCase):
+    def test_manager_dashboard_view(self):
+        response = self.client.get(reverse('dashboard:manager_dashboard'))
+        self.assertEquals(response.status_code,302)
+    
+    def test_orders_list_view(self):
+        response = self.client.get(reverse('dashboard:all_orders'))
+        self.assertEquals(response.status_code,302)
+
+    def test_userListView_view(self):
+        response = self.client.get(reverse('dashboard:user_list'))
+        self.assertEquals(response.status_code,302)

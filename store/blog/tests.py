@@ -79,3 +79,18 @@ class TestUrls(SimpleTestCase):
         url = reverse('blog:add_blog')
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, addBlog)
+    
+class TestViews(TestCase):
+
+    def test_blogView_view(self):
+        pass
+        # response = self.client.get(reverse('blog:blog_list'))
+        # self.assertEquals(response.status_code,200)
+        # self.assertTemplateUsed(response,'blog/blog_list.html')
+
+    def test_blogDetail_view(self):
+        response = self.client.get(reverse('blog:blog_detail',args=['1']))
+        self.assertEquals(response.status_code,404)
+        # self.assertTemplateUsed(response,'blog/blog_list.html')
+
+        

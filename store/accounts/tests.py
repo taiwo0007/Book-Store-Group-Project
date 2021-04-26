@@ -54,7 +54,13 @@ class TestUrls(SimpleTestCase):
         url = reverse('dashboard_view')
        # print(resolve(url).func)
         self.assertEquals(resolve(url).func, dashboardView)
+    
 
+class TestViews(TestCase):
+
+    def test_profileView_view(self):
+        response = self.client.get(reverse_lazy('profile_view'))
+        self.assertEquals(response.status_code,302)
     
 
 

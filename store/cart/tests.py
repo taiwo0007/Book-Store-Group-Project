@@ -80,3 +80,13 @@ class TestUrls(SimpleTestCase):
         url = reverse('cart:full_remove', args=['diary-of-a-wimpy-kid'])
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, full_remove)
+    
+class TestViews(TestCase):
+
+    def test_add_cart_view(self):
+        pass
+        # response = self.client.get(reverse('cart:add_cart',args=['diary-of-a-wimpy-kid']))
+        # self.assertEquals(response.status_code,302)
+        # self.assertTemplateUsed(response,'cart:cart_detail')
+    
+    
