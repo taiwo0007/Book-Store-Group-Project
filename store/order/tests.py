@@ -84,3 +84,22 @@ class TestUrls(SimpleTestCase):
         url = reverse('order:request-refund')
         print(resolve(url).func)
         #self.assertEquals(resolve(url).func, RequestRefundView.as_view())
+    
+class TestViews(TestCase):
+
+    def test_thanks_view(self):
+        response = self.client.get(reverse('order:thanks',args=['10']))
+        self.assertEquals(response.status_code,404)
+       
+    def test_orderHistory(self):
+        response = self.client.get(reverse('order:order_history'))
+        self.assertEquals(response.status_code,302)
+
+    def test__order_detail_view(self):
+        response = self.client.get(reverse('order:order_detail', args=['10']))
+        self.assertEquals(response.status_code,302)
+
+    def test_refund_view(self):
+        response = self.client.get(reverse('order:request-refund'))
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'request_refund.html')

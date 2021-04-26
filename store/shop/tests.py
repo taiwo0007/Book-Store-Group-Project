@@ -176,3 +176,46 @@ class TestUrls(SimpleTestCase):
         url = reverse('shop:reviewList')
         print(resolve(url).func)
         self.assertEquals(resolve(url).func, reviewList)
+
+class TestViews(TestCase):
+
+    def test_reviewList_views(self):
+        response = self.client.get(reverse('shop:reviewList')) 
+        self.assertEquals(response.status_code,302)
+        # self.assertTemplateUsed(response,'shop/reviews.html')
+    
+    def test_cheapBooks_views(self):
+        response = self.client.get(reverse('shop:cheapBooks'))
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'shop/book_cheap.html')
+    
+    def test_topRatedBooks_views(self):
+        response = self.client.get(reverse('shop:topRatedBooks'))
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'shop/book_rating.html')
+    
+    # def test_book_detail_views(self):
+
+    #     response = self.client.get(reverse('shop:book_detail',args=['childrens', 'diary-of-a-wimpy-kid']))
+    #     self.assertEquals(response.status_code,200)
+
+    def test_viewWishList_views(self):
+        response = self.client.get(reverse('shop:wishList_books'))
+        self.assertEquals(response.status_code,302)
+
+    def test_allBookCat_views(self):
+        response = self.client.get(reverse('shop:books_by_category',args=['fiction']))
+        self.assertEquals(response.status_code,404)
+
+    
+    def test_managerCreateView_view(self):
+        response = self.client.get(reverse('shop:book_new'))
+        self.assertEquals(response.status_code,302)
+    
+    def test_bookListView_view(self):
+        response = self.client.get(reverse('shop:book_list'))
+        self.assertEquals(response.status_code,302)
+    
+    # def test_bookUpdateView_view(self):
+    #     response = self.client.get(reverse('shop:book_edit'))
+    #     self.assertEquals(response.status_code,302)
